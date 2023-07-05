@@ -27,11 +27,11 @@ class Book(db.Model):
     
 
     #해당 클래스에 대해 string 값으로 대표되는 값을 표현
-    def __repr__(self):
-        return f"[Book] ({self.book_isbn}, {self.book_title}, {self.book_author}, {self.book_publisher}, {self.book_date}, {self.book_cover})"
+    # def __repr__(self):
+    #     return f"[Book] ({self.book_isbn}, {self.book_title}, {self.book_author}, {self.book_publisher}, {self.book_date}, {self.book_cover})"
 
-    def as_dict(self):
-        return {x.name: getattr(self, x.name) for x in self.__table__.columns}
+    # def as_dict(self):
+    #     return {x.name: getattr(self, x.name) for x in self.__table__.columns}
 
     # def as_simple_dict(self, idx):
     #     rank = {"rank": idx}

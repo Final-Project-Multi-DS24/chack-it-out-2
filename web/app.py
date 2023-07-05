@@ -11,7 +11,6 @@ from apis.wordcloud import wordcloud
 __USERNAME__ = "multi"
 __PASSWORD__ = "multi12345!"
 __HOST__ = "localhost"
-DATABASE = ["USER","BOOK","MEETING"]
 
 
 def create_app():
@@ -19,7 +18,12 @@ def create_app():
     
     #DB 설정
         # 사용할 데이터베이스의 위치
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{__USERNAME__}:{__PASSWORD__}@{__HOST__}/{DATABASE}"
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{__USERNAME__}:{__PASSWORD__}@{__HOST__}/BOOK"
+    # 데이터베이스가 여러개일때
+    # app.config['SQLALCHEMY_BINDS'] = {
+    # 'USER': f"mysql+pymysql://{__USERNAME__}:{__PASSWORD__}@{__HOST__}/USER",
+    # 'MEETING': f"mysql+pymysql://{__USERNAME__}:{__PASSWORD__}@{__HOST__}/MEETING"
+    # }
         # 추가적인 메모리가 필요할 때    
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
         #pool
