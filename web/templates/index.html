@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Chack-it-out</title>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="../static/style.css">
+                
+        <!-- MDB -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+        rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <!-- 네비게이션 바 -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="logo" href="/">책읽아웃</a> 
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav" data-mdb-toggle="modal" data-mdb-target="#signModal"href="#!">로그인</a></li>
+                    <li class="nav-item"><a class="nav" href="#!">검색</a></li>
+                    <li class="nav-item"><a class="nav" aria-current="page" href="#">독서모임</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- 헤더-->
+        <div class="header">
+
+        </div>
+
+        <!-- 콘텐츠 -->
+        <div>
+            <div class="container">
+                <div class="book-covers text-center">
+                    {% for i in range(4) %}
+                    <img class=book-cover src={{urls[random.randint(0, 24)]}}>
+                    {% endfor %}
+                    <br>
+                    {% for i in range(4) %}
+                    <img class=book-cover src={{urls[random.randint(0, 24)]}}>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <h1 class="text-center my-5"> 책읽아웃 </h1>
+        </div>
+
+        <!-- Footer-->
+        <footer class="py-2 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        </footer>
+
+
+    <!-- Modal -->
+    <div
+    class="modal fade"
+    id="signModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLabel">로그인</h3>
+            <button
+            type="button"
+            class="btn-close"
+            data-mdb-dismiss="modal"
+            aria-label="Close"
+            ></button>
+        </div>
+
+        <div class="modal-body">
+            <form>
+                <!-- ID input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="form2Example1" class="form-control" />
+                    <label class="form-label" for="form2Example1">ID</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input
+                    type="password"
+                    id="form2Example2"
+                    class="form-control"
+                    />
+                    <label class="form-label" for="form2Example2">Password</label>
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                    <div class="col d-flex justify-content-center">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                            <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="form2Example34"
+                            checked
+                        />
+                        <label class="form-check-label" for="form2Example34">
+                            ID 기억하기
+                        </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">
+                    Sign in
+                </button>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p>회원가입 <a href="register.html">Register</a></p>
+                    <p>or sign up with:</p>
+
+                    <button
+                    type="button"
+                    class="btn btn-secondary btn-floating mx-1"
+                    >
+                    <i class="fab fa-google"></i>
+                    </button>
+
+                <!-- <button type="button" class="btn btn-secondary btn-floating mx-1">
+                            <i class="fab fa-github"></i>
+                    </button> -->
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+
+<script src="../static/scripts.js"></script>
+<!-- MDB core JavaScript -->
+<script
+type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+</body>
+</html>
+

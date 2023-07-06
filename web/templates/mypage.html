@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Chack-it-out</title>
+        
+        <!-- 자체 CSS -->
+        <link rel="stylesheet" href="../static/style.css">
+        
+        <!-- Favicon-->
+        <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
+        
+        <!-- Font Awesome -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+        rel="stylesheet"
+        />
+        
+    </head>
+    <body>
+        <!-- 네비게이션 바 -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/
+                ">책읽아웃</a>
+                <button class="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarSupportedContent" 
+                        aria-controls="navbarSupportedContent" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" data-mdb-toggle="modal" data-mdb-target="#signModal"href="#!">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">검색</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">독서모임</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 헤더-->
+        <header class="py-5 bg-light border-bottom mb-5">
+            <div class="row">
+                <div class="col-2"></div>
+                    <div class="col-3 tab_bar text-center" id="tab-01">
+                        <a href="#">Profile</a>
+                    </div>
+                    <div class="col-2 tab_bar text-center" id="tab-02">
+                        <a href="#">Recommend</a>
+                    </div>
+                    <div class="col-3 tab_bar text-center" id="tab-03">
+                        <a href="#">Meeting</a>
+                    </div>
+                <div class="col-2"></div>
+            </div>
+        </header>
+        <!-- 프로필 탭 -->
+        <!-- 추천 탭 -->
+        <div>
+            <div class="container" id="#tab-01"> 
+                <div class="row">
+                        <div class="col-4 tab_bar text-center" id="tab-01">
+                            <a href="#">Favorite</a>
+                        </div>
+                        <div class="col-4 tab_bar text-center" id="tab-02">
+                            <a href="#">추천도서</a>
+                        </div>
+                        <div class="col-4 tab_bar text-center" id="tab-01">
+                            <a href="#">다 읽은 도서</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="book-covers text-center">
+            <img class=book-cover src={{url}}>
+            <br>
+            <img class=book-cover src={{url}}>
+        </div>
+        <!-- 참여모임 탭 -->     
+        <!-- Bootstrap core JS-->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+        <!-- Core theme JS-->
+        <script src="../static/scripts.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+    </body>
+</html>
