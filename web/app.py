@@ -1,20 +1,32 @@
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response, jsonify,render_template
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
-from apis.recommendation import recommendation
-from apis.sentiment import sentiment
-from apis.statistics import statistics
-from apis.wordcloud import wordcloud
+# from apis.recommendation import recommendation
+# from apis.sentiment import sentiment
+# from apis.statistics import statistics
+# from apis.wordcloud import wordcloud
+# from .apis import login
 
 __USERNAME__ = "multi"
 __PASSWORD__ = "multi12345!"
 __HOST__ = "localhost"
 
+migrate = Migrate()
+
+
 
 def create_app():
     app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+        return render_template('base.html')
+
+    #csrf 토큰 생성을 위한 secret_key 설정
+    app.config["SECRET_KEY"]="dev"
     
     #DB 설정
         # 사용할 데이터베이스의 위치
@@ -34,19 +46,21 @@ def create_app():
 
     
     db = SQLAlchemy(app, session_options={'autocommit': True})
+    migrate.init_app(app, db)
     
     # CORS 설정
-    cors = CORS(app, resources={r"/*": {"origins": "*"}})
+    # cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
     # EndPoint 추가
-    app.register_blueprint(recommendation, url_prefix="/ml/api/recommend")
-    app.register_blueprint(sentiment, url_prefix="/ml/api/book")
-    app.register_blueprint(statistics, url_prefix="/ml/api/statistics")
-    app.register_blueprint(wordcloud, url_prefix="/ml/api/book")
+    # app.register_blueprint(recommendation, url_prefix="/ml/api/recommend")
+    # app.register_blueprint(sentiment, url_prefix="/ml/api/book")
+    # app.register_blueprint(statistics, url_prefix="/ml/api/statistics")
+    # app.register_blueprint(wordcloud, url_prefix="/ml/api/book")
+    # app.register_blueprint(login, url_prefic="/login")
 
     return app
 
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0", port ="5000")

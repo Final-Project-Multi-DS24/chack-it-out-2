@@ -1,5 +1,5 @@
 # 추천에 필요한 함수 추가
-from crypt import methods
+
 from flask import Blueprint, make_response, jsonify
 from flask_restx import Api, Resource
 
