@@ -1,6 +1,5 @@
 from flask import Flask, request, make_response, jsonify,render_template
 from flask_cors import CORS
-from flask_migrate import Migrate
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
@@ -8,15 +7,12 @@ from flask_sqlalchemy import SQLAlchemy
 # from apis.sentiment import sentiment
 # from apis.statistics import statistics
 # from apis.wordcloud import wordcloud
-# from .apis import login
+from Book.apis.register import auth
+from Book.apis.main import main
 
 __USERNAME__ = "multi"
 __PASSWORD__ = "multi12345!"
 __HOST__ = "localhost"
-
-migrate = Migrate()
-
-
 
 def create_app():
     app = Flask(__name__)
@@ -46,7 +42,7 @@ def create_app():
 
     
     db = SQLAlchemy(app, session_options={'autocommit': True})
-    migrate.init_app(app, db)
+    
     
     # CORS 설정
     # cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -56,7 +52,9 @@ def create_app():
     # app.register_blueprint(sentiment, url_prefix="/ml/api/book")
     # app.register_blueprint(statistics, url_prefix="/ml/api/statistics")
     # app.register_blueprint(wordcloud, url_prefix="/ml/api/book")
-    # app.register_blueprint(login, url_prefic="/login")
+    # app.register_blueprint(login, url_prefix="/login")
+    app.register_blueprint(main.main) #main.py의 main이라는 블루프린트 객체
+    app.register_blueprint(register.auth)
 
     return app
 
