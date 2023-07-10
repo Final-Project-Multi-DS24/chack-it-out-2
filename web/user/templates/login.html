@@ -5,13 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>회원가입</title>
+        <title>로그인</title>
         
         <!-- 자체 CSS -->
         <link rel="stylesheet" href="../static/style.css">
-        
-        <!-- Favicon-->
-        <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
         
         <!-- Font Awesome -->
         <link
@@ -47,52 +44,47 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" data-mdb-toggle="modal" data-mdb-target="#signModal"href="#!">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">검색</a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="location.href='/user/login'">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link"  onclick="location.href='/user/register'">회원가입</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">독서모임</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-        
+
+<body>
     <div class="container">
         <div class="row mt-5">
             <div class="col-12 text-center">
-                <h1>회원가입</h1>
+                <h1>로그인</h1>
             </div>
         </div>
+				<div class="row mt-5">
+			      <div class="col-12 text-center">
+			      </div>
+				</div>
         <div class="row mt-5">
-                <div class="col-5">
+            <div class="col-12">
                 <form method="post" action=".">
+                    {% csrf_token %}
                     <div class="form-group">
-                        <label for="useremail">이메일</label>
-                        <input type="email" class="form-control" id="useremail" placeholder="아이디로 사용할 이메일을 입력하세요" name="useremail">
-                        <input type="submit" value="중복확인" id="check-id">
+                        <label for="user_id">사용자 이름</label>
+                        <input type="text" class="form-control" id="user_id" placeholder="사용자 이름" name="user_id">
                     </div>
                     <div class="form-group">
                         <label for="password">비밀번호</label>
                         <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password">
                     </div>
-										<div class="form-group">
-                        <label for="re-password">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="re-password" placeholder="비밀번호 확인" name="re-password">
-                    </div>
-                    <div class="form-group">
-                        <label for="user_id">이름</label>
-                        <input type="text" class="form-control" id="user_id" placeholder="사용자 이름" name="user_id">
-                    </div>
-                    <div class="form-group">
-                        <label for="favorite"> 관심사 선택</label>
-                        <div class="container">            
-                        <a><input type="checkbox"><span>경영경제</span></a>
-                        <a><input type="checkbox"><span>사회</span></a>
-                        <a><input type="checkbox"><span>자기계발</span></a>
-                        <a><input type="checkbox"><span>문화 </span></a>
-                        </div>    
-                    </div>                      
-                   <input type="submit" value="가입">
+                    <button type="submit" class="btn btn-primary">로그인</button>
+                    <p>아이디가 없으신가요?</p>
+                    <button class="btn btn-primary btn-block" onclick="location.href='/user/register'">회원가입</button>                
                 </form>
-                </div>
+            </div>
         </div>
-    </div>  
-        </body>
+    </div>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        </footer>
+    </body>
+</html>
