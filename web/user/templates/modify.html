@@ -1,15 +1,54 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>회원가입</title>
+<title>회원정보 수정</title>
 {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="/static/style.css">
+{% endblock %}
+
+<!-- 헤더-->
+{% block header %}
+<header class="py-5 bg-light border-bottom mb-1">
+    <div class="row mt-1">
+        <div class="col-2"></div>
+            <div class="col-3 tab_bar text-center" id="tab-01">
+                <a href="#"></a>
+            </div>
+            <div class="col-2 tab_bar text-center" id="tab-02">
+                <a href="#"></a>
+            </div>
+            <div class="col-3 tab_bar text-center" id="tab-03">
+                <div id="btnWrap">
+                    <button typ="button" id="popupBtn">회원탈퇴</button>
+                </div>
+                <div id="modalWrap">
+                    <div id="modalBody">
+                        <span id="closeBtn">&times;</span>
+                        <p>정말 탈퇴하시겠습니까?</p>
+                        <form action="post">
+                            <span> 비밀번호를 입력하세요.</span>
+                            <input type="password">
+                        </form>
+                        <a href="#" text>네</a>
+                        <br>
+                        <a href="#" text-center>아니오</a>
+                    </div>
+                </div>
+            </div>
+        <div class="col-2"></div>
+    </div>
+</header>
+{% endblock %}
+
 
 
 {% block contents %}
 <div class="container">
     <div class="row mt-5">
         <div class="col-12 text-center">
-            <h1>회원가입</h1>
+            <h1>회원정보 수정</h1>
         </div>
     </div>
     <div class="row mt-5">
@@ -17,16 +56,7 @@
             <!-- POST방식으로 전달 -->
             <form method="post" action="." >
                 <!-- csrf_token : POST방식으로 데이터를 서버에 전송하기 위해서 필요한 토큰 -->
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="user_id">아이디</label>
-                    <input type="text" class="form-control" id="user_id" placeholder="아이디를 입력하세요." name="user_id">
-                    <input type="button" value="중복확인" id="check-id">
-                </div>
-                <div class="form-group">
-                    <label for="user_name">이름</label>
-                    <input type="text" class="form-control" id="user_name" placeholder="이름을 적어주세요." name="user_name">
-                </div>
+                <!-- {% csrf_token %} -->
                 <div class="form-group">
                     <label for="password">비밀번호</label>
                     <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요." name="password">
@@ -60,10 +90,13 @@
                 <br>
 
                 <!-- POST 방식 SUBMIT-->
-                <button type="submit" class="button">가입완료</button>
+                <button type="submit" class="button">수정완료</button>
             </form>
         </div>
     </div>
-</div>  
+</div>
 {% endblock %}
 
+{% block script %}
+<script src="/static/script.js"></script>
+{% endblock %}

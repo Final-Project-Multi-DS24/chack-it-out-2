@@ -1,5 +1,3 @@
-// 모달창 js - 회원 탈퇴
-
 const btn = document.getElementById('popupBtn');
 const modal = document.getElementById('modalWrap');
 const closeBtn = document.getElementById('closeBtn');

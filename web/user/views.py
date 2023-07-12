@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 # POST로 받을 DB 모델 
 from .models import User
+# 로그인폼
+from .forms import LoginForm
 
 # Create your views here.
 
@@ -33,30 +35,35 @@ def register(request):
         return render(request, 'register.html')
     
 
-
+# 로그인 기능
 def login(request):
-    # request to VIEW if "GET"(/link/), return templates to user
-    if request.method == 'GET':
-        return render(request, 'login.html')
-    
-    elif request.method == 'POST':
-        # user_id를 저장하되 None값으로 (값이 덮어써지면 안되니까)
-        user_id = request.POST.get('user_id', None)
-        # 비밀번호 또한 동일
-        password = request.POST.get('password', None)
+    if request.method == 'POST':
+        # POST로 들어오는경우, loginForm에 받아준다.
+        form = LoginForm(request.POST)
+        # is_valid - post로 들어온 form을 둘다 적었다.
+        if form.is_valid():
+            # 유저 pk를 세션에 저장
+            request.session['user'] = form.user_id
+            return redirect('/')
+    # POST방식이 아닌 경우
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
-        # objects.get : 객체를 반환한다 = user_id가 'user_id'인 User 모델의 객체를 반환한다.
-        if not (user_id and password):
-            pass
-        # objects.get : 객체를 반환한다 = user_id가 'user_id'인 User 모델의 객체를 반환한다.
-        else:
-            user = User.objects.get(user_id=user_id)
-            # password와 방금 반환한 객체의 password로 저장한 값이 True면?
-            if check_password(password, user.password):
-                request.session['user'] = user.id
-				# home으로 redirect
-                return redirect('/')
-            else:
-                print('비밀번호 오류')             
-        return render(request, 'login.html')
+
+def logout(request):
+    # 현재 로그인한 사용자의 정보가 세션에 존재하면
+    if request.session.get('user'):
+        del(request.session['user']) # user 정보 삭제
     
+    # 로그아웃 수행 후 홈 페이지로 이동
+    return redirect("/")
+
+def userpage(request):
+    return render(request, 'userpage.html')
+
+def modify(request):
+    return render(request, 'modify.html')
+
+def search(request):
+    return render(request, 'Usersearch.html')

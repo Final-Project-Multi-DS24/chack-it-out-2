@@ -1,58 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>로그인</title>
-        
-        <!-- 자체 CSS -->
-        <link rel="stylesheet" href="../static/style.css">
-        
-        <!-- Font Awesome -->
-        <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        rel="stylesheet"
-        />
-        <!-- Google Fonts -->
-        <link
-        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        rel="stylesheet"
-        />
-        <!-- MDB -->
-        <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
-        rel="stylesheet"
-        />
-        
-    </head>
-    <body>
-        <!-- 네비게이션 바 -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="/
-                ">책읽아웃</a>
-                <button class="navbar-toggler" 
-                        type="button" 
-                        data-bs-toggle="collapse" 
-                        data-bs-target="#navbarSupportedContent" 
-                        aria-controls="navbarSupportedContent" 
-                        aria-expanded="false" 
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" onclick="location.href='/user/login'">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link"  onclick="location.href='/user/register'">회원가입</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">독서모임</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+{% extends "base.html" %}
 
-<body>
+{% block title %}
+<title>로그인</title>
+{% endblock %}
+
+{% block header %}
+<!-- 헤더-->
+
+{% endblock %}
+
+
+
+{% block contents %}
     <div class="container">
         <div class="row mt-5">
             <div class="col-12 text-center">
@@ -67,18 +26,27 @@
             <div class="col-12">
                 <form method="post" action=".">
                     {% csrf_token %}
+                    
+                    {% for field in form %}
                     <div class="form-group">
-                        <label for="user_id">사용자 이름</label>
-                        <input type="text" class="form-control" id="user_id" placeholder="사용자 이름" name="user_id">
+                        <label for="{{ field.name }}">{{ field.label }}</label>
+                        <!-- widget :따로 설정한 타입 -->
+                        <input  type="{{ field.field.widget.input_type }}" 
+                                class="form-control" 
+                                id="{{ field.name }}" 
+                                placeholder="{{ field.label }}" 
+                                name="{{ field.name }}"/>
                     </div>
-                    <div class="form-group">
-                        <label for="password">비밀번호</label>
-                        <input type="password" class="form-control" id="password" placeholder="비밀번호" name="password">
-                    </div>
+                        {% if field.errors %}
+                        <span style="color: red;">{{ field.errors }}</span>
+                        {% endif %}
+        
+                    {% endfor %}
+                    
                     <button type="submit" class="btn btn-primary">로그인</button>
+                </form>
                     <p>아이디가 없으신가요?</p>
                     <button class="btn btn-primary btn-block" onclick="location.href='/user/register'">회원가입</button>                
-                </form>
             </div>
         </div>
     </div>
@@ -88,3 +56,4 @@
         </footer>
     </body>
 </html>
+{% endblock %}

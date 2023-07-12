@@ -5,8 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Chack-it-out</title>
+        <!-- 타이틀 -->
+        {% block title %}
         
+        {% endblock %}
+
+        <!-- 자체 css 있으면 추가-->
+        {% block link %}
+        
+        {% endblock %}
         <!-- Favicon-->
         <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
         
@@ -43,39 +50,42 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <!--  -->
-                        <li class="nav-item"><a class="nav-link" onclick="location.href='/'">로그아웃</a></li>
+                        {% if request.session.user %}
+                        <li class="nav-item"><a class="nav-link" onclick="location.href='/user/logout'">로그아웃</a></li>
                         <li class="nav-item"><a class="nav-link"  onclick="location.href='/user/userpage'">마이페이지</a></li>
                         <li class="nav-item"><a class="nav-link"  onclick="location.href='/search'">검색</a></li>
                         <li class="nav-item"><a class="nav-link" onclick="location.href='/community'">독서모임</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" onclick="location.href='/user/login'">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" onclick="location.href='/community'">독서모임</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-        <!-- 헤더-->
-        <header class="py-5 bg-light border-bottom mb-5">
-            <img src="/web/static/profile.jpg"> ○○○님 환영합니다.  
-        </header>
+        <!-- 헤더 -->
+        {% block header %}
 
-        <!-- Contens -->
-        <div class="container">
-            <div class="col-12 text-center">
-                <img src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg">
-                <img src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg">
-                <img src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg">
-                <img src="https://image.aladin.co.kr/product/28512/86/cover200/896054289x_1.jpg">
-                <br>
-                <img src="https://image.aladin.co.kr/product/31722/66/cover200/8937417154_1.jpg">
-                <img src="https://image.aladin.co.kr/product/3915/96/cover200/899230997x_1.jpg">
-                <img src="https://image.aladin.co.kr/product/31868/12/cover200/k632833529_1.jpg">
-                <img src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg">
-            </div>    
-        </div>
 
+        {% endblock%}   
+
+
+        <!-- 콘텐츠 -->
+        {% block contents %}
+    
+        
+        {% endblock%}
+       
+        <!-- 자체 js 있으면 추가-->
+        {% block script %}
+
+    
+        {% endblock%}
+       
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
+            <div class="container"><p class="m-0 text-center text-white">C H A C K I T O U T</p></div>
+        </footer>    
     </body>
 </html>
 

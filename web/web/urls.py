@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import home
+# 나의 views.py에 들어있는 함수의 이름.
+from .views import home,search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #path('받을 경로', include('앱명.urls') )
+        # 외부 앱의 urls.py 파일을 include하겠다.
     path('user/', include('user.urls')),
-	path('', home)
-]
+    path('book/',include('book.urls')),
+    path('', home),
+    path('search/', search)]

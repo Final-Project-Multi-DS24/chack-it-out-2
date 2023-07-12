@@ -1,7 +1,12 @@
 from django.urls import path
-from . import views
+# from .views import view의 함수명 
+from .views import register, login,logout,userpage,modify,search
 
 urlpatterns = [
-    path('register/', views.register),
-    path('login/', views.login),
+    path('register/', register),
+    path('login/', login),
+    path('logout/', logout),
+    path('userpage/',userpage),
+    path('modify/',modify),
+    path('search/',search)
 ]

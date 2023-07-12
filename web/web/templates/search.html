@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>책읽아웃</title>
+{% endblock %}
+
+{% block contents%}
+
+<div class="container">
+    <div class="row mt-5"></div>
+    <div class="row mt-5">
+        <div class="col-6 text-center">
+            <div id="btnWrap">
+                <button typ="button" id="popupBtn" onclick="location.href='/user/search'">유저검색</button>
+            </div>
+        </div>
+        <div class="col-6 text-center">
+            <div id="btnWrap">
+                <button typ="button" id="popupBtn" onclick="location.href='/book/search'">도서검색</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5"></div>
+</div>
+{% endblock %}
