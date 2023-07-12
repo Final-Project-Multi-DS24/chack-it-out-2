@@ -4,9 +4,10 @@
 <title>회원정보 수정</title>
 {% endblock %}
 
-{% block link %}
+{% block css %}
 <link rel="stylesheet" href="/static/style.css">
 {% endblock %}
+
 
 <!-- 헤더-->
 {% block header %}
@@ -20,20 +21,16 @@
                 <a href="#"></a>
             </div>
             <div class="col-3 tab_bar text-center" id="tab-03">
+                <!-- 팝업버튼 -->
                 <div id="btnWrap">
-                    <button typ="button" id="popupBtn">회원탈퇴</button>
+                    <button type="button" id="popupBtn">회원탈퇴</button>
                 </div>
+                <!-- 모달 -->
                 <div id="modalWrap">
                     <div id="modalBody">
-                        <span id="closeBtn">&times;</span>
                         <p>정말 탈퇴하시겠습니까?</p>
-                        <form action="post">
-                            <span> 비밀번호를 입력하세요.</span>
-                            <input type="password">
-                        </form>
-                        <a href="#" text>네</a>
-                        <br>
-                        <a href="#" text-center>아니오</a>
+                        <input class="btn" value='탈퇴하기' onclick="location.href='/user/delete'">
+                        <input class="btn" value='취소' id="cancel">
                     </div>
                 </div>
             </div>
@@ -41,7 +38,6 @@
     </div>
 </header>
 {% endblock %}
-
 
 
 {% block contents %}
@@ -54,7 +50,7 @@
     <div class="row mt-5">
         <div class="col-3">
             <!-- POST방식으로 전달 -->
-            <form method="post" action="." >
+            <form method="put" action="." >
                 <!-- csrf_token : POST방식으로 데이터를 서버에 전송하기 위해서 필요한 토큰 -->
                 <!-- {% csrf_token %} -->
                 <div class="form-group">
@@ -88,7 +84,6 @@
                     <a><input type="checkbox"><span>문화 </span></a>
                     </div>     -->
                 <br>
-
                 <!-- POST 방식 SUBMIT-->
                 <button type="submit" class="button">수정완료</button>
             </form>
@@ -98,5 +93,5 @@
 {% endblock %}
 
 {% block script %}
-<script src="/static/script.js"></script>
+<script src="/static/script.js?ver=1"></script>
 {% endblock %}

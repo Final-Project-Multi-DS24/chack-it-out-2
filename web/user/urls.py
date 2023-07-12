@@ -1,6 +1,6 @@
 from django.urls import path
 # from .views import view의 함수명 
-from .views import register, login,logout,userpage,modify,search
+from .views import register, login,logout,userpage,modify,search,delete
 
 urlpatterns = [
     path('register/', register),
@@ -8,5 +8,6 @@ urlpatterns = [
     path('logout/', logout),
     path('userpage/',userpage),
     path('modify/',modify),
-    path('search/',search)
+    path('search/',search),
+    path('delete/',delete)
 ]

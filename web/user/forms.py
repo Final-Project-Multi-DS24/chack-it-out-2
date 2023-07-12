@@ -6,6 +6,11 @@ from .models import User
 from django.contrib.auth.hashers import check_password
 
 
+# class Modify(forms.Form):
+#      user_pw = 
+
+
+
 # 로그인폼 작성 
 class LoginForm(forms.Form):
     user_id = forms.CharField(
@@ -31,20 +36,6 @@ class LoginForm(forms.Form):
                 # form.POST 객체이며, 여기서 사용자가 입력한 데이터를 꺼내올 수 있습니다.
                 user_id = cleaned_data.get("user_id")
                 password = cleaned_data.get("password")
-            
-
-                # if user_id and password:
-
-                #     # user_id를 이용해 사용자 조회
-                #     user = User.objects.get(user_id)
-                #     if user == None:
-                #         self.add_error("password", "존재하지 않는 아이디이거나 비밀번호가 다릅니다.")
-                #     elif not check_password(password, user.password):
-                #     # 비밀번호가 틀리면 에러 메시지 설정
-                #         self.add_error("password", "존재하지 않는 아이디이거나 비밀번호가 다릅니다.")
-                #     else:
-                #     # user.id = 자동적으로 생성된 pk를 저장
-                #         self.user_id=user.id
 
                 # user_id와 패스워드가 모두 존재한다면 Valid = True
                 if user_id and password:

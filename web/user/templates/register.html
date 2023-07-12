@@ -4,6 +4,10 @@
 <title>회원가입</title>
 {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/style.css">        
+{% endblock %}
+
 
 {% block contents %}
 <div class="container">
@@ -13,7 +17,7 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-3">
+        <div class="col-4">
             <!-- POST방식으로 전달 -->
             <form method="post" action="." >
                 <!-- csrf_token : POST방식으로 데이터를 서버에 전송하기 위해서 필요한 토큰 -->
@@ -21,7 +25,7 @@
                 <div class="form-group">
                     <label for="user_id">아이디</label>
                     <input type="text" class="form-control" id="user_id" placeholder="아이디를 입력하세요." name="user_id">
-                    <input type="button" value="중복확인" id="check-id">
+                    <input type="button" value="중복확인"  id="alertBtn">
                 </div>
                 <div class="form-group">
                     <label for="user_name">이름</label>
@@ -65,5 +69,13 @@
         </div>
     </div>
 </div>  
-{% endblock %}
 
+<script>
+const alertBtn = document.getElementById('alertBtn');
+
+alertBtn.onclick = function() {
+alert('이 아이디를 사용해도 좋습니다.');
+        };
+
+</script>
+{% endblock %}

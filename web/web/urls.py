@@ -24,5 +24,6 @@ urlpatterns = [
         # 외부 앱의 urls.py 파일을 include하겠다.
     path('user/', include('user.urls')),
     path('book/',include('book.urls')),
+    path('community/',include('community.urls')),
     path('', home),
     path('search/', search)]

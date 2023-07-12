@@ -66,4 +66,12 @@ def modify(request):
     return render(request, 'modify.html')
 
 def search(request):
-    return render(request, 'Usersearch.html')
+    return render(request, 'usersearch.html')
+
+# 회원정보 삭제 
+def delete(request):
+    user = User.objects.get(id=int(request.session.get('user')))
+    user.delete()
+    del(request.session['user'])
+    return render(request, 'main.html')
+    

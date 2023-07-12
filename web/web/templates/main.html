@@ -8,19 +8,27 @@
 <!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5">
     
-    {% if request.session.user %}
-    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077114.png"> {{ name }}님 환영합니다.
-    {% else %}
+{% if request.session.user %}
+<div class="col-6 text-center">
+<img src="https://avatarfiles.alphacoders.com/139/13900.gif"> {{ name }}님 환영합니다.
+</div>
+{% else %}
 
-    {% endif %}
+{% endif %}
 </header>
 {% endblock %}
 
 {% block contents %}
 <!-- Contents -->
+
+
 <div class="container">
     <div class="col-12 text-center">
-        {{url}}
+        {% if request.session.user %}
+        <h6> 🌎{{ name }}님의 독서모임 "북📗치기박치기"에 추천합니다🌎</h6>
+        {% else %}
+
+        {% endif %}
         <img src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg">
         <img src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg">
         <img src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg">
@@ -32,5 +40,7 @@
         <img src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg">
     </div>    
 </div>
+
+
 
 {% endblock %}
