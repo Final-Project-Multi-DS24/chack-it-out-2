@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>도서검색</title>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+
+{% block header %}
+<!-- 헤더-->
+<header class="py-5 bg-light border-bottom mb-5">
+    <div class="container">
+        <div class="row mt-5"></div>
+            <div>
+            <select name="selectbar" id="selectbar">
+                <option value="1">작가</option>
+                <option value="2">키워드</option>
+                <option value="2">도서명</option>
+            </select>
+            <input type="search" name="search" id="search">
+            <input type="button" value="검색결과">
+            </div>
+        <div class="row mt-5"></div>
+    </div>
+</header>
+{% endblock %}
+
+{% block contents %}
+
+{% endblock %}
+
+
+{% block script %}
+
+{% endblock %}

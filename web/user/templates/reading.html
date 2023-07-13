@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>유저 페이지</title>
+{% endblock %}
+
+
+<!-- 헤더-->
+{% block header %}
+<header class="py-5 bg-light border-bottom mb-5">
+    <!-- 추천 탭 -->
+    <div>
+        <div class="container" id="#tab-01"> 
+            <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-2 tab_bar text-center" id="tab-02">
+                        <a class="nav-link"  onclick="location.href='reading'">📚읽은 책</a>
+                    </div>
+                    <div class="col-2 tab_bar text-center" id="tab-03">
+                        <a class="nav-link"  onclick="location.href='favorite'">📘위시리스트</a>
+                    </div>
+                    <div class="col-2 tab_bar text-center" id="tab-03">
+                        <a class="nav-link"  onclick="location.href='usercommunity'">📗참여 모임</a>
+                    </div>
+                    <div class="col-1 tab_bar text-center" id="tab-05">
+                        <input type="button" value="회원정보 수정" onclick="location.href='/user/modify'">
+                    </div>
+                    <div class="col-2"></div>
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+    <div class="col-12 text-center">
+        <div class="row">
+            <div class="col-12"><h3>{{name}}님이 읽은 책</h3></div>
+       </div>
+
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3 tab_bar text-center" id="tab-05">
+             <input type="button" value="➕추가" onclick="location.href=''">
+            </div>
+            <div class="col-3 tab_bar text-center" id="tab-05">
+                <input type="button" value="➖삭제" onclick="location.href=''">
+            </div>
+            <div class="col-3"></div>
+        </div>
+
+        <img src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg">
+        <img src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg">
+        <img src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg">
+        <img src="https://image.aladin.co.kr/product/28512/86/cover200/896054289x_1.jpg">
+        <br>
+        <img src="https://image.aladin.co.kr/product/31722/66/cover200/8937417154_1.jpg">
+        <img src="https://image.aladin.co.kr/product/3915/96/cover200/899230997x_1.jpg">
+        <img src="https://image.aladin.co.kr/product/31868/12/cover200/k632833529_1.jpg">
+        <img src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg">
+    </div>    
+</div>
+{% endblock %}

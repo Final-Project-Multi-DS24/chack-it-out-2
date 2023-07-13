@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>회원가입</title>
+<title>도서검색</title>
 {% endblock %}
 
 {% block header %}
@@ -16,13 +16,12 @@
             <option value="2">도서명</option>
         </select>
         <input type="search" name="search" id="search">
-        <input type="button" value="검색결과">
+        <input type="button" value="검색결과" onclick="location.href='result'" >
         </div>
     <div class="row mt-5"></div>
 </div>
 </header>
 {% endblock %}
-
 
 {% block contents %}
  

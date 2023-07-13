@@ -68,6 +68,22 @@ def modify(request):
 def search(request):
     return render(request, 'usersearch.html')
 
+def reading(request):
+    if request.session.get('user'):
+        user = User.objects.get(id=int(request.session.get('user')))
+        name = user.user_name
+    return render(request, 'reading.html',{'name': name})
+
+def favorite(request):
+    if request.session.get('user'):
+        user = User.objects.get(id=int(request.session.get('user')))
+        name = user.user_name
+    return render(request, 'favorite.html',{'name': name})
+
+def usercommunity(request):
+    return render(request, 'usercommunity.html')
+
+
 # 회원정보 삭제 
 def delete(request):
     user = User.objects.get(id=int(request.session.get('user')))
