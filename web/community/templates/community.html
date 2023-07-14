@@ -5,28 +5,49 @@
 {% endblock %}
 
 <!-- css -->
-{% block link %}
+{% block css %}
+
+
 {% endblock %}
 
 <!-- 헤더 -->
 {% block header %}
-<div class="container">
-    <div class="col-12 text-center">
-    <br><br>
-    ❗ 공지사항 ❗
-    <br>
-    ▶ 공지사항 글 작성·수정·삭제 권한은 관리자에게 부여합니다.
-    <br><br>
-    </div>
-</div>
 
+<div class="header">
+    <div class="container">
+        <div class="col-12 text-center">
+            <br><br>
+            ❗ 공지사항 ❗
+            <br>
+            ▶ 공지사항 글 작성·수정·삭제 권한은 관리자에게 부여합니다.
+            <br><br>
+        </div>
+
+    </div>
+</div>    
 {% endblock %}
 <!-- 콘텐츠 -->
 {% block contents %}
-<div class="container">
-    <div class="grid text-center">
-      
+
+<div class="row">
+    <div class="col-3 text-center"></div>
+    <div class="col-6 text-center">
+        <div class="rectangle">독서모임1</div>
+        <div class="rectangle">독서모임2</div>
+        <div class="rectangle">독서모임3</div>
+        <div class="rectangle">독서모임4</div>
     </div>
+    <div class="col-3 text-center"></div>   
+</div>
+<div class="row">
+    <div class="col-3 text-center"></div>
+    <div class="col-6 text-center">
+        <div class="rectangle">독서모임5</div>
+        <div class="rectangle">독서모임6</div>
+        <div class="rectangle">독서모임7</div>
+        <div class="rectangle">독서모임8</div>
+    </div>
+    <div class="col-3 text-center"></div>
 </div>
 {% endblock %}
 

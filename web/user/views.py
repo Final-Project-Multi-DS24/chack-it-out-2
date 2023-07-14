@@ -2,6 +2,13 @@ from django.shortcuts import render, redirect
 # 회원가입 암호화,회원가입 확인
 from django.contrib.auth.hashers import make_password, check_password
 # POST로 받을 DB 모델 
+
+# 회원가입오류
+# 1. 아이디 또는 비밀번호 오류
+from django.db import IntegrityError
+# 2. 날짜 오류
+from django.core.exceptions import ValidationError
+
 from .models import User
 # 로그인폼
 from .forms import LoginForm
@@ -15,24 +22,27 @@ def register(request):
 # 사용자의 요청이 POST인 경우
     elif request.method == 'POST':
 # 각 input tag에서 name 속성값을 이용해 사용자가 보낸 값을 꺼내옵니다.
-        user_id=request.POST['user_id']
-        user_name=request.POST['user_name']
-        password=request.POST['password']
-        user_birth=request.POST['user_birth']
-        phonenumber=request.POST['phonenumber']
-        profile_image=request.POST['profile_image']
-        # interest = request.POST['interest']
+        try:
+            user_id=request.POST['user_id']
+            user_name=request.POST['user_name']
+            password=request.POST['password']
+            profile_image=request.POST['profile_image']
+            # interest = request.POST['interest']
 
-        # 그리고 변수를 User모델 객체에 담습니다.
-        user = User(user_id=user_id, 
-                    user_name=user_name, 
-                    user_birth=user_birth, 
-                    password=make_password(password),
-                    phonenumber=phonenumber,
-                    profile_image=profile_image
-                    )
-        user.save()
-        return render(request, 'register.html')
+            # 그리고 변수를 User모델 객체에 담습니다.
+            user = User(user_id=user_id, 
+                        user_name=user_name, 
+                        password=make_password(password),
+                        profile_image=profile_image
+                        )
+            user.save()
+        except IntegrityError:
+            error="이미 존재하는 아이디이거나 아이디가 공백입니다."
+            return render(request, 'register.html', {"error":error})
+        except ValidationError:
+            pass
+        # 가입 완료시 메인으로 이동
+        return render(request, 'main.html')
     
 
 # 로그인 기능
@@ -63,8 +73,10 @@ def userpage(request):
     return render(request, 'userpage.html')
 
 def modify(request):
-    return render(request, 'modify.html')
-
+    if request.method == 'GET':
+        return render(request, 'modify.html')
+    elif request.method == 'POST':
+        return render(request, 'main.html')
 def search(request):
     return render(request, 'usersearch.html')
 
@@ -81,7 +93,10 @@ def favorite(request):
     return render(request, 'favorite.html',{'name': name})
 
 def usercommunity(request):
-    return render(request, 'usercommunity.html')
+    if request.session.get('user'):
+        user = User.objects.get(id=int(request.session.get('user')))
+        name = user.user_name
+    return render(request, 'usercommunity.html',{'name': name})
 
 
 # 회원정보 삭제 

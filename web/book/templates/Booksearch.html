@@ -4,6 +4,46 @@
 <title>도서검색</title>
 {% endblock %}
 
+{% block css%}
+<style>
+img:hover {
+    filter :brightness(60%);
+    transform: scale(1.1);
+    transition: 10ms;
+    }
+    /* 이미지영역 */
+    .img_area{
+    display:inline-block;
+    position: relative;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    }
+    
+    /* 이미지가 뜨면 제일앞에 표시 */
+    .img_area:hover > .hover_text
+    {
+    display:block;
+    }
+    
+    /* 텍스트 평소에는 안보임*/
+    .hover_text{
+    display:none;
+    }
+    
+    /* 텍스트 속성 */
+    .hover_text {
+    position: absolute;
+    transition: 10ms;
+    top: 140px;
+    left: 20px;
+    color: beige;
+    font-weight: 600;
+    font-size: 30px;
+    }
+</style>
+{% endblock %}
+
+
 {% block header %}
 <!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5">

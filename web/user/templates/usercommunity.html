@@ -4,6 +4,47 @@
 <title>유저 페이지</title>
 {% endblock %}
 
+<!-- css -->
+{% block css%}
+<style>
+
+img:hover {
+  filter :brightness(60%);
+  transform: scale(1.1);
+  transition: 10ms;
+}
+/* 이미지영역 */
+.img_area{
+  display:inline-block;
+  position: relative;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+/* 이미지가 뜨면 제일앞에 표시 */
+.img_area:hover > .hover_text
+{
+  display:block;
+}
+
+/* 텍스트 평소에는 안보임*/
+.hover_text{
+  display:none;
+}
+
+/* 텍스트 속성 */
+.hover_text {
+  position: absolute;
+  transition: 10ms;
+  top: 140px;
+  left: 20px;
+  color: beige;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+</style>
+{% endblock %}
 
 <!-- 헤더-->
 {% block header %}
@@ -20,7 +61,7 @@
                         <a class="nav-link"  onclick="location.href='favorite'">📘위시리스트</a>
                     </div>
                     <div class="col-2 tab_bar text-center" id="tab-03">
-                        <a class="nav-link"  onclick="location.href='usercommunity'">📗참여 모임</a>
+                        <a class="nav-link"  onclick="location.href='usercommunity'">📗모임 참여</a>
                     </div>
                     <div class="col-1 tab_bar text-center" id="tab-05">
                         <input type="button" value="회원정보 수정" onclick="location.href='/user/modify'">
@@ -33,9 +74,18 @@
 {% endblock %}
 
 {% block contents %}
-<div class="container">
-    <div class="col-12 text-center">     
-        현재 참여하고 있는 독서모임이 없습니다. 
-    </div>    
-</div>
+<div class="col-12 text-center">
+    <div class="row">
+        <div class="col-12"><h3>{{name}}님의 모임참여 기록</h3></div>
+   </div> 
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg"><p class="hover_text">"도서명"</p></a>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg"><p class="hover_text">"도서명"</p></a>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg"><p class="hover_text">"도서명"</p></a>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/28512/86/cover200/896054289x_1.jpg"><p class="hover_text">"도서명"</p></a>
+    <br>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/31722/66/cover200/8937417154_1.jpg"><p class="hover_text">"도서명"</p></a>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/3915/96/cover200/899230997x_1.jpg"><p class="hover_text">"도서명"</p></a>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/31868/12/cover200/k632833529_1.jpg"><p class="hover_text">"도서명"</p></a>
+    <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg"><p class="hover_text">"도서명"</p></a>
+</div>    
 {% endblock %}

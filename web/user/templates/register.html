@@ -25,7 +25,8 @@
                 <div class="form-group">
                     <label for="user_id">아이디</label>
                     <input type="text" class="form-control" id="user_id" placeholder="아이디를 입력하세요." name="user_id">
-                    <input type="button" value="중복확인"  id="alertBtn">
+                    <span>{{error}}</span>
+
                 </div>
                 <div class="form-group">
                     <label for="user_name">이름</label>
@@ -38,14 +39,6 @@
                 <div class="form-group">
                     <label for="re-password">비밀번호 확인</label>
                     <input type="password" class="form-control" id="re-password" placeholder="비밀번호 확인" name="re-password">
-                </div>
-                <div class="form-group">
-                    <label for="user_birth">생년월일</label>
-                    <input type="date" class="form-control" id="user_birth" name="user_birth">
-                </div>
-                <div class="form-group">
-                    <label for="phonenumber">전화번호</label>
-                    <input type="text" class="form-control" id="phonenumber" name="phonenumber" placeholder="하이픈(-)없이 입력하세요.">
                 </div>
                 <div class="form-group">
                     <label for="profile_image">프로필 이미지</label>

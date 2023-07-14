@@ -4,17 +4,55 @@
 <title>책읽아웃</title>
 {% endblock %}
 
+{% block css%}
+<style>
+img:hover {
+    filter :brightness(60%);
+    transform: scale(1.1);
+    transition: 10ms;
+    }
+    /* 이미지영역 */
+    .img_area{
+    display:inline-block;
+    position: relative;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    }
+    
+    /* 이미지가 뜨면 제일앞에 표시 */
+    .img_area:hover > .hover_text
+    {
+    display:block;
+    }
+    
+    /* 텍스트 평소에는 안보임*/
+    .hover_text{
+    display:none;
+    }
+    
+    /* 텍스트 속성 */
+    .hover_text {
+    position: absolute;
+    transition: 10ms;
+    top: 140px;
+    left: 20px;
+    color: beige;
+    font-weight: 600;
+    font-size: 30px;
+    }
+</style>
+{% endblock %}
+
 {% block header %}
 <!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5">
-    
-{% if request.session.user %}
-<div class="col-6 text-center">
-<img src="https://avatarfiles.alphacoders.com/139/13900.gif"> {{ name }}님 환영합니다.
-</div>
-{% else %}
+    {% if request.session.user %}
+    <div class="col-6 text-center">
+    <img src="https://avatarfiles.alphacoders.com/139/13900.gif"> {{ name }}님 환영합니다.
+    </div>
+    {% else %}
 
-{% endif %}
+    {% endif %}
 </header>
 {% endblock %}
 
@@ -22,25 +60,20 @@
 <!-- Contents -->
 
 
-<div class="container">
     <div class="col-12 text-center">
         {% if request.session.user %}
-        <h6> 🌎{{ name }}님의 독서모임 "북📗치기박치기"에 추천합니다🌎</h6>
-        {% else %}
-
+        <h6> 📕TODAY'S 추천📕</h6>
         {% endif %}
-        <img src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg">
-        <img src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg">
-        <img src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg">
-        <img src="https://image.aladin.co.kr/product/28512/86/cover200/896054289x_1.jpg">
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg"><p class="hover_text">"도서명"</p></a>
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg"><p class="hover_text">"도서명"</p></a>
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg"><p class="hover_text">"도서명"</p></a>
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/28512/86/cover200/896054289x_1.jpg"><p class="hover_text">"도서명"</p></a>
         <br>
-        <img src="https://image.aladin.co.kr/product/31722/66/cover200/8937417154_1.jpg">
-        <img src="https://image.aladin.co.kr/product/3915/96/cover200/899230997x_1.jpg">
-        <img src="https://image.aladin.co.kr/product/31868/12/cover200/k632833529_1.jpg">
-        <img src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg">
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/31722/66/cover200/8937417154_1.jpg"><p class="hover_text">"도서명"</p></a>
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/3915/96/cover200/899230997x_1.jpg"><p class="hover_text">"도서명"</p></a>
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/31868/12/cover200/k632833529_1.jpg"><p class="hover_text">"도서명"</p></a>
+        <a href="/book/search/" class="img_area"><img src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg"><p class="hover_text">"도서명"</p></a>
     </div>    
-</div>
-
 
 
 {% endblock %}
