@@ -7,3 +7,6 @@ def search(request):
 
 def result(request):
     return render(request, 'result.html')
+
+def result2(request):
+    return render(request, 'result2.html')

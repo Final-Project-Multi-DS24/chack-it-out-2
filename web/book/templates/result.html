@@ -1,73 +1,95 @@
 {% extends "base.html" %}
 
+<!-- 타이틀 -->
 {% block title %}
 <title>도서검색</title>
 {% endblock %}
-
+<!-- css -->
 {% block css%}
-<style>
-img:hover {
-    filter :brightness(60%);
-    transform: scale(1.1);
-    transition: 10ms;
-    }
-    /* 이미지영역 */
-    .img_area{
-    display:inline-block;
-    position: relative;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    }
-    
-    /* 이미지가 뜨면 제일앞에 표시 */
-    .img_area:hover > .hover_text
-    {
-    display:block;
-    }
-    
-    /* 텍스트 평소에는 안보임*/
-    .hover_text{
-    display:none;
-    }
-    
-    /* 텍스트 속성 */
-    .hover_text {
-    position: absolute;
-    transition: 10ms;
-    top: 140px;
-    left: 20px;
-    color: beige;
-    font-weight: 600;
-    font-size: 30px;
-    }
-</style>
+<style></style>
 {% endblock %}
-
+<!-- 헤더-->
 
 {% block header %}
-<!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5">
-    <div class="container">
-        <div class="row mt-5"></div>
-            <div>
-            <select name="selectbar" id="selectbar">
-                <option value="1">작가</option>
-                <option value="2">키워드</option>
-                <option value="2">도서명</option>
-            </select>
-            <input type="search" name="search" id="search">
-            <input type="button" value="검색결과">
-            </div>
-        <div class="row mt-5"></div>
+  <div class="container">
+    <div class="row mt-5"></div>
+    <div>
+      <select name="selectbar" id="selectbar">
+        <option value="1">작가</option>
+        <option value="2">키워드</option>
+        <option value="2">도서명</option>
+      </select>
+      <input type="search" name="search" id="search" />
+      <input type="button" value="검색결과" />
     </div>
+    <div class="row mt-5"></div>
+  </div>
 </header>
 {% endblock %}
 
+<!-- 콘텐츠 -->
 {% block contents %}
-이 책은 이런 페이지입니다~~~
-{% endblock %}
 
+<div class="container">
+  <div class="row">
+    <!-- One Side -->
+    <div class="col-6 text-center">
+      <!-- 사진 표시 -->
+      <img
+        style="height: 400px; width: 300px; margin-bottom: 20px"
+        src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg"
+      />
+      <br />
+      <input style="margin-right: 50px" type="button" value="읽은 책➕" />
+      <input type="button" value="위시리스트➕" />
+    </div>
 
-{% block script %}
+    <!-- other side -->
+    <div class="col-6">
+      <div style="overflow: auto; width: 500px; height: 400px">
+        <!-- 책소개 -->
+        <h2 style="font-weight: bold">📕무기가 되는 스토리</h2>
+        <!-- page -->
+        <h6>239쪽</h6>
 
+        <!-- 저자 -->
+        ✍🏻저자
+        <h4>도널드 밀러 저</h4>
+        🔖출판사
+        <!-- 출판사 -->
+        <h4>멀티캠퍼스</h4>
+
+        <!-- 책소개 -->
+        <pre>
+당신의 브랜드가 하는 일을 한 문장으로 말해보라. 만약 바로 말할 수
+없다면? 지금 당신의 브랜드는 서서히 망해가고 있다. 이 책은 마케팅
+전쟁터에서 가장 강력한 힘을 지닌 무기, 즉 스토리의 구축 비법을 공개한
+책이다. 메시지가 선명한 스토리는 듣는 이의 마음을 얻지만, 흐릿한
+스토리는 막대한 손실을 가져온다. 과연 스토리는 어떻게 만들어야 할까?
+아마존 베스트셀러 종합 1위에 오른 작가인 도널드 밀러. 그는 독자를
+사로잡는 스토리에는 불변의 공식이 있음을 깨닫고 이를 7단계 문장
+공식으로 체계화했다. 그는 이 공식에 기초한 컨설팅 기업
+[스토리브랜드]를 창립했고, 그의 공식은 인텔, 팬틴, 켄 블랜차드 컴퍼니,
+마리메이 등 3,000개 기업을 실적 부진의 늪에서 구원했으며 지금도 진행
+중이다. 시작은 브랜드와 고객의 관계를 새롭게 정의하는 것이다. 고객은
+브랜드가 힘주어 말하는 어마어마한 스토리에 관심이 전혀 없다. 다만,
+자신의 삶에만 흥미가 있다. 거의 모든 마케팅이 돈 먹는 하마가 된 이유가
+여기에 있다는 것. 고객들이 어떤 사람들인지, 고객을 움직이는 문장은
+어떻게 쓰는 것인지 구체적인 조언들이 페이지마다 가득하며, 결국 내
+브랜드에 어떤 스토리를 담아야 하는지 본질적 질문에 스스로 대답하도록
+치밀하게 짜여 있다. 마케터부터 기획자, 광고인, 소호 기업가까지 7가지
+문장 공식을 제대로 따른다면 치열한 전장에서 살아남을 자신만의 무기를
+지니게 될 것이다.
+          <br />
+        </pre>
+        <input
+          type="button"
+          value="리뷰 보기"
+          onclick="location.href='/book/search/result2'"
+        />
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
