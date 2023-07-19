@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>독서모임</title>
+<title>새 독서 모임 만들기</title>
 {% endblock %}
 
 <!-- css -->
@@ -54,24 +54,31 @@
 
 <!-- 콘텐츠 -->
 {% block contents %}
+
 <div class="container">
-{% for community in communities %}
-{{community}}
+    <form method="post" action=".">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="meeting_date">모임 날짜</label>
+            <input type="datetime-local" class="form-control" id="meeting_date" name="meeting_date">
+        </div>
+        <div class="form-group">
+            <label for="book">도서명</label>
+            <input type="text" class="form-control" id="book" placeholder="도서명" name="book">
+        </div>
+        <div class="form-group">
+            <label for="meeting_place">모임 장소</label>
+            <input type="text" class="form-control" id="meeting_place" placeholder="모임 장소를 적어주세요" name="meeting_place">
+        </div>
+        <div class="form-group">
+            <label for="description">설명</label>
+            <textarea class="form-control" class="form-control" id="description" name="description" placeholder="모임에 대해 간단히 설명을 적어주세요."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">만들기</button>
+    </form>
+</div>
 
-{% endfor %}
-<!-- 로그인 O -->
-{% if request.session.user %}
-<a onclick="location.href='new'"><div class="row"> 모임 새로 만들기 </div></a>
-{% else %}
-<div class="row">
-<div class="col-12 text-center">
-로그인하시면 독서모임에 함께 참여하실 수 있습니다.
-</div>
-</div>
-{% endif %}
-</div>
 {% endblock %}
-
 <!-- js -->
 {% block script %}
 

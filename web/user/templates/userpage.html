@@ -4,6 +4,63 @@
 <title>유저 페이지</title>
 {% endblock %}
 
+{% block css %}
+<style>
+    /* 회원페이지 - 회원탈퇴*/
+* {
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
+}
+
+#btnWrap {
+  width: 500px;
+}
+
+/* 회원탈퇴 버튼 */
+#popupBtn {
+  width: 150px;
+  height: 50px;
+  padding: 10px 5px;
+}
+/* 모달창 전체 */
+#modalWrap {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: none;
+}
+/*  */
+#modalBody {
+  width: 500px;
+  height: 300px;
+  padding: 30px 30px;
+  margin: 0 auto;
+  border: 1px solid #777;
+  background-color: #fff;
+}
+/* 닫기버튼 */
+#closeBtn {
+  float:right;
+  font-weight: bold;
+  color: #777;
+  font-size:25px;
+  cursor: pointer;
+}
+
+
+img:hover {
+ color: #777;
+}
+
+</style>
+{% endblock %}
 
 <!-- 헤더-->
 {% block header %}
@@ -13,17 +70,27 @@
         <div class="container" id="#tab-01"> 
             <div class="row">
                     <div class="col-3"></div>
-                    <div class="col-2 tab_bar text-center" id="tab-02">
+                    <div class="col-2 tab_bar text-center">
                         <a class="nav-link"  onclick="location.href='reading'">📚읽은 책</a>
                     </div>
-                    <div class="col-2 tab_bar text-center" id="tab-03">
+                    <div class="col-2 tab_bar text-center">
                         <a class="nav-link"  onclick="location.href='favorite'">📘위시리스트</a>
                     </div>
-                    <div class="col-2 tab_bar text-center" id="tab-03">
+                    <div class="col-2 tab_bar text-center">
                         <a class="nav-link"  onclick="location.href='usercommunity'">📗모임 참여</a>
                     </div>
-                    <div class="col-1 tab_bar text-center" id="tab-05">
-                        <input type="button" value="회원정보 수정" onclick="location.href='/user/modify'">
+                    <div class="col-1">
+                        <div id="btnWrap">
+                            <button type="button" id="popupBtn">회원탈퇴</button>
+                        </div>
+                        <!-- 모달 -->
+                        <div id="modalWrap">
+                            <div id="modalBody">
+                                <p>정말 탈퇴하시겠습니까?</p>
+                                <input class="btn" value='탈퇴하기' onclick="location.href='/user/delete'">
+                                <input class="btn" value='취소' id="cancel">
+                            </div>
+                        </div>
                     </div>
                     <div class="col-2"></div>
             </div>
@@ -32,6 +99,39 @@
 </header>
 {% endblock %}
 
+<!-- 콘텐츠 -->
 {% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            {{name}}님의 유저페이지입니다.
+        </div>
+    </div>
+</div>
+{% endblock %}
 
+{% block script %}
+<script>
+// 팝업버튼 = btn
+const btn = document.getElementById('popupBtn');
+// 모달창 = modal
+const modal = document.getElementById('modalWrap');
+// 모달창-취소 = cancel
+const cancel = document.getElementById('cancel');
+
+// btn을 .onclick 하면 = function(){ 실행 }
+btn.onclick = function() {
+  modal.style.display = 'block';
+}
+
+cancel.onclick = function() {
+  modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 {% endblock %}

@@ -10,21 +10,43 @@
 <header class="py-5 bg-light border-bottom mb-5">
     <div class="container">
         <div class="row mt-5"></div>
-            <div>
-            <select name="selectbar" id="selectbar">
-                <option value="1">유저명</option>
-                <option value="2">아이디명</option>
-            </select>
-            <input type="search" name="search" id="search">
-            <input type="button" value="검색결과">
-            </div>
+            <form action="" method="get" action=".">
+                <select name="selectbar" id="selectbar">
+                    <option value="1">유저명</option>
+                    <option value="2">아이디명</option>
+                </select>
+                <input type="search" name="searchword" id="search">
+                <input type="submit" value="검색결과">
+            </form> 
         <div class="row mt-5"></div>
     </div>
 </header>
 {% endblock %}
 
-
 {% block contents %}
 <!-- 콘텐츠 -->
+
+{% if query %}
+<div class="container">
+    <div class="row">
+        <div class="col-12" 
+        style="margin-bottom: 40px; 
+        font-weight: bold;
+        font-size: 30px;
+        -webkit-text-stroke: 1px white;
+        color: black;
+        ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
+        {% for user in users %}
+            <!-- 이름으로 검색 -->
+            {% if selectbar == "1" %}
+            <div>{{user.user_name}}</div>
+            <!-- 아이디로 검색한 경우 -->
+            {% elif selectbar == "2" %}
+            <div>{{user.user_id}}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}

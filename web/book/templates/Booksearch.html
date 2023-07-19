@@ -6,58 +6,62 @@
 
 {% block css%}
 <style>
-img:hover {
-    filter :brightness(60%);
+  img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  img:hover {
+    filter: brightness(60%);
     transform: scale(1.1);
-    transition: 10ms;
-    }
-    /* 이미지영역 */
-    .img_area{
-    display:inline-block;
+    transition: 1s;
+  }
+  /* 이미지영역 */
+  .img_area {
+    display: inline-block;
     position: relative;
     padding-right: 10px;
     padding-bottom: 10px;
-    }
-    
-    /* 이미지가 뜨면 제일앞에 표시 */
-    .img_area:hover > .hover_text
-    {
-    display:block;
-    }
-    
-    /* 텍스트 평소에는 안보임*/
-    .hover_text{
-    display:none;
-    }
-    
-    /* 텍스트 속성 */
-    .hover_text {
+  }
+
+  /* 이미지가 뜨면 제일앞에 표시 */
+  .img_area:hover > .hover_text {
+    display: block;
+  }
+
+  /* 텍스트 평소에는 안보임*/
+  .hover_text {
+    display: none;
+  }
+
+  /* 텍스트 속성 */
+  .hover_text {
     position: absolute;
     transition: 10ms;
-    top: 140px;
-    left: 20px;
-    color: beige;
+    top: 100px;
+    left: 10px;
+    width: 200px;
+    color: white;
+    -webkit-text-stroke: 0.8px black;
     font-weight: 600;
-    font-size: 30px;
-    }
+    font-size: 25px;
+  }
 </style>
 {% endblock %}
-
 
 {% block header %}
 <!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5">
-<div class="container">
-    <div class="row mt-5"></div>
-        <div>
-        <select name="selectbar" id="selectbar">
-            <option value="1">작가</option>
-            <option value="2">키워드</option>
-            <option value="2">도서명</option>
-        </select>
-        <input type="search" name="search" id="search">
-        <input type="button" value="검색결과" onclick="location.href='result'" >
-        </div>
+    <div class="container">
+        <div class="row mt-5"></div>
+        <form action="" method="get" action=".">
+            <select name="selectbar" id="selectbar">
+                <option value="1">도서명</option>
+                <option value="2">작가</option>
+                <option value="3">키워드</option>
+            </select>
+            <input type="search" name="searchword" id="search">
+            <input type="submit" value="검색결과">
+        </form> 
     <div class="row mt-5"></div>
 </div>
 </header>
@@ -65,4 +69,28 @@ img:hover {
 
 {% block contents %}
  
+{% if query %}
+<div class="container">
+    <div class="row">
+        <div class="col-12" 
+        style="margin-bottom: 40px; 
+        font-weight: bold;
+        font-size: 30px;
+        -webkit-text-stroke: 1px white;
+        color: black;
+        ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
+        {% for book in books %}
+        <div class="col-3 text-center" style="position: relative;">
+        <a href="/book/search/result/" class="img_area"><img
+          src="{{book.book_cover}}"
+        />
+        <p class="hover_text">"{{book.book_title}}"</p></a
+      >
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+
 {% endblock %}

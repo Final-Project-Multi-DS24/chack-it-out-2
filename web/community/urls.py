@@ -1,5 +1,4 @@
 from django.urls import path
-from .views import community
+from .views import community, newcommunity
 
-urlpatterns = [
-    path('',community)]
+urlpatterns = [path("", community), path("new/", newcommunity)]

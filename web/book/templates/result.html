@@ -13,18 +13,18 @@
 {% block header %}
 <header class="py-5 bg-light border-bottom mb-5">
   <div class="container">
-    <div class="row mt-5"></div>
-    <div>
-      <select name="selectbar" id="selectbar">
-        <option value="1">작가</option>
-        <option value="2">키워드</option>
-        <option value="2">도서명</option>
-      </select>
-      <input type="search" name="search" id="search" />
-      <input type="button" value="검색결과" />
-    </div>
-    <div class="row mt-5"></div>
-  </div>
+      <div class="row mt-5"></div>
+      <form action="" method="get" action=".">
+          <select name="selectbar" id="selectbar">
+              <option value="1">도서명</option>
+              <option value="2">작가</option>
+              <option value="3">키워드</option>
+          </select>
+          <input type="search" name="searchword" id="search">
+          <input type="submit" value="검색결과">
+      </form> 
+  <div class="row mt-5"></div>
+</div>
 </header>
 {% endblock %}
 
@@ -81,14 +81,14 @@
 치밀하게 짜여 있다. 마케터부터 기획자, 광고인, 소호 기업가까지 7가지
 문장 공식을 제대로 따른다면 치열한 전장에서 살아남을 자신만의 무기를
 지니게 될 것이다.
-          <br />
         </pre>
-        <input
-          type="button"
-          value="리뷰 보기"
-          onclick="location.href='/book/search/result2'"
-        />
       </div>
+      <input
+      type="button"
+      value="리뷰 보기"
+      onclick="location.href='/book/search/result2'"
+      style="margin-top: 20px;"
+    />
     </div>
   </div>
 </div>

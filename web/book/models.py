@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Book(models.Model):
-    book_isbn = models.IntegerField(unique=True, verbose_name="ISBN")
+    book_isbn = models.IntegerField(unique=True, primary_key=True, verbose_name="ISBN")
     book_title = models.CharField(max_length=500, verbose_name="도서명")
     book_author = models.CharField(max_length=20, verbose_name="저자")
     book_publisher = models.CharField(max_length=20, verbose_name="출판사")
