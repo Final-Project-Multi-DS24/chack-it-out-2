@@ -21,17 +21,18 @@ def newcommunity(request):
         meeting_date = request.POST["meeting_date"]
         meeting_place = request.POST["meeting_place"]
         description = request.POST["description"]
+        creator = User.objects.get(id=request.session.get("user"))
         community = Community(
             book=Book.objects.get(book_isbn=book),
             meeting_date=meeting_date,
             meeting_place=meeting_place,
             description=description,
+            creator=creator,
         )
         community.save()
         member = Member(
             Communityid=Community.objects.latest("id"),
             user_pk=User.objects.get(id=int(request.session.get("user"))),
-            is_leader=True,
         )
         member.save()
 

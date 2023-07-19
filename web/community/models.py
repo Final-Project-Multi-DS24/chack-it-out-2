@@ -14,6 +14,13 @@ class Community(models.Model):
     )
     meeting_date = models.DateTimeField(blank=False, verbose_name="모임 날짜")
     meeting_place = models.CharField(max_length=20, blank=False, verbose_name="모임 장소")
+    creator= models.ForeignKey(
+        "user.User",
+        to_field="id",
+        blank=False,
+        on_delete=models.CASCADE,
+        verbose_name="작성자",
+    )
     is_finished = models.BooleanField(default=False)
     description = models.TextField()
 
@@ -25,7 +32,6 @@ class Community(models.Model):
 class Member(models.Model):
     Communityid = models.ForeignKey("Community", on_delete=models.CASCADE)
     user_pk = models.ForeignKey("user.User", on_delete=models.CASCADE)
-    is_leader = models.BooleanField(default=False)
 
     class Meta:
         db_table = "tb_communitymember"
