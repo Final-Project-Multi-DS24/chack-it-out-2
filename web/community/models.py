@@ -30,8 +30,8 @@ class Community(models.Model):
 
 
 class Member(models.Model):
-    Communityid = models.ForeignKey("Community", on_delete=models.CASCADE)
-    user_pk = models.ForeignKey("user.User", on_delete=models.CASCADE)
+    community = models.ForeignKey("Community", on_delete=models.CASCADE)
+    user = models.ForeignKey("user.User", on_delete=models.CASCADE)
 
     class Meta:
         db_table = "tb_communitymember"

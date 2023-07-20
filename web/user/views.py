@@ -32,15 +32,13 @@ def register(request):
             user_id = request.POST["user_id"]
             user_name = request.POST["user_name"]
             password = request.POST["password"]
-            profile_image = request.POST["profile_image"]
             # interest = request.POST['interest']
 
             # 그리고 변수를 User모델 객체에 담습니다.
             user = User(
                 user_id=user_id,
                 user_name=user_name,
-                password=make_password(password),
-                profile_image=profile_image,
+                password=make_password(password)
             )
             user.save()
         except IntegrityError:

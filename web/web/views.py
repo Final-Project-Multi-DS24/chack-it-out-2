@@ -9,13 +9,11 @@ def home(request):
     try:
         user = User.objects.get(id=int(request.session.get('user')))
         name = user.user_name
-        image=user.profile_image
     # 그 외에는 그냥 메인페이지 접속
     except TypeError:
         return render(request, 'main.html')
     return render(request, 'main.html', {'user':request.session.get('user'),
-                                         'name': name,
-                                         'image': image} 
+                                         'name': name} 
                                          )
 
 def search(request):
