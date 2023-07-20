@@ -12,3 +12,14 @@ class User(models.Model):
     # db_table의 이름을 "tb_user로 설정"
     class Meta:
         db_table = 'tb_user'
+
+class Favorite(models.Model):
+    user=models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='유저 PK')
+    category = models.ForeignKey(
+        "book.Category", on_delete=models.CASCADE, verbose_name="카테고리 PK"
+    )
+    def __str__(self):
+        return self.user
+    # db_table의 이름을 "tb_user로 설정"
+    class Meta:
+        db_table = 'tb_userfavorite'

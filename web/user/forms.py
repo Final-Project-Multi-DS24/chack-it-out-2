@@ -46,7 +46,7 @@ class LoginForm(forms.Form):
                     except User.DoesNotExist: # 조회된 내용이 없을 경우 발생된 예외를 처리
                         self.add_error("password", "비밀번호 오류 또는 존재하지 않는 아이디입니다.")
                         return # 중단 (자동 clear)
-                    if not check_password(password, user.password):
+                    if password != user.password:
                         # 비밀번호가 틀리면 에러 메시지 설정
                         self.add_error("password", "비밀번호 오류 또는 존재하지 않는 아이디입니다.")
                     else:

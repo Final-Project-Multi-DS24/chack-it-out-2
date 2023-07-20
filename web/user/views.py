@@ -12,9 +12,9 @@ from django.db import IntegrityError
 # 2. 날짜 오류
 from django.core.exceptions import ValidationError
 
-from .models import User
+from .models import User,Favorite
+from book.models import Category
 from django.db.models import Q
-
 # 로그인폼
 from .forms import LoginForm
 
@@ -24,7 +24,8 @@ from .forms import LoginForm
 # request to VIEW if "GET"(/link/), return templates to user
 def register(request):
     if request.method == "GET":
-        return render(request, "register.html")
+        categories = Category.objects.all()
+        return render(request, "register.html",{'categories':categories})
     # 사용자의 요청이 POST인 경우
     elif request.method == "POST":
         # 각 input tag에서 name 속성값을 이용해 사용자가 보낸 값을 꺼내옵니다.
@@ -32,15 +33,18 @@ def register(request):
             user_id = request.POST["user_id"]
             user_name = request.POST["user_name"]
             password = request.POST["password"]
-            # interest = request.POST['interest']
-
-            # 그리고 변수를 User모델 객체에 담습니다.
+            # User모델 객체에 담는는다..
             user = User(
                 user_id=user_id,
                 user_name=user_name,
-                password=make_password(password)
+                password=password
             )
-            user.save()
+            # user.save()
+            categories = Category.objects.all()
+            # 선택된 것들을 리스트로 담음
+            selected = request.POST.getlist('selected')
+            for choice in selected:
+                print()
         except IntegrityError:
             error = "이미 존재하는 아이디이거나 아이디가 공백입니다."
             return render(request, "register.html", {"error": error})
@@ -111,11 +115,11 @@ def reading(request):
     return render(request, "reading.html", {"name": name})
 
 
-def favorite(request):
+def wish(request):
     if request.session.get("user"):
         user = User.objects.get(id=int(request.session.get("user")))
         name = user.user_name
-    return render(request, "favorite.html", {"name": name})
+    return render(request, "wish.html", {"name": name})
 
 
 def usercommunity(request):
