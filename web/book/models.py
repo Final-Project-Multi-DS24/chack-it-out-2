@@ -7,7 +7,7 @@ class Book(models.Model):
         unique=True, primary_key=True, verbose_name="ISBN"
     )
     book_title = models.CharField(max_length=500, verbose_name="도서명")
-    book_author = models.CharField(max_length=20, verbose_name="저자")
+    book_author = models.CharField(max_length=500, verbose_name="저자")
     book_description = models.CharField(max_length=1000, verbose_name="책소개")
     book_cover = models.CharField(max_length=400, verbose_name="책표지")
     book_publishdate = models.DateField(verbose_name="출간일")
@@ -25,7 +25,7 @@ class Book(models.Model):
 
 
 class Category(models.Model):
-    category = models.CharField(max_length=20, unique=True,verbose_name="카테고리명")
+    category = models.CharField(max_length=20, unique=True, verbose_name="카테고리명")
 
     def __str__(self):
         return self.category

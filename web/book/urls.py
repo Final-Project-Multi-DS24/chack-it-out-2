@@ -3,6 +3,6 @@ from .views import search,result,result2
 
 urlpatterns = [
     path('search/',search),
-    path('search/result/',result),
-    path('search/result2/',result2)   
+    path('search/result/<int:pk>/',result),
+    path('search/result2/<int:pk>/',result2)   
     ]

@@ -7,6 +7,7 @@
 {% block css%}
 <style>
   img {
+    height: 400px; width: 300px;
     margin-right: 10px;
     margin-bottom: 10px;
   }
@@ -19,6 +20,7 @@
   .img_area {
     display: inline-block;
     position: relative;
+    
     padding-right: 10px;
     padding-bottom: 10px;
   }
@@ -38,10 +40,10 @@
     position: absolute;
     transition: 10ms;
     top: 100px;
-    left: 10px;
+    left: 30px;
     width: 200px;
-    color: white;
-    -webkit-text-stroke: 0.8px black;
+    color: black;
+    -webkit-text-stroke: 0.8px white;
     font-weight: 600;
     font-size: 25px;
   }
@@ -57,7 +59,7 @@
             <select name="selectbar" id="selectbar">
                 <option value="1">도서명</option>
                 <option value="2">작가</option>
-                <option value="3">키워드</option>
+                <option value="3">ISBN</option>
             </select>
             <input type="search" name="searchword" id="search">
             <input type="submit" value="검색결과">
@@ -71,24 +73,24 @@
  
 {% if query %}
 <div class="container">
-    <div class="row">
-        <div class="col-12" 
-        style="margin-bottom: 40px; 
-        font-weight: bold;
-        font-size: 30px;
-        -webkit-text-stroke: 1px white;
-        color: black;
-        ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
-        {% for book in books %}
-        <div class="col-3 text-center" style="position: relative;">
-        <a href="/book/search/result/" class="img_area"><img
-          src="{{book.book_cover}}"
-        />
-        <p class="hover_text">"{{book.book_title}}"</p></a
-      >
-        </div>
-        {% endfor %}
-    </div>
+  <div class="row">
+      <div class="col-12" 
+      style="margin-bottom: 40px; 
+      font-weight: bold;
+      font-size: 30px;
+      -webkit-text-stroke: 1px white;
+      color: black;
+      ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
+      {% for book in books %}
+      <div class="col-3 text-center" style="position: relative;">
+      <a href="/book/search/result/{{book.book_isbn}}" class="img_area"><img
+        src="{{book.book_cover}}"
+      />
+      <p class="hover_text">"{{book.book_title}}"</p></a
+    >
+      </div>
+      {% endfor %}
+  </div>
 </div>
 {% endif %}
 
