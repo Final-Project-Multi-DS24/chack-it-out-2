@@ -2,7 +2,7 @@
 <title>유저 페이지</title>
 {% endblock %} {% block css%}
 <style>
-  /*  */
+  /* 이미지 형식  */
   img {
     margin-right: 10px;
     margin-bottom: 10px;
@@ -57,16 +57,21 @@
           <a class="nav-link" onclick="location.href='reading'">📚읽은 책</a>
         </div>
         <div class="col-2 tab_bar text-center" id="tab-03">
-          <a class="nav-link" onclick="location.href='favorite'"
-            >📘위시리스트</a
-          >
+          <a class="nav-link" onclick="location.href='wish'">📘위시리스트</a>
         </div>
         <div class="col-2 tab_bar text-center" id="tab-03">
           <a class="nav-link" onclick="location.href='usercommunity'"
             >📗모임 참여</a
           >
         </div>
-        <div class="col-3"></div>
+        <div class="col-1 tab_bar text-center" id="tab-05">
+          <input
+            type="button"
+            value="회원정보 수정"
+            onclick="location.href='/user/modify'"
+          />
+        </div>
+        <div class="col-2"></div>
       </div>
     </div>
   </div>
