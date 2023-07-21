@@ -6,8 +6,10 @@ from .models import Community, Member
 class CommunityAdmin(admin.ModelAdmin):
     list_display = ("id", "meeting_date", "meeting_place", "creator")
 
+
 class MemberAdmin(admin.ModelAdmin):
     list_display = ("community", "user")
+
 
 admin.site.register(Community, CommunityAdmin)
 admin.site.register(Member, MemberAdmin)

@@ -16,9 +16,7 @@ def search(request):
             elif selectbar == "2":
                 books = Book.objects.all().filter(Q(book_author__icontains=query))
             elif selectbar == "3":
-                books = Book.objects.all().filter(
-                    Q(book_isbn__icontains=query)
-                )
+                books = Book.objects.all().filter(Q(book_isbn__icontains=query))
         return render(
             request,
             "Booksearch.html",
@@ -28,9 +26,11 @@ def search(request):
         return render(request, "Booksearch.html")
 
 
-def result(request):
-    return render(request, "result.html")
+def result(request, pk):
+    book = Book.objects.get(book_isbn=pk)
+    return render(request, "result.html", {"pk": pk, "book": book})
 
 
-def result2(request):
-    return render(request, "result2.html")
+def result2(request, pk):
+    book = Book.objects.get(book_isbn=pk)
+    return render(request, "result2.html", {"pk": pk, "book": book})
