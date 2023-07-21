@@ -9,12 +9,13 @@ from django.contrib.auth.hashers import make_password, check_password
 # 1. 아이디 또는 비밀번호 오류
 from django.db import IntegrityError
 
-# 2. 날짜 오류
-from django.core.exceptions import ValidationError
-
-from .models import User,Favorite
+from book.models import Book
+from .models import User, Favorite
 from book.models import Category
 from django.db.models import Q
+import random
+
+
 # 로그인폼
 from .forms import LoginForm
 
@@ -25,7 +26,7 @@ from .forms import LoginForm
 def register(request):
     if request.method == "GET":
         categories = Category.objects.all()
-        return render(request, "register.html",{'categories':categories})
+        return render(request, "register.html", {"categories": categories})
     # 사용자의 요청이 POST인 경우
     elif request.method == "POST":
         # 각 input tag에서 name 속성값을 이용해 사용자가 보낸 값을 꺼내옵니다.
@@ -34,22 +35,22 @@ def register(request):
             user_name = request.POST["user_name"]
             password = request.POST["password"]
             # User모델 객체에 담는는다..
-            user = User(
-                user_id=user_id,
-                user_name=user_name,
-                password=password
-            )
-            # user.save()
+            user = User(user_id=user_id, user_name=user_name, password=password)
+            user.save()
             categories = Category.objects.all()
             # 선택된 것들을 리스트로 담음
-            selected = request.POST.getlist('selected')
+            selected = request.POST.getlist("selected")
             for choice in selected:
-                print()
+                favorite = Favorite(
+                    user=User.objects.latest("id"),
+                    category=Category.objects.get(id=choice),
+                )
+                favorite.save()
+
         except IntegrityError:
             error = "이미 존재하는 아이디이거나 아이디가 공백입니다."
             return render(request, "register.html", {"error": error})
-        except ValidationError:
-            pass
+
         # 가입 완료시 메인으로 이동
         return render(request, "main.html")
 
@@ -79,15 +80,26 @@ def logout(request):
     return redirect("/")
 
 
-def userpage(request):
-    return render(request, "userpage.html")
-
-
-def modify(request):
-    if request.method == "GET":
-        return render(request, "modify.html")
-    elif request.method == "POST":
-        return render(request, "main.html")
+def userpage(request, pk):
+    user = User.objects.get(id=pk)
+    name = user.user_name
+    # user_id가 pk와 일치하는 카테고리 객체집합
+    favorites = Favorite.objects.all().filter(user_id=pk)
+    cate_ls = []
+    cate_name =[]
+    for favorite in favorites:
+        # category - fk의 값 category_id - fk
+        # list에 담아줌
+        cate_name.append(favorite.category)
+        cate_ls.append(favorite.category_id)
+    print(cate_name,cate_ls)
+    # 필터링된 책들
+    selectedbooks=Book.objects.all().filter(category_id__in=cate_ls)
+    # 랜덤으로 8개 추출
+    randomresult = []
+    for i in range(8):
+        randomresult.append(random.choice(selectedbooks))
+    return render(request, "userpage.html", {"name": name, "pk": pk, "user": user, 'cate_name':cate_name,"randomresult": randomresult})
 
 
 def search(request):
@@ -108,25 +120,22 @@ def search(request):
         return render(request, "usersearch.html")
 
 
-def reading(request):
-    if request.session.get("user"):
-        user = User.objects.get(id=int(request.session.get("user")))
-        name = user.user_name
-    return render(request, "reading.html", {"name": name})
+def reading(request, pk):
+    user = User.objects.get(id=pk)
+    name = user.user_name
+    return render(request, "reading.html", {"name": name, "pk": pk})
 
 
-def wish(request):
-    if request.session.get("user"):
-        user = User.objects.get(id=int(request.session.get("user")))
-        name = user.user_name
-    return render(request, "wish.html", {"name": name})
+def wish(request, pk):
+    user = User.objects.get(id=pk)
+    name = user.user_name
+    return render(request, "wish.html", {"name": name, "pk": pk})
 
 
-def usercommunity(request):
-    if request.session.get("user"):
-        user = User.objects.get(id=int(request.session.get("user")))
-        name = user.user_name
-    return render(request, "usercommunity.html", {"name": name})
+def usercommunity(request, pk):
+    user = User.objects.get(id=pk)
+    name = user.user_name
+    return render(request, "usercommunity.html", {"name": name, "pk": pk})
 
 
 # 회원정보 삭제

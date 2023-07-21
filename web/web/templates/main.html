@@ -1,16 +1,19 @@
 {% extends "base.html" %} {% block title %}
 <title>책읽아웃</title>
-{% endblock %} {% block css%}
+{% endblock %} 
+<!-- css -->
+{% block css%}
 <style>
   img:hover {
     filter: brightness(60%);
     transform: scale(1.1);
-    transition: 10ms;
+    transition: 1s;
   }
   /* 이미지영역 */
   .img_area {
     display: inline-block;
     position: relative;
+    
     padding-right: 10px;
     padding-bottom: 10px;
   }
@@ -25,18 +28,21 @@
     display: none;
   }
 
-  /* 텍스트 속성 */
+
   .hover_text {
     position: absolute;
     transition: 10ms;
-    top: 140px;
-    left: 20px;
-    color: beige;
+    top: 100px;
+    left: 30px;
+    width: 200px;
+    color: black;
+    -webkit-text-stroke: 0.8px white;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 25px;
   }
 </style>
-{% endblock %} {% block header %}
+{% endblock %} 
+{% block header %}
 <!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5" style="height: 200px; ">
   {% if request.session.user %}
@@ -51,63 +57,33 @@
   </div>
   {% endif %}
 </header>
-{% endblock %} {% block contents %}
+{% endblock %}
 <!-- Contents -->
+{% block contents %}
+<div class="container">
+  <div class="col-12 text-center">
+    {% if request.session.user %}
+    <h5>📕TODAY'S 추천📕</h5>
+      </div>  
+    {% for randombook in randomresult %}
+  <a href="/book/search/result/{{randombook.book_isbn}}" class="img_area"><img
+    src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
+    margin-right: 10px;
+    margin-bottom: 10px;"
+  /><p class="hover_text">"{{randombook.book_title}}"</p></a>
+    {% endfor %}
 
-<div class="col-12 text-center">
-  {% if request.session.user %}
-  <h6>📕TODAY'S 추천📕</h6>
-  {% endif %}
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/16901/95/cover200/k022534274_1.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/5608/0/cover200/6000835790_3.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/19389/8/cover200/8935212822_1.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/28512/86/cover200/896054289x_1.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <br />
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/31722/66/cover200/8937417154_1.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/3915/96/cover200/899230997x_1.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/31868/12/cover200/k632833529_1.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
-  <a href="/book/search/result/" class="img_area"
-    ><img
-      src="https://image.aladin.co.kr/product/1349/19/cover200/8935208957_2.jpg"
-    />
-    <p class="hover_text">"도서명"</p></a
-  >
+    {% else %}
+    <h5>📕로그인 하시면 도서정보와 도서리뷰, 나에게 맞는 책 추천 등 다양한 정보를 확인할 수 있습니다.📕</h5>
+  </div>  
+    {% for randombook in randomresult %}
+    <img
+    src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
+    margin-right: 10px;
+    margin-bottom: 10px;">
+      {% endfor %}
 
+    {% endif %}
 
 </div>
 

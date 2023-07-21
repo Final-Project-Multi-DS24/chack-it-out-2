@@ -10,24 +10,9 @@ import random
 
 def home(request):
     allbook = Book.objects.all()
-    randombook_1 = random.choice(allbook)
-    randombook_2 = random.choice(allbook)
-    randombook_3 = random.choice(allbook)
-    randombook_4 = random.choice(allbook)
-    randombook_5 = random.choice(allbook)
-    randombook_6 = random.choice(allbook)
-    randombook_7 = random.choice(allbook)
-    randombook_8 = random.choice(allbook)
-    randomresult = [
-        randombook_1,
-        randombook_2,
-        randombook_3,
-        randombook_4,
-        randombook_5,
-        randombook_6,
-        randombook_7,
-        randombook_8,
-    ]
+    randomresult = []
+    for i in range(8):
+        randomresult.append(random.choice(allbook))
     # 로그인정보가 있을때
     try:
         user = User.objects.get(id=int(request.session.get("user")))
@@ -47,11 +32,11 @@ def home(request):
     )
 
 
-def search(request, pk):
-    user = User.objects.get(id=pk)
-    return render(request, "search.html", {"pk": pk, "user": user})
+def search(request):
+    user = User.objects.get(id=int(request.session.get("user")))
+    name = user.user_name
+    return render(request, "search.html", {"name": name})
 
 
-def search_book(request, pk):
-    user = User.objects.get(id=pk)
-    return render(request, "search_book.html", {"pk": pk, "user": user})
+def search_book(request):
+    return render(request, "search_book.html")

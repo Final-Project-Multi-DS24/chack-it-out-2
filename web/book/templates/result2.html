@@ -128,18 +128,18 @@
 {% block header %}
 <header class="py-5 bg-light border-bottom mb-5">
   <div class="container">
-    <div class="row mt-5"></div>
-    <div>
-      <select name="selectbar" id="selectbar">
-        <option value="1">작가</option>
-        <option value="2">키워드</option>
-        <option value="2">도서명</option>
-      </select>
-      <input type="search" name="search" id="search" />
-      <input type="button" value="검색결과" />
-    </div>
-    <div class="row mt-5"></div>
-  </div>
+      <div class="row mt-5"></div>
+      <form action="" method="get" action=".">
+          <select name="selectbar" id="selectbar">
+              <option value="1">도서명</option>
+              <option value="2">작가</option>
+              <option value="3">ISBN</option>
+          </select>
+          <input type="search" name="searchword" id="search">
+          <input type="submit" value="검색결과">
+      </form> 
+  <div class="row mt-5"></div>
+</div>
 </header>
 {% endblock %}
 <!-- 콘텐츠 -->

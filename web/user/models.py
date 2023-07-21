@@ -6,7 +6,7 @@ class User(models.Model):
     user_id = models.CharField(
         max_length=10, unique=True, blank=False, verbose_name="사용자 아이디"
     )
-    user_name = models.CharField(max_length=10, blank=False, verbose_name="이름")
+    user_name = models.CharField(max_length=20, blank=False, verbose_name="이름")
     password = models.CharField(max_length=15, blank=False, verbose_name="비밀번호")
     registered_dttm = models.DateTimeField(auto_now_add=True, verbose_name="등록시간")
 
