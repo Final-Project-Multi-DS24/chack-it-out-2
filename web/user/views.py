@@ -155,7 +155,7 @@ def wish(request, pk):
 def usercommunity(request, pk):
     user = User.objects.get(id=pk)
     name = user.user_name
-    return render(request, "usercommunity.html", {"name": name, "pk": pk})
+    return render(request, "usercommunity.html", {"user":user,"name": name, "pk": pk})
 
 
 # 회원정보 삭제

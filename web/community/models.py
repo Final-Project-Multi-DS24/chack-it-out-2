@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 
-
+# 독서모임
 class Community(models.Model):
     book = models.ForeignKey(
         "book.Book",
@@ -27,7 +27,7 @@ class Community(models.Model):
     class Meta:
         db_table = "tb_community"
 
-
+# 모임 참여 멤버
 class Member(models.Model):
     community = models.ForeignKey("Community", on_delete=models.CASCADE)
     user = models.ForeignKey("user.User", on_delete=models.CASCADE)

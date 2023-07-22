@@ -17,7 +17,7 @@ class User(models.Model):
     class Meta:
         db_table = "tb_user"
 
-
+# 유저가 선택한 관심사
 class Favorite(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, verbose_name="유저 PK")
     category = models.ForeignKey(
@@ -31,7 +31,7 @@ class Favorite(models.Model):
     class Meta:
         db_table = "tb_userfavorite"
 
-
+# 유저가 읽은도서
 class Reading(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, verbose_name="유저 PK")
     book = models.ForeignKey(
@@ -45,7 +45,7 @@ class Reading(models.Model):
         db_table = "tb_reading" 
 
 
-    
+# 유저의 위시리스트
 class Wish(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, verbose_name="유저 PK")
     book = models.ForeignKey(

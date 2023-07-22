@@ -2,6 +2,8 @@ from django.db import models
 
 
 # Create your models here.
+
+# 도서
 class Book(models.Model):
     book_isbn = models.BigIntegerField(verbose_name="ISBN"
     )
@@ -22,7 +24,7 @@ class Book(models.Model):
     class Meta:
         db_table = "tb_book"
 
-
+# 도서 카테고리
 class Category(models.Model):
     category = models.CharField(max_length=20, unique=True, verbose_name="카테고리명")
 
@@ -31,3 +33,21 @@ class Category(models.Model):
 
     class Meta:
         db_table = "tb_category"
+
+# 도서 리뷰
+# class Review(models.Model):
+#     book = models.ForeignKey(
+#         "book.Book",
+#         blank=False,
+#         on_delete=models.CASCADE,
+#         verbose_name="도서",
+#     )
+#     review = models.CharField(max_length=2000, verbose_name='리뷰')
+#     label= models.IntegerField(verbose_name='긍정 또는 부정')
+
+#     def __str__(self):
+#         return self.id
+
+#     class Meta:
+#         db_table = "tb_review"
+
