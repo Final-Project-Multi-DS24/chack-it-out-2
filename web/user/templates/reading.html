@@ -36,11 +36,13 @@
   .hover_text {
     position: absolute;
     transition: 10ms;
-    top: 140px;
-    left: 20px;
-    color: beige;
+    top: 100px;
+    left: 30px;
+    width: 200px;
+    color: black;
+    -webkit-text-stroke: 0.8px white;
     font-weight: 600;
-    font-size: 30px;
+    font-size: 25px;
   }
 </style>
 {% endblock %}
@@ -78,5 +80,15 @@
       <h3 style="margin-bottom: 10px">{{name}}님이 읽은 책</h3>
     </div>
   </div>
+  {% for selectedbook in selectedbooks %}
+  <a href="/book/search/result/{{selectedbook.book_isbn}}" class="img_area"><img
+    src="{{selectedbook.book_cover}}" style="height: 400px; width: 300px;
+    margin-right: 10px;
+    margin-bottom: 10px;"
+  /><p class="hover_text">"{{selectedbook.book_title}}"</p></a>
+  <form action="" method="get" action="." style="display: inline;">
+    <button style="margin-right: 50px" type="submit" value="{{selectedbook.book_isbn}}" name='delete' id="{{selectedbook.book_isbn}}">삭제하기</button>
+  </form>  
+    {% endfor %}
 </div>
 {% endblock %}

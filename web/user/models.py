@@ -30,3 +30,36 @@ class Favorite(models.Model):
     # db_table의 이름을 "tb_user로 설정"
     class Meta:
         db_table = "tb_userfavorite"
+
+
+class Reading(models.Model):
+    user = models.ForeignKey("User", on_delete=models.CASCADE, verbose_name="유저 PK")
+    book = models.ForeignKey(
+    "book.Book",
+    to_field="book_isbn",
+    blank=False,
+    on_delete=models.CASCADE,
+    verbose_name="읽은 도서(PK)")
+    
+    def __str__(self):
+        return self.user
+
+    class Meta:
+        db_table = "tb_reading" 
+
+
+    
+class Wish(models.Model):
+    user = models.ForeignKey("User", on_delete=models.CASCADE, verbose_name="유저 PK")
+    book = models.ForeignKey(
+    "book.Book",
+    to_field="book_isbn",
+    blank=False,
+    on_delete=models.CASCADE,
+    verbose_name="읽은 도서(PK)")
+    
+    def __str__(self):
+        return self.user
+
+    class Meta:
+        db_table = "tb_wish" 

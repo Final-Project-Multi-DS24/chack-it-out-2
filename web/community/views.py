@@ -12,7 +12,7 @@ def community(request):
         request, "community.html", {"communities": communities, "members": members}
     )
 
-
+    
 def newcommunity(request):
     if request.method == "GET":
         return render(request, "new.html")
@@ -20,8 +20,8 @@ def newcommunity(request):
         book = 9791195463817
         meeting_date = request.POST["meeting_date"]
         meeting_place = request.POST["meeting_place"]
-        description = request.POST["description"]
         creator = User.objects.get(id=request.session.get("user"))
+        description = request.POST["description"]
         community = Community(
             book=Book.objects.get(book_isbn=book),
             meeting_date=meeting_date,
@@ -31,8 +31,8 @@ def newcommunity(request):
         )
         community.save()
         member = Member(
-            Communityid=Community.objects.latest("id"),
-            user_pk=User.objects.get(id=int(request.session.get("user"))),
+            community=Community.objects.latest("id"),
+            user=User.objects.get(id=int(request.session.get("user"))),
         )
         member.save()
 

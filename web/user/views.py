@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.db import IntegrityError
 
 from book.models import Book
-from .models import User, Favorite
+from .models import User, Favorite, Reading, Wish
 from book.models import Category
 from django.db.models import Q
 import random
@@ -92,7 +92,6 @@ def userpage(request, pk):
         # list에 담아줌
         cate_name.append(favorite.category)
         cate_ls.append(favorite.category_id)
-    print(cate_name,cate_ls)
     # 필터링된 책들
     selectedbooks=Book.objects.all().filter(category_id__in=cate_ls)
     # 랜덤으로 8개 추출
@@ -123,13 +122,33 @@ def search(request):
 def reading(request, pk):
     user = User.objects.get(id=pk)
     name = user.user_name
-    return render(request, "reading.html", {"name": name, "pk": pk})
+    readings = Reading.objects.all().filter(user_id=pk)
+    readingls=[]
+    for reading in readings:
+        readingls.append(reading.book_id)
+    selectedbooks=Book.objects.all().filter(book_isbn__in=readingls)
+    if "delete" in request.GET:
+        book_isbn = request.GET.get("delete")
+        reading = Reading.objects.get(book_id=book_isbn)
+        reading.delete()
+        return redirect(f"/user/userpage/{request.session.get('user')}/reading")
+    return render(request, "reading.html", {"name": name, "pk": pk, 'selectedbooks':selectedbooks})
 
 
 def wish(request, pk):
     user = User.objects.get(id=pk)
     name = user.user_name
-    return render(request, "wish.html", {"name": name, "pk": pk})
+    Wishes = Wish.objects.all().filter(user_id=pk)
+    wishls=[]
+    for wish in Wishes:
+        wishls.append(wish.book_id)
+    selectedbooks=Book.objects.all().filter(book_isbn__in=wishls)
+    if "delete" in request.GET:
+        book_isbn = request.GET.get("delete")
+        wish = Wish.objects.get(book_id=book_isbn)
+        wish.delete()
+        return redirect(f"/user/userpage/{request.session.get('user')}/wish")
+    return render(request, "wish.html", {"name": name, "pk": pk, 'selectedbooks':selectedbooks})
 
 
 def usercommunity(request, pk):
