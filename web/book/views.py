@@ -8,6 +8,7 @@ from django.core.paginator import Paginator
 
 
 def search(request):
+    user = User.objects.get(id=int(request.session.get("user")))    
     if "searchword" in request.GET:
         query = request.GET.get("searchword")
         selectbar = request.GET.get("selectbar")
@@ -21,13 +22,14 @@ def search(request):
         return render(
             request,
             "Booksearch.html",
-            {"query": query, "books": books, "selectbar": selectbar},
+            {"user":user,"query": query, "books": books, "selectbar": selectbar},
         )
     else:
-        return render(request, "Booksearch.html")
+        return render(request, "Booksearch.html",{'user':user})
 
 
 def result(request, pk):
+    user = User.objects.get(id=int(request.session.get("user")))    
     # 위에 검색창 검색기능
     if "searchword" in request.GET:
         query = request.GET.get("searchword")
@@ -42,7 +44,7 @@ def result(request, pk):
         return render(
             request,
             "Booksearch.html",
-            {"query": query, "books": books, "selectbar": selectbar},
+            {"user":user,"query": query, "books": books, "selectbar": selectbar}
         )
     
     # 읽은 책 버튼 추가 기능
@@ -64,10 +66,11 @@ def result(request, pk):
         return redirect(f"/user/userpage/{request.session.get('user')}/wish")
     else:
         book = Book.objects.get(id=pk)
-        return render(request, "result.html", {"pk": pk, "book": book})
+        return render(request, "result.html", {"user":user,"pk": pk, "book": book})
 
 
 def result2(request, pk):
+    user = User.objects.get(id=int(request.session.get("user"))) 
     if "searchword" in request.GET:
         query = request.GET.get("searchword")
         selectbar = request.GET.get("selectbar")
@@ -81,7 +84,7 @@ def result2(request, pk):
         return render(
             request,
             "Booksearch.html",
-            {"query": query, "books": books, "selectbar": selectbar},
+            {"user":user,"query": query, "books": books, "selectbar": selectbar},
         )
     
     else:

@@ -51,18 +51,19 @@
     <div class="col-6">
       <div style="overflow: auto; width: 500px; height: 400px">
         <!-- 책소개 -->
-        <h2 style="font-weight: bold">📕{{book.book_title}}</h2>
-        <!-- page -->
-        <h6>{{book.book_page}}</h6>
-
+        <h2 style="font-weight: bold">📕 {{book.book_title}}</h2>
+        <!-- 페이지 -->
+        <h6>📄 {{book.book_page}} 페이지</h6> 
+        <!-- 출간일 -->
+        <h6>📆 {{book.book_publishdate|date:'Y년 m월 d일 출간'}} </h6> 
         <!-- 저자 -->
-        ✍🏻저자
+        ✍🏻 저자
         <h4>{{book.book_author}}</h4>
+        <h6>🔑 ISBN {{book.book_isbn}}</h6>
         🔖책소개
         <br>
         <!-- 책소개 -->
       {{book.book_description}}
-
       </div>
       <input
       type="button"

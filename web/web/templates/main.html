@@ -42,13 +42,16 @@
   }
 </style>
 {% endblock %} 
+
+
+
+
 {% block header %}
 <!-- 헤더-->
 <header class="py-5 bg-light border-bottom mb-5" style="height: 200px; ">
   {% if request.session.user %}
   <div class="col-6 text-center" >
-    <img src="https://avatarfiles.alphacoders.com/139/13900.gif" /> {{ name }}님
-    환영합니다.
+    <img src="https://avatarfiles.alphacoders.com/139/13900.gif" /> <span style="font-weight: bold;">{{ name }}</span>님 환영합니다.
   </div>
   {% else %} 
   <div class="col-12 text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;font-size: 40px;">

@@ -35,8 +35,10 @@ def home(request):
 def search(request):
     user = User.objects.get(id=int(request.session.get("user")))
     name = user.user_name
-    return render(request, "search.html", {"name": name})
+    return render(request, "search.html", {"user": user,"name": name})
 
 
 def search_book(request):
-    return render(request, "search_book.html")
+    user = User.objects.get(id=int(request.session.get("user")))
+    name = user.user_name
+    return render(request, "search.html", {"user": user,"name": name})

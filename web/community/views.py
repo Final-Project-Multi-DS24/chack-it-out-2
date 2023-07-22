@@ -6,16 +6,28 @@ from user.models import User
 
 # Create your views here.
 def community(request):
-    communities = Community.objects.all()
-    members = Member.objects.all()
-    return render(
-        request, "community.html", {"communities": communities, "members": members}
-    )
+    # 로그인 정보가 있을 때
+    if request.session.get("user"):
+        user = User.objects.get(id=int(request.session.get("user")))
+        name = user.user_name
+        communities = Community.objects.all()
+        members = Member.objects.all()
+        return render(
+            request, "community.html", {"user":user,"name":name,"communities": communities, "members": members}
+        )
+    else:
+        communities = Community.objects.all()
+        members = Member.objects.all()
+        return render(
+            request, "community.html", {"communities": communities, "members": members}
+        )
 
     
 def newcommunity(request):
     if request.method == "GET":
-        return render(request, "new.html")
+        user = User.objects.get(id=int(request.session.get("user")))
+        name = user.user_name        
+        return render(request, "new.html",{"user":user,"name":name})
     elif request.method == "POST":
         book = 1
         meeting_date = request.POST["meeting_date"]

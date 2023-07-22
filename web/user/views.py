@@ -79,7 +79,6 @@ def logout(request):
     # 로그아웃 수행 후 홈 페이지로 이동
     return redirect("/")
 
-
 def userpage(request, pk):
     user = User.objects.get(id=pk)
     name = user.user_name
@@ -98,10 +97,12 @@ def userpage(request, pk):
     randomresult = []
     for i in range(8):
         randomresult.append(random.choice(selectedbooks))
-    return render(request, "userpage.html", {"name": name, "pk": pk, "user": user, 'cate_name':cate_name,"randomresult": randomresult})
-
+    return render(request, "userpage.html", {"user":user,"name": name, "pk": pk, "user": user, 'cate_name':cate_name,"randomresult": randomresult})
+    
 
 def search(request):
+    user = User.objects.get(id=int(request.session.get("user")))
+    name = user.user_name
     if "searchword" in request.GET:
         query = request.GET.get("searchword")
         selectbar = request.GET.get("selectbar")
@@ -113,10 +114,10 @@ def search(request):
         return render(
             request,
             "usersearch.html",
-            {"query": query, "users": users, "selectbar": selectbar},
+            {'user':user,'name':name,"query": query, "users": users, "selectbar": selectbar},
         )
     else:
-        return render(request, "usersearch.html")
+        return render(request, "usersearch.html", {"user":user,"name":name})
 
 
 def reading(request, pk):
@@ -132,7 +133,7 @@ def reading(request, pk):
         reading = Reading.objects.get(book_id=id)
         reading.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/reading")
-    return render(request, "reading.html", {"name": name, "pk": pk, 'selectedbooks':selectedbooks})
+    return render(request, "reading.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks})
 
 
 def wish(request, pk):
@@ -148,7 +149,7 @@ def wish(request, pk):
         wish = Wish.objects.get(book_id=id)
         wish.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/wish")
-    return render(request, "wish.html", {"name": name, "pk": pk, 'selectedbooks':selectedbooks})
+    return render(request, "wish.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks})
 
 
 def usercommunity(request, pk):
