@@ -151,7 +151,7 @@
     {% endfor %}와 관련된 추천도서입니다   
     </div>  
     {% for randombook in randomresult %}
-  <a href="/book/search/result/{{randombook.book_isbn}}" class="img_area"><img
+  <a href="/book/search/result/{{randombook.id}}" class="img_area"><img
     src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
     margin-right: 10px;
     margin-bottom: 10px;"

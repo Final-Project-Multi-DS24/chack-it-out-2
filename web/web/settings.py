@@ -91,7 +91,7 @@ WSGI_APPLICATION = "web.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "BOOK_Final",
+        "NAME": "BOOK",
         "USER": "multi",
         "PASSWORD": "multi12345!",
         "HOST": "13.208.125.123",

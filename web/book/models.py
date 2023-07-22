@@ -3,8 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Book(models.Model):
-    book_isbn = models.BigIntegerField(
-        unique=True, primary_key=True, verbose_name="ISBN"
+    book_isbn = models.BigIntegerField(verbose_name="ISBN"
     )
     book_title = models.CharField(max_length=500, verbose_name="도서명")
     book_author = models.CharField(max_length=500, verbose_name="저자")
@@ -17,7 +16,7 @@ class Book(models.Model):
     )
 
     def __str__(self):
-        return self.book_title
+        return self.book_isbn
 
     # db_table의 이름을 "tb_user로 설정"
     class Meta:

@@ -49,7 +49,7 @@ def result(request, pk):
     elif "reading" in request.GET:
         reading=Reading(
             user = User.objects.get(id=int(request.session.get("user"))),
-            book = Book.objects.get(book_isbn=pk)
+            book = Book.objects.get(id=pk)
         )
         reading.save()
         return redirect(f"/user/userpage/{request.session.get('user')}/reading")
@@ -58,12 +58,12 @@ def result(request, pk):
     elif "wish" in request.GET:
         wish=Wish(
             user = User.objects.get(id=int(request.session.get("user"))),
-            book = Book.objects.get(book_isbn=pk)
+            book = Book.objects.get(id=pk)
         )
         wish.save()
         return redirect(f"/user/userpage/{request.session.get('user')}/wish")
     else:
-        book = Book.objects.get(book_isbn=pk)
+        book = Book.objects.get(id=pk)
         return render(request, "result.html", {"pk": pk, "book": book})
 
 
@@ -85,5 +85,5 @@ def result2(request, pk):
         )
     
     else:
-        book = Book.objects.get(book_isbn=pk)
+        book = Book.objects.get(id=pk)
         return render(request, "result2.html", {"pk": pk, "book": book})

@@ -7,7 +7,6 @@ from django.db import models
 class Community(models.Model):
     book = models.ForeignKey(
         "book.Book",
-        to_field="book_isbn",
         blank=False,
         on_delete=models.CASCADE,
         verbose_name="도서",

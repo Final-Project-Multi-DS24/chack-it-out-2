@@ -81,13 +81,13 @@
     </div>
   </div>
   {% for selectedbook in selectedbooks %}
-  <a href="/book/search/result/{{selectedbook.book_isbn}}" class="img_area"><img
+  <a href="/book/search/result/{{selectedbook.id}}" class="img_area"><img
     src="{{selectedbook.book_cover}}" style="height: 400px; width: 300px;
     margin-right: 10px;
     margin-bottom: 10px;"
   /><p class="hover_text">"{{selectedbook.book_title}}"</p></a>
   <form action="" method="get" action="." style="display: inline;">
-    <button style="margin-right: 50px" type="submit" value="{{selectedbook.book_isbn}}" name='delete' id="{{selectedbook.book_isbn}}">삭제하기</button>
+    <button style="margin-right: 50px" type="submit" value="{{selectedbook.id}}" name='delete' id="{{selectedbook.book_id}}">삭제하기</button>
   </form>  
     {% endfor %}
 </div>

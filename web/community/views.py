@@ -17,13 +17,13 @@ def newcommunity(request):
     if request.method == "GET":
         return render(request, "new.html")
     elif request.method == "POST":
-        book = 9791195463817
+        book = 1
         meeting_date = request.POST["meeting_date"]
         meeting_place = request.POST["meeting_place"]
         creator = User.objects.get(id=request.session.get("user"))
         description = request.POST["description"]
         community = Community(
-            book=Book.objects.get(book_isbn=book),
+            book=Book.objects.get(id=book),
             meeting_date=meeting_date,
             meeting_place=meeting_place,
             description=description,

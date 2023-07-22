@@ -83,7 +83,7 @@
       ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
       {% for book in books %}
       <div class="col-3 text-center" style="position: relative;">
-      <a href="/book/search/result/{{book.book_isbn}}" class="img_area"><img
+      <a href="/book/search/result/{{book.id}}" class="img_area"><img
         src="{{book.book_cover}}"
       />
       <p class="hover_text">"{{book.book_title}}"</p></a

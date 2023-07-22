@@ -126,10 +126,10 @@ def reading(request, pk):
     readingls=[]
     for reading in readings:
         readingls.append(reading.book_id)
-    selectedbooks=Book.objects.all().filter(book_isbn__in=readingls)
+    selectedbooks=Book.objects.all().filter(id__in=readingls)
     if "delete" in request.GET:
-        book_isbn = request.GET.get("delete")
-        reading = Reading.objects.get(book_id=book_isbn)
+        id = request.GET.get("delete")
+        reading = Reading.objects.get(book_id=id)
         reading.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/reading")
     return render(request, "reading.html", {"name": name, "pk": pk, 'selectedbooks':selectedbooks})
@@ -142,10 +142,10 @@ def wish(request, pk):
     wishls=[]
     for wish in Wishes:
         wishls.append(wish.book_id)
-    selectedbooks=Book.objects.all().filter(book_isbn__in=wishls)
+    selectedbooks=Book.objects.all().filter(id__in=wishls)
     if "delete" in request.GET:
-        book_isbn = request.GET.get("delete")
-        wish = Wish.objects.get(book_id=book_isbn)
+        id = request.GET.get("delete")
+        wish = Wish.objects.get(book_id=id)
         wish.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/wish")
     return render(request, "wish.html", {"name": name, "pk": pk, 'selectedbooks':selectedbooks})
