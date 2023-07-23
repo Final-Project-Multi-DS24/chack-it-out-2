@@ -86,15 +86,26 @@ WSGI_APPLICATION = "web.wsgi.application"
 #     }
 # }
 
+# AWS DB
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "BOOK",
+#         "USER": "multi",
+#         "PASSWORD": "multi12345!",
+#         "HOST": "13.208.125.123",
+#         "PORT": "3306",
+#     }
+# }
 
-
+# LOCAL DB
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "BOOK",
-        "USER": "multi",
-        "PASSWORD": "multi12345!",
-        "HOST": "13.208.125.123",
+        "NAME": "book",
+        "USER": "root",
+        "PASSWORD": "1234",
+        "HOST": "127.0.0.1",
         "PORT": "3306",
     }
 }

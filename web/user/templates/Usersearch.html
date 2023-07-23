@@ -53,15 +53,17 @@
                 <th scope="col">#</th>
                 <th scope="col">유저 아이디</th>
                 <th scope="col">유저 이름</th>
-                <th scope="col">가입시간</th>
+                <th scope="col">가입일자</th>
+                <th scope="col">유저 페이지</th>
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="location.href='/user/userpage/{{user.id}}'">
+                <tr>
                     <th scope="row">{{user.id}}</th>
                     <td>{{user.user_id}}</td>
                     <td>{{user.user_name}}</td>
                     <td>{{user.registered_dttm|date:'Y년 m월 d일'}}</td>
+                    <td><a href="/user/userpage/{{user.id}}" style="font-size: large; color: yellow;">방문하기</a></td>
                 </tr>
             </tbody>
             </table>

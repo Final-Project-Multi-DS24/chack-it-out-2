@@ -2,7 +2,7 @@
 
 <!-- 타이틀 -->
 {% block title %}
-<title>도서검색</title>
+<title>검색 결과</title>
 {% endblock %}
 <!-- css -->
 {% block css%}
@@ -150,10 +150,14 @@
       <h2>리뷰</h2>
       <div style="overflow: auto; width: 500px; height: 200px">
         <div class="comments">
-          <ul id="comment-list"></ul>
+          <ul id="comment-list">
+            {% for review in allreview %}
+              <li>{{user}} : {{review.review}}</li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
-      <h3>다른 웹사이트의 유저는 이 책을 다른 유저에게</h3>   
+      <h4>🧞 웹사이트 유저는 이 책을 유저에게</h4>   
       <div style="overflow: auto; width: 500px; height: 400px">
         <div class="vertical_chart_box">
           <div class="chart_box">
@@ -186,16 +190,12 @@
     <div class="col-6">
       <div class="form">
         <h2>리뷰작성</h2>
-        <form id="comment-form">
-          <textarea id="comment-input" rows="4" cols="50"></textarea>
-          <br />
-          <input type="submit" value="제출" />
-          <input
-            type="button"
-            value="앞으로 가기"
-            onclick="location.href='/book/search/result'"
-          />
+        <form action="." method="get">
+          <input type="text" id="comment-input" name="comment-input" maxlength="2000" style="width: 400px;">
+          <br/>
         </form>
+        <br>
+        <button onclick="location.href='/book/search/result/{{pk}}'">앞으로 가기</button>
       </div>
     </div>
   </div>
@@ -204,24 +204,5 @@
 
 <!-- js -->
 {% block script %}
-<script>
-  document
-    .getElementById("comment-form")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      var commentInput = document.getElementById("comment-input");
-      var commentText = commentInput.value;
-      if (commentText) {
-        addComment(commentText);
-        commentInput.value = "";
-      }
-    });
 
-  function addComment(commentText) {
-    var commentList = document.getElementById("comment-list");
-    var listItem = document.createElement("li");
-    listItem.innerText = commentText;
-    commentList.appendChild(listItem);
-  }
-</script>
 {% endblock %}

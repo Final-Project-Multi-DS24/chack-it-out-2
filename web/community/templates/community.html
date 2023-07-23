@@ -18,8 +18,6 @@
         <div class="row">
             <div class="col-12 text-center">
               <br><br>
-              <h6>❗ 모임 생성시 정확한 책 선택을 위해 <span style="font-weight: bold;">🔑ISBN</span>으로만 적도록 되어있습니다. 
-                🔎검색에서 도서의 <span style="font-weight: bold;">🔑ISBN</span>을 확인해주세요.❗ </h6>
             </div>
             <div class="row">
 <pre style="font-weight: bold;">
@@ -61,6 +59,8 @@
 {% if request.session.user %}
 <div class="row">
     <div class="col-12 text-center  ">
+      <h6>❗ 모임 생성시 정확한 책 선택을 위해 <span style="font-weight: bold;">🔑ISBN</span>으로만 적도록 되어있습니다. 
+        <a href="/book/search">🔎검색</a>에서 도서의 <span style="font-weight: bold;">🔑ISBN</span>을 확인해주세요.❗ </h6>
     <button><a onclick="location.href='new'">모임 새로 만들기</a></button>
     </div>
 </div>
@@ -81,7 +81,7 @@
     </thead>
     <tbody>
         {% for community in communities %}
-      <tr onclick="location.href='.'">
+      <tr onclick="location.href='/community/detail/{{community.id}}'">
         <th scope="row">{{community.id}}</th>
         <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
         <td>{{community.meeting_place}}</td>

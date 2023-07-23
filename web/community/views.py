@@ -23,7 +23,7 @@ def community(request):
             request, "community.html", {"communities": communities, "members": members}
         )
 
-    
+# 새 모임 만들기
 def newcommunity(request):
     if request.method == "GET":
         user = User.objects.get(id=int(request.session.get("user")))
@@ -50,3 +50,9 @@ def newcommunity(request):
         member.save()
 
         return redirect("/community/")
+
+# 상세 페이지
+def detail(request,pk):
+        user = User.objects.get(id=int(request.session.get("user")))
+        community=Community.objects.get(id=pk)
+        return render(request, "detail.html",{"user":user,"pk": pk,'community':community})

@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
-from .models import Book
+from .models import Book,reviewUser
 from user.models import User,Reading,Wish
 from django.db.models import Q
-from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -70,7 +69,10 @@ def result(request, pk):
 
 
 def result2(request, pk):
-    user = User.objects.get(id=int(request.session.get("user"))) 
+    user = User.objects.get(id=int(request.session.get("user")))
+    book = Book.objects.get(id=pk)
+    # 책의 전체 리뷰
+    allreview=reviewUser.objects.all().filter(book_id=book.id)
     if "searchword" in request.GET:
         query = request.GET.get("searchword")
         selectbar = request.GET.get("selectbar")
@@ -88,5 +90,14 @@ def result2(request, pk):
         )
     
     else:
+        user = User.objects.get(id=int(request.session.get("user")))
         book = Book.objects.get(id=pk)
-        return render(request, "result2.html", {"pk": pk, "book": book})
+        if "comment-input" in request.GET:
+            contents = request.GET.get("comment-input")
+            reviewuser=reviewUser(
+                review=contents,
+                book = Book.objects.get(id=pk)  
+            )
+            reviewuser.save()
+            return redirect(f"/book/search/result2/{pk}")
+        return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview})
