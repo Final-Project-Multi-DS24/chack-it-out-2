@@ -40,7 +40,8 @@ class Reading(models.Model):
         on_delete=models.CASCADE,
         verbose_name="도서",
     )
-
+    def __str__(self):
+        return self.user
     class Meta:
         db_table = "tb_reading" 
 
@@ -54,6 +55,7 @@ class Wish(models.Model):
         on_delete=models.CASCADE,
         verbose_name="도서",
     )
-
+    def __str__(self):
+        return self.user
     class Meta:
         db_table = "tb_wish" 

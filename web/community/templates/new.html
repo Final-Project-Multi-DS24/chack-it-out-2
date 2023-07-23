@@ -59,20 +59,21 @@
     <form method="post" action=".">
         {% csrf_token %}
         <div class="form-group">
-            <label for="meeting_date">모임 날짜</label>
-            <input type="datetime-local" class="form-control" id="meeting_date" name="meeting_date">
+            <label for="meeting_date"> 1. 모임 날짜 - 📆을 눌러 모임 날짜를 선택 </label>
+            <input type="datetime-local" class="form-control" id="meeting_date" name="meeting_date"style="width: 150px">
         </div>
         <div class="form-group">
-            <label for="book">도서명</label>
-            <input type="text" class="form-control" id="book" placeholder="도서명" name="book">
+            <label for="book"> 2. 🔑도서 ISBN</label>
+            <input type="text" class="form-control" id="book" placeholder="도서검색 후 도서 ISBN을 확인해주세요" name="book" style="width: 400px;">
+            <a type="button" href="/book/search/" target="_blank width=400,height=500" >도서 검색</a>
         </div>
         <div class="form-group">
-            <label for="meeting_place">모임 장소</label>
-            <input type="text" class="form-control" id="meeting_place" placeholder="모임 장소를 적어주세요" name="meeting_place">
+            <label for="meeting_place">3. 모임 장소를 적어주세요.</label>
+            <input type="text" class="form-control" id="meeting_place" placeholder="모임 장소를 적어주세요" maxlength='20' name="meeting_place" style="width: 400px;">
         </div>
         <div class="form-group">
-            <label for="description">설명</label>
-            <textarea class="form-control" class="form-control" id="description" name="description" placeholder="모임에 대해 간단히 설명을 적어주세요."></textarea>
+            <label for="description">4. 모임에 대한 설명을 적어주세요.</label>
+            <textarea class="form-control" class="form-control" id="description" name="description" placeholder="모임에 대한 소개를 적어주세요."style="width: 1000px" maxlength='999'></textarea>
         </div>
         <button type="submit" class="btn btn-primary">만들기</button>
     </form>

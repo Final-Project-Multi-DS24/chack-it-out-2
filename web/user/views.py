@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect
 
-# 회원가입 암호화,회원가입 확인
-from django.contrib.auth.hashers import make_password, check_password
-
 # POST로 받을 DB 모델
 
 # 회원가입오류
@@ -12,6 +9,7 @@ from django.db import IntegrityError
 from book.models import Book
 from .models import User, Favorite, Reading, Wish
 from book.models import Category
+from community.models import Community,Member
 from django.db.models import Q
 import random
 
@@ -79,6 +77,8 @@ def logout(request):
     # 로그아웃 수행 후 홈 페이지로 이동
     return redirect("/")
 
+
+
 def userpage(request, pk):
     user = User.objects.get(id=pk)
     name = user.user_name
@@ -122,6 +122,7 @@ def search(request):
 
 def reading(request, pk):
     user = User.objects.get(id=pk)
+    loginuser = User.objects.get(id=int(request.session.get("user")))
     name = user.user_name
     readings = Reading.objects.all().filter(user_id=pk)
     readingls=[]
@@ -130,14 +131,15 @@ def reading(request, pk):
     selectedbooks=Book.objects.all().filter(id__in=readingls)
     if "delete" in request.GET:
         id = request.GET.get("delete")
-        reading = Reading.objects.get(book_id=id)
+        reading = Reading.objects.all().filter(book_id=id).filter(user_id=user)
         reading.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/reading")
-    return render(request, "reading.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks})
+    return render(request, "reading.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks,"loginuser":loginuser})
 
 
 def wish(request, pk):
     user = User.objects.get(id=pk)
+    loginuser = User.objects.get(id=int(request.session.get("user")))
     name = user.user_name
     Wishes = Wish.objects.all().filter(user_id=pk)
     wishls=[]
@@ -146,16 +148,23 @@ def wish(request, pk):
     selectedbooks=Book.objects.all().filter(id__in=wishls)
     if "delete" in request.GET:
         id = request.GET.get("delete")
-        wish = Wish.objects.get(book_id=id)
+        wish = Wish.objects.all().filter(book_id=id).filter(user_id=user)
         wish.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/wish")
-    return render(request, "wish.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks})
+    return render(request, "wish.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks,"loginuser":loginuser})
 
 
 def usercommunity(request, pk):
     user = User.objects.get(id=pk)
     name = user.user_name
-    return render(request, "usercommunity.html", {"user":user,"name": name, "pk": pk})
+
+    Members = Member.objects.all().filter(user=pk)
+    membercommunityls=[]
+    for member in Members:
+        membercommunityls.append(member.community_id)
+    # 모든 종료된 커뮤니티를 가져오고, 그중 id가 list에 있는것을 가져옴
+    endcommunities = Community.objects.all().filter(is_finished=True).filter(id__in=membercommunityls)   
+    return render(request, "usercommunity.html", {"user":user,"name": name, "pk": pk,"endcommunities":endcommunities })
 
 
 # 회원정보 삭제

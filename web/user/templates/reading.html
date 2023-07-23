@@ -86,9 +86,12 @@
     margin-right: 10px;
     margin-bottom: 10px;"
   /><p class="hover_text">"{{selectedbook.book_title}}"</p></a>
+  <!-- 본인일때만 삭제-->
+  {% if loginuser == user %}
   <form action="" method="get" action="." style="display: inline;">
     <button style="margin-right: 50px" type="submit" value="{{selectedbook.id}}" name='delete' id="{{selectedbook.book_id}}">삭제하기</button>
-  </form>  
+  </form>
+  {% endif %}  
     {% endfor %}
 </div>
 {% endblock %}

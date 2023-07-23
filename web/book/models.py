@@ -18,7 +18,7 @@ class Book(models.Model):
     )
 
     def __str__(self):
-        return self.book_isbn
+        return "%s"%self.book_title
 
     # db_table의 이름을 "tb_user로 설정"
     class Meta:
@@ -34,20 +34,36 @@ class Category(models.Model):
     class Meta:
         db_table = "tb_category"
 
-# 도서 리뷰
-# class Review(models.Model):
-#     book = models.ForeignKey(
-#         "book.Book",
-#         blank=False,
-#         on_delete=models.CASCADE,
-#         verbose_name="도서",
-#     )
-#     review = models.CharField(max_length=2000, verbose_name='리뷰')
-#     label= models.IntegerField(verbose_name='긍정 또는 부정')
+# 라벨링 붙은 알라딘 리뷰
+class Review(models.Model):
+    book = models.ForeignKey(
+        "book.Book",
+        blank=False,
+        on_delete=models.CASCADE,
+        verbose_name="도서",
+    )
+    review = models.CharField(max_length=2000, verbose_name='리뷰')
+    label= models.IntegerField(verbose_name='긍정 부정')
 
-#     def __str__(self):
-#         return self.id
+    def __str__(self):
+        return self.id
 
-#     class Meta:
-#         db_table = "tb_review"
+    class Meta:
+        db_table = "tb_review"
+
+# 유저가 작성한 리뷰
+class reviewUser(models.Model):
+    book = models.ForeignKey(
+        "book.Book",
+        blank=False,
+        on_delete=models.CASCADE,
+        verbose_name="도서",
+    )
+    review = models.CharField(max_length=2000, verbose_name='리뷰')
+
+    def __str__(self):
+        return self.id
+
+    class Meta:
+        db_table = "tb_reviewUser"
 

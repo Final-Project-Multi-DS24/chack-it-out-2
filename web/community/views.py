@@ -10,10 +10,11 @@ def community(request):
     if request.session.get("user"):
         user = User.objects.get(id=int(request.session.get("user")))
         name = user.user_name
-        communities = Community.objects.all()
-        members = Member.objects.all()
+        # 현재 진행중인 모임만 출력
+        communities = Community.objects.all().filter(is_finished=False)
+        endcommunities = Community.objects.all().filter(is_finished=True)
         return render(
-            request, "community.html", {"user":user,"name":name,"communities": communities, "members": members}
+            request, "community.html", {"user":user,"name":name,"communities": communities, "endcommunities":endcommunities}
         )
     else:
         communities = Community.objects.all()
@@ -29,13 +30,13 @@ def newcommunity(request):
         name = user.user_name        
         return render(request, "new.html",{"user":user,"name":name})
     elif request.method == "POST":
-        book = 1
+        get_book_isbn = request.POST["book"]
         meeting_date = request.POST["meeting_date"]
         meeting_place = request.POST["meeting_place"]
         creator = User.objects.get(id=request.session.get("user"))
         description = request.POST["description"]
         community = Community(
-            book=Book.objects.get(id=book),
+            book=Book.objects.get(book_isbn=get_book_isbn),
             meeting_date=meeting_date,
             meeting_place=meeting_place,
             description=description,

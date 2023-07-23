@@ -8,7 +8,7 @@ class CommunityAdmin(admin.ModelAdmin):
 
 
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ("community", "user")
+    list_display = ("id", "user")
 
 
 admin.site.register(Community, CommunityAdmin)

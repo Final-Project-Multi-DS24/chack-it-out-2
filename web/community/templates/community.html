@@ -58,10 +58,18 @@
 
 <!-- 콘텐츠 -->
 {% block contents %}
-<div class="container">
+{% if request.session.user %}
+<div class="row">
+    <div class="col-12 text-center  ">
+    <button><a onclick="location.href='new'">모임 새로 만들기</a></button>
+    </div>
+</div>
 
+<div class="container">
+<div>
+  <div style="overflow: auto; width: auto; height: 250px">
 <table class="table caption-top table-dark table-hover">
-    <caption>현재 진행중인 모임</caption>
+    <caption>모집중인 모임</caption>
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -75,7 +83,34 @@
         {% for community in communities %}
       <tr onclick="location.href='.'">
         <th scope="row">{{community.id}}</th>
-        <td>{{community.meeting_date}}</td>
+        <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
+        <td>{{community.meeting_place}}</td>
+        <td>{{community.book}}</td>
+        <td>{{community.creator}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
+</div>
+<div>
+  <div style="overflow: auto; width: auto; height: 250px">
+  <table class="table caption-top table-dark table-hover">
+    <caption>종료된 모임</caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">모임일자</th>
+        <th scope="col">모임장소</th>
+        <th scope="col">도서</th>
+        <th scope="col">작성자</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for community in endcommunities %}
+      <tr onclick="location.href='.'">
+        <th scope="row">{{community.id}}</th>
+        <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
         <td>{{community.meeting_place}}</td>
         <td>{{community.book}}</td>
         <td>{{community.creator}}</td>
@@ -83,14 +118,9 @@
       {% endfor %}
     </tbody>
   </table>
-
-<!-- 로그인 O -->
-{% if request.session.user %}
-<div class="row">
-    <div class="col-2">
-    <button><a onclick="location.href='new'">모임 새로 만들기</a></button>
-    </div>
+  </div>
 </div>
+
 {% else %}
 
     <div class="row">

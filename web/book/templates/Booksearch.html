@@ -80,16 +80,16 @@
       font-size: 30px;
       -webkit-text-stroke: 1px white;
       color: black;
-      ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
+      ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div>
+      <div style="overflow: auto; width:auto; height: 400px">
       {% for book in books %}
-      <div class="col-3 text-center" style="position: relative;">
       <a href="/book/search/result/{{book.id}}" class="img_area"><img
         src="{{book.book_cover}}"
       />
       <p class="hover_text">"{{book.book_title}}"</p></a
     >
-      </div>
       {% endfor %}
+    </div>
   </div>
 </div>
 {% endif %}

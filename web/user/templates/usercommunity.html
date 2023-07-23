@@ -73,9 +73,40 @@
 {% endblock %}
 <!-- 콘텐츠 -->
 {% block contents %}
-<div class="col-12 text-center">
-  <div class="row">
-    <div class="col-12"><h3>{{name}}님의 독서모임 참여도서</h3></div>
+<div class="container" id="#tab-01">
+  <div class="col-12 text-center">
+    <div class="row">
+      <div class="col-12"><h3>{{name}}님의 독서모임 참여 기록</h3></div>
+      <h6>*종료된 모임만 표시됩니다.</h6>
+    </div>
+    <div class="container">
+      <div>
+        <div style="overflow: auto; width: auto; height: 250px">
+        <table class="table caption-top table-dark table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">모임일자</th>
+              <th scope="col">모임장소</th>
+              <th scope="col">도서</th>
+              <th scope="col">작성자</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for community in endcommunities %}
+            <tr onclick="location.href='.'">
+              <th scope="row">{{community.id}}</th>
+              <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
+              <td>{{community.meeting_place}}</td>
+              <td>{{community.book}}</td>
+              <td>{{community.creator}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        </div>
+      </div>
   </div>
+</div>
 </div>
 {% endblock %}

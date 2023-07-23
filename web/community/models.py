@@ -20,8 +20,8 @@ class Community(models.Model):
         on_delete=models.CASCADE,
         verbose_name="작성자",
     )
-    is_finished = models.BooleanField(default=False)
-    description = models.TextField()
+    is_finished = models.BooleanField(default=False,verbose_name='종료 여부')
+    description = models.TextField(max_length=1000,verbose_name='모임 소개')
 
     # db_table의 이름을 "tb_user로 설정"
     class Meta:
@@ -31,6 +31,7 @@ class Community(models.Model):
 class Member(models.Model):
     community = models.ForeignKey("Community", on_delete=models.CASCADE)
     user = models.ForeignKey("user.User", on_delete=models.CASCADE)
+
 
     class Meta:
         db_table = "tb_communitymember"

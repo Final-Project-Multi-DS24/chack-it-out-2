@@ -36,14 +36,38 @@
         -webkit-text-stroke: 1px white;
         color: black;
         ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div> 
-        {% for user in users %}
-            <!-- 이름으로 검색 -->
-            {% if selectbar == "1" %}
-            <a href="/user/userpage/{{user.id}}/"><div>{{user.user_name}}</div></a>
-            <!-- 아이디로 검색한 경우 -->
-            {% elif selectbar == "2" %}
-            <a href="/user/userpage/{{user.id}}/"><div>{{user.user_id}}</div></a>
-            {% endif %}
+        {% for user in users %}        
+        <!-- 이름으로 검색 -->
+        <!-- {% if selectbar == "1" %} -->
+        <!-- <a href="/user/userpage/{{user.id}}/"><div>{{user.user_name}}</div></a> -->
+        <!-- 아이디로 검색한 경우 -->
+        <!-- {% elif selectbar == "2" %} -->
+        <!-- <a href="/user/userpage/{{user.id}}/"><div>{{user.user_id}}</div></a> -->
+        <!-- {% endif %} -->
+<div class="container">
+    <div>
+        <div style="overflow: auto; width: auto; height: 250px">
+            <table class="table caption-top table-dark table-hover">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">유저 아이디</th>
+                <th scope="col">유저 이름</th>
+                <th scope="col">가입시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="location.href='/user/userpage/{{user.id}}'">
+                    <th scope="row">{{user.id}}</th>
+                    <td>{{user.user_id}}</td>
+                    <td>{{user.user_name}}</td>
+                    <td>{{user.registered_dttm|date:'Y년 m월 d일'}}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
         {% endfor %}
     </div>
 </div>
