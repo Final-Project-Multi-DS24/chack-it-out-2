@@ -13,8 +13,12 @@ def community(request):
         # 현재 진행중인 모임만 출력
         communities = Community.objects.all().filter(is_finished=False)
         endcommunities = Community.objects.all().filter(is_finished=True)
+        # 지금까지 도서모임으로 진행했던 책들
+        result = []
+        for community in endcommunities:
+            result.append(community.book)
         return render(
-            request, "community.html", {"user":user,"name":name,"communities": communities, "endcommunities":endcommunities}
+            request, "community.html", {"user":user,"name":name,"communities": communities, "endcommunities":endcommunities, "result":result}
         )
     else:
         communities = Community.objects.all()

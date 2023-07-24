@@ -7,7 +7,7 @@
   img:hover {
     filter: brightness(60%);
     transform: scale(1.1);
-    transition: 1s;
+    transition: 0.5s;
   }
   /* 이미지영역 */
   .img_area {
@@ -64,10 +64,10 @@
 <!-- Contents -->
 {% block contents %}
 <div class="container">
+  {% if request.session.user %}
   <div class="col-12 text-center">
-    {% if request.session.user %}
     <h5>📕TODAY'S 추천📕</h5>
-      </div>  
+  </div>  
     {% for randombook in randomresult %}
   <a href="/book/search/result/{{randombook.id}}" class="img_area"><img
     src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
@@ -75,17 +75,23 @@
     margin-bottom: 10px;"
   /><p class="hover_text">"{{randombook.book_title}}"</p></a>
     {% endfor %}
-
+  </h4>
+  <!-- 로그인 X  -->
     {% else %}
+  <div class="col-12 text-center">
     <h4>📕우리는 이런 책들로 함께 독서모임을 하고 있습니다.📕</h4>
+    <h4>(책 정보는 로그인 후에 이용 가능합니다.)</h4>
   </div>  
-    {% for randombook in randomresult %}
-    <img
-    src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
+<div class="col-12 text-center" text-center style="overflow: auto; width: 1500px; height: 420px ;">
+  
+  {% for book in result %}
+  <img
+    src="{{book.book_cover}}" style="height: 400px; width: 300px;
     margin-right: 10px;
-    margin-bottom: 10px;">
-      {% endfor %}
-
+    margin-bottom: 10px;"
+  />
+  {% endfor %} 
+</div>
     {% endif %}
 
 </div>

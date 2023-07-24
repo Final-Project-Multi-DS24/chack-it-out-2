@@ -6,9 +6,46 @@
 
 <!-- css -->
 {% block css %}
+<style>
+  img:hover {
+    filter: brightness(60%);
+    transform: scale(1.1);
+    transition: 1s;
+  }
+  /* 이미지영역 */
+  .img_area {
+    display: inline-block;
+    position: relative;
+    
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+
+  /* 이미지가 뜨면 제일앞에 표시 */
+  .img_area:hover > .hover_text {
+    display: block;
+  }
+
+  /* 텍스트 평소에는 안보임*/
+  .hover_text {
+    display: none;
+  }
 
 
-{% endblock %}
+  .hover_text {
+    position: absolute;
+    transition: 10ms;
+    top: 100px;
+    left: 30px;
+    width: 200px;
+    color: black;
+    -webkit-text-stroke: 0.8px white;
+    font-weight: 600;
+    font-size: 25px;
+  }
+</style>
+{% endblock %} 
+
 
 <!-- 헤더 -->
 {% block header %}
@@ -58,10 +95,22 @@
 {% block contents %}
 {% if request.session.user %}
 <div class="row">
-    <div class="col-12 text-center  ">
+    <div class="col-12 text-center">
       <h6>❗ 모임 생성시 정확한 책 선택을 위해 <span style="font-weight: bold;">🔑ISBN</span>으로만 적도록 되어있습니다. 
         <a href="/book/search">🔎검색</a>에서 도서의 <span style="font-weight: bold;">🔑ISBN</span>을 확인해주세요.❗ </h6>
     <button><a onclick="location.href='new'">모임 새로 만들기</a></button>
+    <br>
+    </div>
+    <div class="col-12 text-center">지금까지 CHACK IT OUT 모임에서 함께한 도서들입니다.</div>
+    <div class="col-12 text-center" text-center style="overflow: auto; width: 1500px; height: 370px ;">
+      
+      {% for book in result %}
+      <a href="/book/search/result/{{book.id}}" class="img_area"><img
+        src="{{book.book_cover}}" style="height: 333px; width: 250px;
+        margin-right: 10px;
+        margin-bottom: 10px;"
+      /><p class="hover_text">"{{book.book_title}}"</p></a>
+      {% endfor %} 
     </div>
 </div>
 
