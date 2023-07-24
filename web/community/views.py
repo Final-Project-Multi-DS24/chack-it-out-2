@@ -55,4 +55,10 @@ def newcommunity(request):
 def detail(request,pk):
         user = User.objects.get(id=int(request.session.get("user")))
         community=Community.objects.get(id=pk)
-        return render(request, "detail.html",{"user":user,"pk": pk,'community':community})
+        book=community.book
+        members=Member.objects.all().filter(community_id=pk)
+        # 모임 참여 신청
+        if "join" in request.GET:
+             print('OK')             
+        return render(request, "detail.html",{"user":user,"pk": pk,'community':community, "book":book, "members":members})
+

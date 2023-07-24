@@ -2,3 +2,94 @@
 {% block title %}
 <title>커뮤니티 정보</title>
 {% endblock %} 
+
+<!-- 헤더 -->
+{% block header %}
+<div class="header" style="height: 300px; margin-bottom: 40px;">
+    <div class="container">
+        <div style="overflow: auto; height: 300px">
+        <div class="row">
+            <div class="col-12 text-center">
+              <br><br>
+            </div>
+            <div class="row">
+<pre style="font-weight: bold;">
+
+        ❗ 공지사항 ❗     
+    
+        안녕하세요, "책읽아웃" 회원 여러분!
+        가입을 진심으로 환영합니다. 아래의 공지사항을 꼭 읽어주시기 바랍니다.
+
+        💛 모임 참여 💛
+ 
+        - 독서모임에 많이 참여할수록, 저희 『책읽아웃』이 여러분의 성향에 딱 맞는 책을 추천해 드릴 수 있습니다.
+        웹사이트를 더욱 풍성하게 즐기고 싶다면 "책읽아웃" 하세요!😜
+
+        💛 서로 존중하고 배려하는 분위기를 유지하기 위해 규칙을 지켜주세요. 💛 
+        - 욕설이나 비방, 불쾌한 행동은 삼가해주시고, 다른 회원들과 긍정적인 대화와 토론을 이어나가는 데 동참해주세요.
+        - 커뮤니티 내에서의 불만이나 문제가 있을 경우, 운영자에게 알려주시면 신속히 조치를 취하도록 하겠습니다.
+
+        💌 운영자 이메일 : bassstg@naver.com
+
+        💛 공지사항 확인 💛 
+        - 커뮤니티의 소식과 중요한 공지사항은 정기적으로 확인해주시기 바랍니다. 
+        - 주기적인 방문을 통해 새로운 소식을 놓치지 않고 참여하실 수 있습니다.
+
+        좋은 독서 경험과 유익한 커뮤니티 활동이 되길 바랍니다.
+        감사합니다!
+            
+        - 책읽아웃 운영자 올림
+</pre>             
+            </div>  
+        </div>
+        </div>
+    </div>
+</div>    
+{% endblock %}
+
+
+{% block contents %}
+<div class="container">
+    <div class="row">
+        <div class="col-6 text-center">
+        <!-- 사진 표시 -->
+        <img
+            style="height: 400px; width: 300px; margin-bottom: 20px"
+            src="{{book.book_cover}}"
+        />
+        <br>
+        <a href="/book/search/result/{{book.id}}">
+            <h3>📰 책정보 보기</h3></a>
+        </div>
+        <div class="col-6">
+            <!-- 책소개 -->
+            <h3 style="font-weight: bold">📕 {{book.book_title}}</h3>
+            <h6>✍🏻 저자 :  {{book.book_author}}</h6>
+            <!-- 모임소개 -->
+            <h6>📆{{community.meeting_date|date:'m월 d일'}}(장소 : {{community.meeting_place}})</h6>
+            <br>
+            <div style="overflow: auto; width: 500px; height: 200px">
+                <h4>🚩모임 소개🚩</h4>
+                <pre style="font-weight: bold;">
+{{community.description}}
+                </pre>        
+            </div>
+            <div>
+            👨‍👩‍👧‍👦현재 참여자명단
+            <br>
+            {% for member in members %}
+            {{member.user.user_name}} ({{member.user}})     
+            </div>
+            {% endfor %}    
+            <form action="#" method="get">
+                <button id="join" name="join">
+                    참여하기
+                </button>
+                {% if user == community.creator %}
+                <a onclick="location.href=''" id="quit" name="quit">모임종료</a>
+                {% endif %}
+            </form>
+        </div>    
+    </div>
+</div>
+{% endblock %}
