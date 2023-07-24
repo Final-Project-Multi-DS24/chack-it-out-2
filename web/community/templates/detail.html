@@ -66,27 +66,47 @@
             <h3 style="font-weight: bold">📕 {{book.book_title}}</h3>
             <h6>✍🏻 저자 :  {{book.book_author}}</h6>
             <!-- 모임소개 -->
-            <h6>📆{{community.meeting_date|date:'m월 d일'}}(장소 : {{community.meeting_place}})</h6>
-            <br>
+            <h6>📆{{community.meeting_date|date:' m월 d일'}}</h6>
+            ✔  장소 : {{community.meeting_place}}
             <div style="overflow: auto; width: 500px; height: 200px">
-                <h4>🚩모임 소개🚩</h4>
+                
+                <h6>🚩LEADER : {{community.creator.user_name}}({{community.creator}})</h6>
+                <h4>모임 소개</h4>
                 <pre style="font-weight: bold;">
 {{community.description}}
                 </pre>        
             </div>
             <div>
-            👨‍👩‍👧‍👦현재 참여자명단
+            👨‍👩‍👧‍👦Join with.. 👨‍👩‍👧‍👦   
             <br>
             {% for member in members %}
-            {{member.user.user_name}} ({{member.user}})     
+            <a href="/user/userpage/{{member.user.id}}">{{member.user.user_name}} ({{member.user}})</a> 
+            {% endfor %}
             </div>
-            {% endfor %}    
+              
             <form action="#" method="get">
-                <button id="join" name="join">
+                <!-- 안 끝난 모임중 -->
+                {% if community.is_finished == 0 %}
+                    <!-- 멤버 리스트에 없으면-->
+                    {% if user.id not in memberls %}
+                    <button id="join" name="join">
                     참여하기
-                </button>
+                    </button>
+                    <!-- 있으면 -->
+                    {% else %}
+                    -현재 참여중입니다.-
+                    {% endif %}
+                <!-- 끝난모임은 -->
+                    {% else %}
+                    <br>
+                - 종료된 모임입니다. -
+                {% endif %}
+
+                <!-- 작성자는 종료 권한 -->
                 {% if user == community.creator %}
-                <a onclick="location.href=''" id="quit" name="quit">모임종료</a>
+                    {% if community.is_finished == 0 %}
+                    <a href='/community/quit/{{community.id}}' id="quit" name="quit">모임 종료하기</a>
+                    {% endif %}
                 {% endif %}
             </form>
         </div>    

@@ -81,6 +81,7 @@ def logout(request):
 
 def userpage(request, pk):
     user = User.objects.get(id=pk)
+    loginuser = User.objects.get(id=int(request.session.get("user")))
     name = user.user_name
     # user_id가 pk와 일치하는 카테고리 객체집합
     favorites = Favorite.objects.all().filter(user_id=pk)
@@ -97,7 +98,7 @@ def userpage(request, pk):
     randomresult = []
     for i in range(8):
         randomresult.append(random.choice(selectedbooks))
-    return render(request, "userpage.html", {"user":user,"name": name, "pk": pk, "user": user, 'cate_name':cate_name,"randomresult": randomresult})
+    return render(request, "userpage.html", {"user":user,"name": name, "pk": pk, "user": user, 'cate_name':cate_name,"randomresult": randomresult, 'loginuser':loginuser})
     
 
 def search(request):
@@ -155,6 +156,7 @@ def wish(request, pk):
 
 
 def usercommunity(request, pk):
+    loginuser = User.objects.get(id=int(request.session.get("user")))
     user = User.objects.get(id=pk)
     name = user.user_name
 
@@ -164,7 +166,7 @@ def usercommunity(request, pk):
         membercommunityls.append(member.community_id)
     # 모든 종료된 커뮤니티를 가져오고, 그중 id가 list에 있는것을 가져옴
     endcommunities = Community.objects.all().filter(is_finished=True).filter(id__in=membercommunityls)   
-    return render(request, "usercommunity.html", {"user":user,"name": name, "pk": pk,"endcommunities":endcommunities })
+    return render(request, "usercommunity.html", {"user":user,"name": name, "pk": pk,"endcommunities":endcommunities,"loginuser":loginuser })
 
 
 # 회원정보 삭제

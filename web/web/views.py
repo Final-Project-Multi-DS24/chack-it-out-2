@@ -8,6 +8,7 @@ from book.models import Book
 import random
 
 
+
 def home(request):
     allbook = Book.objects.all()
     randomresult = []

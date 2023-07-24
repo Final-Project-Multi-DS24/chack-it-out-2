@@ -108,7 +108,7 @@
     </thead>
     <tbody>
         {% for community in endcommunities %}
-      <tr onclick="location.href='.'">
+        <tr onclick="location.href='/community/detail/{{community.id}}'">
         <th scope="row">{{community.id}}</th>
         <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
         <td>{{community.meeting_place}}</td>

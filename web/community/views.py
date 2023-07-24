@@ -57,8 +57,21 @@ def detail(request,pk):
         community=Community.objects.get(id=pk)
         book=community.book
         members=Member.objects.all().filter(community_id=pk)
+        memberls=[]
+        for member in members:
+             memberls.append(member.user_id)
         # 모임 참여 신청
         if "join" in request.GET:
-             print('OK')             
-        return render(request, "detail.html",{"user":user,"pk": pk,'community':community, "book":book, "members":members})
-
+            member = Member(
+                community=community,
+                user=user
+            )
+            member.save()
+            return redirect("/community/")       
+        return render(request, "detail.html",{"user":user,"pk": pk,'community':community, "book":book, "members":members,"memberls":memberls})
+# 작성자 권한 : 모임 종료시키기
+def quit(request,pk):
+    community=Community.objects.get(id=pk)
+    community.is_finished=1
+    community.save()
+    return redirect("/community/")
