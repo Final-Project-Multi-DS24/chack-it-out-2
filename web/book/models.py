@@ -42,8 +42,7 @@ class Review(models.Model):
         on_delete=models.CASCADE,
         verbose_name="도서",
     )
-    review = models.CharField(max_length=2000, verbose_name='리뷰')
-    label= models.IntegerField(verbose_name='긍정 부정')
+    label= models.IntegerField(verbose_name='긍부정라벨')
 
     def __str__(self):
         return self.id

@@ -31,7 +31,7 @@ def getRecommend(df,tfidf_matrix,isbn_list):
   for i in idxls:
       sim_scores.remove(sim_scores[i])
   # 점수가 가장 높은 책 8권 추천
-  sim_scores = sim_scores[1:9]
+  sim_scores = sim_scores[2:10]
   
   # 가장 유사한 책 8권의 인덱스
   book_indices = [i[0] for i in sim_scores]
