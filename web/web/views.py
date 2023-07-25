@@ -4,28 +4,43 @@ from user.models import User
 from book.models import Book
 from community.models import Community
 import random
-
+import pickle
+import pandas as pd
+# 추천함수
+from recommend import getRecommend
+import bookdata
+# 추천에 사용할 매트릭스
+# tfidx_matrix
 
 
 def home(request):
+    pickle_file_path = 'data/mec_3f_007_matrix.pkl'
+    with open(pickle_file_path, 'rb') as file:
+        tfidx_matrix = pickle.load(file)
     # "완료된" 독서모임의 책"객체"들 뽑아내기
     endcommunities = Community.objects.all().filter(is_finished=True)
-    allbook = Book.objects.all()
-    randomresult=[]
+    # 커뮤니티 참여 책 객체
     result = []
+    isbn_list=[]
     for community in endcommunities:
         result.append(community.book)
-    for i in range(8):
-        randomresult.append(random.choice(allbook))
+    for comubook in result:
+        isbn_list.append(comubook.book_isbn)
+    # 책 리스트 df로
+    # DataFrame 만들기
+    df=bookdata.df
+    ls=getRecommend(df,tfidx_matrix,isbn_list)
+    recommendbooks=Book.objects.all().filter(book_isbn__in=ls)
     # 로그인정보가 있을때
     try:
         user = User.objects.get(id=int(request.session.get("user")))
         name = user.user_name
         # 책 객체를 랜덤으로하나 보여주겠다.
-
+        
     # 유저 정보가 없을때(비로그인) 그냥 메인페이지 접속
     except TypeError:
-        return render(request, "main.html", {"randomresult": randomresult, "result":result})
+        # getRecommend(df,tfidx_matrix,isbn_list)
+        return render(request, "main.html", {"result":result[-1:-4:-1]})
 
 
     return render(
@@ -34,7 +49,7 @@ def home(request):
         {
             "user": user,
             "name": name,
-            "randomresult": randomresult,
+            "recommendbooks": recommendbooks,
             "result":result
         },
     )

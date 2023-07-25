@@ -66,14 +66,16 @@
 <div class="container">
   {% if request.session.user %}
   <div class="col-12 text-center">
+    
     <h5>📕TODAY'S 추천📕</h5>
+    최근의 모임진행 책을 바탕으로 다음 책을 추천해 드러요!
   </div>  
-    {% for randombook in randomresult %}
-  <a href="/book/search/result/{{randombook.id}}" class="img_area"><img
-    src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
+    {% for book in recommendbooks %}
+  <a href="/book/search/result/{{book.id}}" class="img_area"><img
+    src="{{book.book_cover}}" style="height: 400px; width: 300px;
     margin-right: 10px;
     margin-bottom: 10px;"
-  /><p class="hover_text">"{{randombook.book_title}}"</p></a>
+  /><p class="hover_text">"{{book.book_title}}"</p></a>
     {% endfor %}
   </h4>
   <!-- 로그인 X  -->

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-
 # POST로 받을 DB 모델
 
 # 회원가입오류

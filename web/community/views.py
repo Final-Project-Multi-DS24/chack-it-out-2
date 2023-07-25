@@ -26,7 +26,7 @@ def community(request):
                 "name": name,
                 "communities": communities,
                 "endcommunities": endcommunities,
-                "result": result,
+                "result": result[::-1],
             },
         )
     else:
@@ -106,7 +106,6 @@ def detail2(request, pk):
             community = Community.objects.get(id=pk)
         )
         reviewmember.save()
-        print('잘 올라갔습니다.')
         return redirect(f"/community/detail2/{pk}")
     return render(request, "detail2.html", {"user":user,"pk": pk, "community": community,'allreview':allreview})
 

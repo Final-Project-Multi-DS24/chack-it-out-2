@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import Book,reviewUser
+import pandas as pd
 from user.models import User,Reading,Wish
 from django.db.models import Q
 
@@ -92,6 +93,7 @@ def result2(request, pk):
     else:
         user = User.objects.get(id=int(request.session.get("user")))
         book = Book.objects.get(id=pk)
+        # 리뷰넣기
         if "comment-input" in request.GET:
             contents = request.GET.get("comment-input")
             reviewuser=reviewUser(
