@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% block title %}
+<title>커뮤니티 정보</title>
+{% endblock %} 
+
+{% block css%}
+<style>
+  ul,
+  li {
+    list-style: none;
+  }
+  .blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .horizontal_chart_box {
+    position: relative;
+    .chart_box {
+      position: relative;
+      margin-bottom: 45px;
+      padding-left: 20px;
+      box-sizing: border-box;
+      height: 200px;
+      width: 220;
+    }
+
+    .axis_x {
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: -o-flex;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      padding: 0;
+      box-sizing: border-box;
+      height: 100%;
+      border-bottom: 1px solid #d3d3d3;
+      .item {
+        flex: 1;
+        position: relative;
+        .text_box {
+          position: absolute;
+          bottom: -43px;
+          left: 50%;
+          text-align: center;
+          -webkit-transform: translate(-50%, 0);
+          -ms-transform: translate(-50%, 0);
+          -o-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+          .day {
+            display: block;
+            font-size: 12px;
+            line-height: 19px;
+            color: #4a4a4a;
+            &.sat {
+              color: #3475ed;
+            }
+            &.sun {
+              color: #eb474a;
+            }
+          }
+          .time {
+            display: block;
+            margin-top: 3px;
+            font-size: 12px;
+            color: #999;
+          }
+        }
+      }
+      .graph {
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: -o-flex;
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+        width: 35px;
+        height: 100%;
+        background: #e8e8e8;
+        border-radius: 3px 3px 0 0;
+        overflow: hidden;
+        .time {
+          display: block;
+          position: relative;
+          margin-bottom: -4px;
+          padding-top: 4px;
+          box-sizing: content-box;
+          width: 100%;
+          border-radius: 3px 3px 0 0;
+          &.data1 {
+            background: red;
+            z-index: 1;
+          }
+          &.data2 {
+            background: orange;
+            z-index: 2;
+          }
+          &.data3 {
+
+            background: rgb(135, 135, 77);
+            z-index: 3;
+          }
+          &.data4 {
+            background: pink;
+            z-index: 4;
+          }
+          &.data5 {
+            background: blue;
+            z-index: 1;
+          }
+          &.data6 {
+            background: purple;
+            z-index: 2;
+          }
+          &.data7 {
+            background: skyblue;
+            z-index: 3;
+          }
+          &.data8 {
+            background: darkblue;
+            z-index: 4;
+          }
+        }
+      }
+      button.graph {
+        border: 0;
+      }
+    }
+  }
+
+  .comments {
+    width: 50%;
+    padding: 10px;
+  }
+  .form {
+    width: 50%;
+    padding: 10px;
+  }
+</style>
+{% endblock %}
+
+
+
+<!-- 헤더 -->
+{% block header %}
+<div class="header" style="height: 300px; margin-bottom: 40px;">
+    <div class="container">
+        <div style="overflow: auto; height: 300px">
+        <div class="row">
+            <div class="col-12 text-center">
+              <br><br>
+            </div>
+            <div class="row">
+<pre style="font-weight: bold;">
+
+        ❗ 공지사항 ❗     
+    
+        안녕하세요, "책읽아웃" 회원 여러분!
+        가입을 진심으로 환영합니다. 아래의 공지사항을 꼭 읽어주시기 바랍니다.
+
+        💛 모임 참여 💛
+ 
+        - 독서모임에 많이 참여할수록, 저희 『책읽아웃』이 여러분의 성향에 딱 맞는 책을 추천해 드릴 수 있습니다.
+        웹사이트를 더욱 풍성하게 즐기고 싶다면 "책읽아웃" 하세요!😜
+
+        💛 서로 존중하고 배려하는 분위기를 유지하기 위해 규칙을 지켜주세요. 💛 
+        - 욕설이나 비방, 불쾌한 행동은 삼가해주시고, 다른 회원들과 긍정적인 대화와 토론을 이어나가는 데 동참해주세요.
+        - 커뮤니티 내에서의 불만이나 문제가 있을 경우, 운영자에게 알려주시면 신속히 조치를 취하도록 하겠습니다.
+
+        💌 운영자 이메일 : bassstg@naver.com
+
+        💛 공지사항 확인 💛 
+        - 커뮤니티의 소식과 중요한 공지사항은 정기적으로 확인해주시기 바랍니다. 
+        - 주기적인 방문을 통해 새로운 소식을 놓치지 않고 참여하실 수 있습니다.
+
+        좋은 독서 경험과 유익한 커뮤니티 활동이 되길 바랍니다.
+        감사합니다!
+            
+        - 책읽아웃 운영자 올림
+</pre>             
+            </div>  
+        </div>
+        </div>
+    </div>
+</div>    
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h2>리뷰</h2>
+      <div style="overflow: auto; width:auto; height: 300px">
+        <div class="comments">
+          <ul id="comment-list">
+            {% for review in allreview %}
+              <li>{{user}} - {{review.review}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <h4>이번 책은 어땠나요?</h4>   
+      <div style="overflow: auto; width: 1200px; height: 500px">
+        <div class="horizontal_chart_box">
+          <div class="chart_box">
+            <ul class="axis_x">
+              <li class="item">
+                <div class="text_box">
+                  <strong class="day">👍</strong>
+                </div>
+                <button type="button" class="graph">
+                    <span class="time data1" style="height: 20%"></span>
+                    <span class="time data2" style="height: 22%"></span>
+                    <span class="time data3" style="height: 30%"></span>
+                    <span class="time data4" style="height: 25%"></span>
+                </button>
+              </li>
+              <li class="item">
+                <div class="text_box">
+                  <strong class="day">
+                    👎
+                </strong>
+                </div>
+                <button type="button" class="graph">
+                    <span class="time data{{i}}" style="height: 25%"></span>
+                    <span class="time data6" style="height: 25%"></span>
+                    <span class="time data7" style="height: 25%"></span>
+                    <span class="time data8" style="height: 25%"></span>
+                </button>
+              </li>
+            </ul>
+            <pre style="font-weight: bold;">
+            <form action="">
+            <a href="" id="1" style="color: red;">■ 가볍게 읽기 좋아요.</a>                                                                       <a href="" id="5" style="color: blue;">■ 내용이 많이 없어요.</a>
+            <a href="" id="2" style="color: orange;">■ 설명이 잘 되어 있어요.</a>                                                                    <a href="" id="6" style="color: purple;">■ 뭐라는지 잘 모르겠어요</a>
+            <a href="" id="3" style="color: rgb(135, 135, 77);">■ 술술 잘 읽혀요.</a>                                                                           <a href="" id="7" style="color: skyblue;">■ 지루해요</a>            
+            <a href="" id="4"style="color: pink;">■ 공감되는 부분이 많아요.</a>                                                                   <a href="" id="8" style="color: darkblue;">■ 그냥 그저 그래요.</a>            
+
+             </form>
+            </pre>
+          </div>
+        </div>
+
+    </div>
+    </div>
+    <div class="col-6">
+      <div class="form">
+        <h4>모임 후기작성</h4>
+        <form action="." method="get">
+          <input type="text" id="comment-input" name="comment-input" maxlength="2000" placeholder="작성 후 [   Enter⏎]"  style="width: 400px; ">
+          <br/>
+        </form>
+        <br>
+        <button onclick="location.href='/community/detail/{{pk}}'">앞으로 가기</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

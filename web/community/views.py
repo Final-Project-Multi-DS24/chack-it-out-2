@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .models import Community, Member
+from .models import Community, Member, reviewMember
 from book.models import Book
 from user.models import User
+import re
 
 
 # Create your views here.
@@ -18,7 +19,15 @@ def community(request):
         for community in endcommunities:
             result.append(community.book)
         return render(
-            request, "community.html", {"user":user,"name":name,"communities": communities, "endcommunities":endcommunities, "result":result}
+            request,
+            "community.html",
+            {
+                "user": user,
+                "name": name,
+                "communities": communities,
+                "endcommunities": endcommunities,
+                "result": result,
+            },
         )
     else:
         communities = Community.objects.all()
@@ -27,12 +36,13 @@ def community(request):
             request, "community.html", {"communities": communities, "members": members}
         )
 
+
 # 새 모임 만들기
 def newcommunity(request):
     if request.method == "GET":
         user = User.objects.get(id=int(request.session.get("user")))
-        name = user.user_name        
-        return render(request, "new.html",{"user":user,"name":name})
+        name = user.user_name
+        return render(request, "new.html", {"user": user, "name": name})
     elif request.method == "POST":
         get_book_isbn = request.POST["book"]
         meeting_date = request.POST["meeting_date"]
@@ -55,27 +65,68 @@ def newcommunity(request):
 
         return redirect("/community/")
 
+
 # 상세 페이지
-def detail(request,pk):
-        user = User.objects.get(id=int(request.session.get("user")))
-        community=Community.objects.get(id=pk)
-        book=community.book
-        members=Member.objects.all().filter(community_id=pk)
-        memberls=[]
-        for member in members:
-             memberls.append(member.user_id)
-        # 모임 참여 신청
-        if "join" in request.GET:
-            member = Member(
-                community=community,
-                user=user
-            )
-            member.save()
-            return redirect("/community/")       
-        return render(request, "detail.html",{"user":user,"pk": pk,'community':community, "book":book, "members":members,"memberls":memberls})
+def detail(request, pk):
+    user = User.objects.get(id=int(request.session.get("user")))
+    community = Community.objects.get(id=pk)
+    book = community.book
+    members = Member.objects.all().filter(community_id=pk)
+    memberls = []
+    for member in members:
+        memberls.append(member.user_id)
+    # 모임 참여 신청
+    if "join" in request.GET:
+        member = Member(community=community, user=user)
+        member.save()
+        return redirect("/community/")
+    return render(
+        request,
+        "detail.html",
+        {
+            "user": user,
+            "pk": pk,
+            "community": community,
+            "book": book,
+            "members": members,
+            "memberls": memberls,
+        },
+    )
+
+
+def detail2(request, pk):
+    user = User.objects.get(id=int(request.session.get("user")))
+    community = Community.objects.get(id=pk)
+    # 책의 전체 리뷰
+    allreview = reviewMember.objects.all().filter(community_id=pk)
+    # if "comment-input" in request.GET:
+    #     contents = request.GET.get("comment-input")
+    #     reviewuser=reviewUser(
+    #         review=contents,
+    #         book = Book.objects.get(id=pk)
+    #     )
+    #     reviewuser.save()
+    #     return redirect(f"/book/search/result2/{pk}")
+    # return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview})
+
+    if "comment-input" in request.GET:
+        contents = request.GET.get("comment-input")
+        reviewmember = reviewMember(
+            review=contents,
+            community=Community.objects.get(id=pk)
+        )
+        reviewmember.save()
+        return redirect(f"/community/detail2/{pk}")
+    return render(
+        request,
+        "detail2.html",
+        {"user": user, "pk": pk, "community": community, "allreview": allreview},
+    )
+
+
 # 작성자 권한 : 모임 종료시키기
-def quit(request,pk):
-    community=Community.objects.get(id=pk)
-    community.is_finished=1
+def quit(request, pk):
+    community = Community.objects.get(id=pk)
+    community.is_finished = 1
     community.save()
     return redirect("/community/")
