@@ -97,32 +97,18 @@ def detail(request, pk):
 def detail2(request, pk):
     user = User.objects.get(id=int(request.session.get("user")))
     community = Community.objects.get(id=pk)
-    # 책의 전체 리뷰
+    # 커뮤의 전체 리뷰
     allreview = reviewMember.objects.all().filter(community_id=pk)
-    # if "comment-input" in request.GET:
-    #     contents = request.GET.get("comment-input")
-    #     reviewuser=reviewUser(
-    #         review=contents,
-    #         book = Book.objects.get(id=pk)
-    #     )
-    #     reviewuser.save()
-    #     return redirect(f"/book/search/result2/{pk}")
-    # return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview})
-
-    if "comment-input" in request.GET:
-        contents = request.GET.get("comment-input")
-        reviewmember = reviewMember(
+    if "review_input" in request.GET:
+        contents = request.GET.get("review_input")
+        reviewmember=reviewMember(
             review=contents,
-            community=Community.objects.get(id=pk)
+            community = Community.objects.get(id=pk)
         )
         reviewmember.save()
+        print('잘 올라갔습니다.')
         return redirect(f"/community/detail2/{pk}")
-    return render(
-        request,
-        "detail2.html",
-        {"user": user, "pk": pk, "community": community, "allreview": allreview},
-    )
-
+    return render(request, "detail2.html", {"user":user,"pk": pk, "community": community,'allreview':allreview})
 
 # 작성자 권한 : 모임 종료시키기
 def quit(request, pk):
