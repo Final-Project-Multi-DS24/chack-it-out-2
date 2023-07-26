@@ -5,7 +5,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 # 추천 함수
 def getRecommend(df,tfidf_matrix,isbn_list):
   isbn_list=isbn_list[-1:-4:-1]
-  indices = pd.Series(df.index, index=df['book_isbn'])
+  indices = pd.Series(df.index, index=df['isbn'])
   # 전달받은 책들의 인덱스 저장
   book_indices = [indices[isbn] for isbn in isbn_list]
   sim_scores = [[i,0] for i in range(tfidf_matrix.shape[0])]
@@ -36,4 +36,4 @@ def getRecommend(df,tfidf_matrix,isbn_list):
   # 가장 유사한 책 8권의 인덱스
   book_indices = [i[0] for i in sim_scores]
   
-  return list(df.iloc[book_indices]['book_isbn'])
+  return list(df.iloc[book_indices]['isbn'])

@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
+import sys
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAIN_TEMPLATE_DIR = os.path.join(BASE_DIR, "web/templates")
-
+sys.path.append(os.path.join(BASE_DIR, 'data'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "book",
     "community",
     # REST
-    "rest_framework",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
@@ -87,28 +87,28 @@ WSGI_APPLICATION = "web.wsgi.application"
 # }
 
 # AWS DB
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "BOOK",
-#         "USER": "multi",
-#         "PASSWORD": "multi12345!",
-#         "HOST": "13.208.125.123",
-#         "PORT": "3306",
-#     }
-# }
-
-# LOCAL DB
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "book",
-        "USER": "root",
-        "PASSWORD": "1234",
-        "HOST": "127.0.0.1",
+        "NAME": "BOOK",
+        "USER": "multi",
+        "PASSWORD": "multi12345!",
+        "HOST": "13.208.125.123",
         "PORT": "3306",
     }
 }
+
+# LOCAL DB
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": "book",
+#         "USER": "root",
+#         "PASSWORD": "1234",
+#         "HOST": "127.0.0.1",
+#         "PORT": "3306",
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
