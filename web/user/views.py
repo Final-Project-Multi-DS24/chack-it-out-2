@@ -11,8 +11,10 @@ from book.models import Category
 from community.models import Community,Member
 from django.db.models import Q
 import random
-
-
+import pickle
+import bookdata
+import recommend4book
+from recommend4book import getRecommend
 # 로그인폼
 from .forms import LoginForm
 
@@ -93,11 +95,39 @@ def userpage(request, pk):
         cate_ls.append(favorite.category_id)
     # 필터링된 책들
     selectedbooks=Book.objects.all().filter(category_id__in=cate_ls)
-    # 랜덤으로 8개 추출
+    # 랜덤으로 4개 추출
     randomresult = []
-    for i in range(8):
+    for i in range(4):
         randomresult.append(random.choice(selectedbooks))
-    return render(request, "userpage.html", {"user":user,"name": name, "pk": pk, "user": user, 'cate_name':cate_name,"randomresult": randomresult, 'loginuser':loginuser})
+    # 추천 위한 피클파일
+    pickle_file_path = 'data/mec_3f_007_matrix.pkl'
+    with open(pickle_file_path, 'rb') as file:
+        tfidx_matrix = pickle.load(file)
+    
+    # "읽은책" 의 책'객체'들 뽑아내기
+    endbooks = Reading.objects.all().filter(user_id=pk)
+    # 커뮤니티 참여 책 객체
+    result = []
+    isbn_list=[]
+    for book in endbooks:
+        result.append(book.book)
+    for book in result:
+        isbn_list.append(book.book_isbn)
+    # 책 리스트 df로
+    # DataFrame 만들기
+    df=bookdata.df
+    ls=getRecommend(df,tfidx_matrix,isbn_list)
+    recommendbooks=Book.objects.all().filter(book_isbn__in=ls)
+    return render(request, "userpage.html", {"user":user,
+                                             "name": name, 
+                                             "pk": pk, 
+                                             "loginuser": loginuser, 
+                                             'cate_name':cate_name,
+                                             "randomresult": randomresult, 
+                                             'loginuser':loginuser,
+                                            "recommendbooks": recommendbooks,
+                                            "result":result
+                                             })
     
 
 def search(request):

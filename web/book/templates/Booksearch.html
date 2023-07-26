@@ -12,7 +12,7 @@
     margin-bottom: 10px;
   }
   img:hover {
-    filter: brightness(60%);
+    filter: brightness(50%);
     transform: scale(1.1);
     transition: 0.5s;
   }
@@ -42,8 +42,8 @@
     top: 100px;
     left: 30px;
     width: 200px;
-    color: black;
-    -webkit-text-stroke: 0.8px white;
+    color: white;
+    -webkit-text-stroke: 1px black;
     font-weight: 600;
     font-size: 25px;
   }
@@ -78,8 +78,8 @@
       style="margin-bottom: 40px; 
       font-weight: bold;
       font-size: 30px;
-      -webkit-text-stroke: 1px white;
-      color: black;
+      -webkit-text-stroke: 1px black;
+      color: white;
       ">🔎[ {{query}} ]에 대해 검색한 내용입니다.</div>
       <div style="overflow: auto; width:auto; height: 400px">
       {% for book in books %}

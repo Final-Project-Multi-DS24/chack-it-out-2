@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Community, Member, reviewMember
+from .models import Community, Member, reviewMember,meetingbookscore
 from book.models import Book
 from user.models import User
 import re
@@ -97,8 +97,6 @@ def detail(request, pk):
 def detail2(request, pk):
     user = User.objects.get(id=int(request.session.get("user")))
     community = Community.objects.get(id=pk)
-    # 커뮤의 전체 리뷰
-    allreview = reviewMember.objects.all().filter(community_id=pk)
     if "review_input" in request.GET:
         contents = request.GET.get("review_input")
         reviewmember=reviewMember(
@@ -107,6 +105,8 @@ def detail2(request, pk):
         )
         reviewmember.save()
         return redirect(f"/community/detail2/{pk}")
+        # 모임의의 전체 리뷰조회
+    allreview = reviewMember.objects.all().filter(community_id=pk)
     return render(request, "detail2.html", {"user":user,"pk": pk, "community": community,'allreview':allreview})
 
 # 작성자 권한 : 모임 종료시키기

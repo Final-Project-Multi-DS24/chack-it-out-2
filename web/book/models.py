@@ -45,7 +45,7 @@ class Review(models.Model):
     label= models.IntegerField(verbose_name='긍부정라벨')
 
     def __str__(self):
-        return self.id
+        return self.book
 
     class Meta:
         db_table = "tb_review"
@@ -61,7 +61,7 @@ class reviewUser(models.Model):
     review = models.CharField(max_length=2000, verbose_name='리뷰')
 
     def __str__(self):
-        return self.id
+        return self.book
 
     class Meta:
         db_table = "tb_reviewUser"

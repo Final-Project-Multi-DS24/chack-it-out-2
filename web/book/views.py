@@ -1,9 +1,9 @@
 from django.shortcuts import render,redirect
-from .models import Book,reviewUser
+from .models import Book,reviewUser,Review
 import pandas as pd
 from user.models import User,Reading,Wish
 from django.db.models import Q
-
+import re
 # Create your views here.
 
 
@@ -74,6 +74,19 @@ def result2(request, pk):
     book = Book.objects.get(id=pk)
     # 책의 전체 리뷰
     allreview=reviewUser.objects.all().filter(book_id=book.id)
+    aladinreview=Review.objects.all().filter(book_id=pk)
+    sum=len(aladinreview)
+    neg=0
+    pos=0
+    if sum >= 1:
+        for booklabel in aladinreview:
+            if booklabel.label == 0:
+                neg += 1
+            else:
+                pos += 1
+        negative=round(neg/sum*100,2)
+        positive=round(pos/sum*100,2)
+
     if "searchword" in request.GET:
         query = request.GET.get("searchword")
         selectbar = request.GET.get("selectbar")
@@ -96,10 +109,11 @@ def result2(request, pk):
         # 리뷰넣기
         if "comment-input" in request.GET:
             contents = request.GET.get("comment-input")
+            urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$\-@\.&+:/?=]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', *contents)
             reviewuser=reviewUser(
                 review=contents,
                 book = Book.objects.get(id=pk)  
             )
             reviewuser.save()
             return redirect(f"/book/search/result2/{pk}")
-        return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview})
+        return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview,"neg":neg,"pos":pos,"negative":negative,"positive":positive})

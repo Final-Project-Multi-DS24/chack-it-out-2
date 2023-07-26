@@ -53,7 +53,7 @@
   }
 
   img:hover {
-    filter: brightness(60%);
+    filter: brightness(50%);
     transform: scale(1.1);
     transition: 0.5s;
   }
@@ -82,8 +82,8 @@
     top: 100px;
     left: 30px;
     width: 200px;
-    color: black;
-    -webkit-text-stroke: 0.8px white;
+    color: white;
+    -webkit-text-stroke: 1px black;
     font-weight: 600;
     font-size: 25px;
   }
@@ -149,7 +149,7 @@
     {% for category in cate_name %}
     ✅{{category}}
     {% endfor %}와 관련된 추천도서입니다   
-    </div>  
+  </div>  
     {% for randombook in randomresult %}
   <a href="/book/search/result/{{randombook.id}}" class="img_area"><img
     src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
@@ -157,8 +157,18 @@
     margin-bottom: 10px;"
   /><p class="hover_text">"{{randombook.book_title}}"</p></a>
     {% endfor %}
-  </div>
 
+  <div class="col-12 text-center" style="font-size: 20px;">
+    {{name}}님이 최근 읽은도서와 유사한 책을 추천합니다.   
+  </div>  
+    {% for book in recommendbooks %}
+  <a href="/book/search/result/{{book.id}}" class="img_area"><img
+    src="{{book.book_cover}}" style="height: 400px; width: 300px;
+    margin-right: 10px;
+    margin-bottom: 10px;"
+  /><p class="hover_text">"{{book.book_title}}"</p></a>
+    {% endfor %}
+</div>
 
 {% endblock %} 
 <!-- 회원탈퇴 -->

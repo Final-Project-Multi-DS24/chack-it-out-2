@@ -194,67 +194,26 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h2>리뷰</h2>
-      <div style="overflow: auto; width:auto; height: 300px">
+      <h5>리뷰</h5>
+      <div style="overflow: auto; width: auto; height: 300px;">
         <div class="comments">
           <ul id="comment-list">
             {% for review in allreview %}
-              <li>{{user}} - {{review.review}}</li>
+              <li>{{ user }} - {{ review.review }}</li>
             {% endfor %}
           </ul>
         </div>
       </div>
-      <h4>이번 책은 어땠나요?</h4>   
-      <div style="overflow: auto; width: 1200px; height: 500px">
-        <div class="horizontal_chart_box">
-          <div class="chart_box">
-            <ul class="axis_x">
-              <li class="item">
-                <div class="text_box">
-                  <strong class="day">👍</strong>
-                </div>
-                <button type="button" class="graph">
-                    <span class="time data1" style="height: 20%"></span>
-                    <span class="time data2" style="height: 22%"></span>
-                    <span class="time data3" style="height: 30%"></span>
-                    <span class="time data4" style="height: 25%"></span>
-                </button>
-              </li>
-              <li class="item">
-                <div class="text_box">
-                  <strong class="day">
-                    👎
-                </strong>
-                </div>
-                <button type="button" class="graph">
-                    <span class="time data{{i}}" style="height: 25%"></span>
-                    <span class="time data6" style="height: 25%"></span>
-                    <span class="time data7" style="height: 25%"></span>
-                    <span class="time data8" style="height: 25%"></span>
-                </button>
-              </li>
-            </ul>
-            <pre style="font-weight: bold;">
-            <form action="">
-            <a href="" id="1" style="color: red;">■ 가볍게 읽기 좋아요.</a>                                                                       <a href="" id="5" style="color: blue;">■ 내용이 많이 없어요.</a>
-            <a href="" id="2" style="color: orange;">■ 설명이 잘 되어 있어요.</a>                                                                    <a href="" id="6" style="color: purple;">■ 뭐라는지 잘 모르겠어요</a>
-            <a href="" id="3" style="color: rgb(135, 135, 77);">■ 술술 잘 읽혀요.</a>                                                                           <a href="" id="7" style="color: skyblue;">■ 지루해요</a>            
-            <a href="" id="4"style="color: pink;">■ 공감되는 부분이 많아요.</a>                                                                   <a href="" id="8" style="color: darkblue;">■ 그냥 그저 그래요.</a>            
-             </form>
-            </pre>
-          </div>
-        </div>
-    </div>
-    </div>
+    </div>  
     <div class="col-6">
       <div class="form">
-        <h2>후기작성</h2>
+        <h5>작성</h5>
         <form action="#" method="get">
-          <input type="text" id="review_input" name="review_input" maxlength="2000" placeholder="리뷰 작성 후 [⏎Enter]"  style="width: 400px; ">
+          <input type="text" id="review_input" name="review_input" maxlength="2000" placeholder="리뷰 작성 후 [⏎Enter]" style="width: 400px;">
           <br/>
         </form>
         <br>
-        <button onclick="location.href='/community/detail/{{pk}}'">앞으로 가기</button>
+        <button onclick="location.href='/community/detail/{{ pk }}'">앞으로 가기</button>
       </div>
     </div>
   </div>

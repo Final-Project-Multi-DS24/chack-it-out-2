@@ -4,7 +4,7 @@ from .models import Community, Member, reviewMember,meetingbookscore
 
 # Register your models here.
 class CommunityAdmin(admin.ModelAdmin):
-    list_display = ("id", "meeting_date", "meeting_place", "creator")
+    list_display = ("id", "creator","book","meeting_date", "meeting_place", "creator")
 
 
 class MemberAdmin(admin.ModelAdmin):

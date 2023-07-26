@@ -60,7 +60,7 @@
               color: #3475ed;
             }
             &.sun {
-              color: #eb474a;
+              color: green;
             }
           }
           .time {
@@ -94,7 +94,7 @@
           width: 100%;
           border-radius: 3px 3px 0 0;
           &.data1 {
-            background: #e73ea9;
+            background: green;
             z-index: 3;
           }
           &.data2 {
@@ -102,7 +102,7 @@
             z-index: 2;
           }
           &.data3 {
-            background: #f5dc12;
+            background: red;
             z-index: 1;
           }
         }
@@ -147,17 +147,21 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h2>리뷰</h2>
+      <h6>리뷰</h6>
       <div style="overflow: auto; width:auto; height: 200px">
         <div class="comments">
           <ul id="comment-list">
             {% for review in allreview %}
               <li>{{user}} - {{review.review}}</li>
             {% endfor %}
+            {% for url in urls %}
+              <a href="{{url}}">링크 바로가기</a>
+            {% endfor %}
           </ul>
         </div>
       </div>
-      <h4>ABOUT THIS BOOK From🧞 </h4>   
+      <h6>🧞로부터 온 리뷰 </h6>
+      <br>   
       <div style="overflow: auto; width: 500px; height: 400px">
         <div class="vertical_chart_box">
           <div class="chart_box">
@@ -165,21 +169,21 @@
               <li class="item">
                 <div class="text_box">
                   <strong class="day">👍</strong>
+                  <strong class="day">{{pos}}</strong>
                 </div>
                 <button type="button" class="graph">
-                  <span class="time data1" style="height: 0%"
-                    ><span class="blind">data 타입 1</span></span
-                  >
+                  <span class="time data1" style="height: {{positive}}%"
+                    >
                 </button>
               </li>
               <li class="item">
                 <div class="text_box">
                   <strong class="day">👎</strong>
+                  <strong class="day">{{neg}}</strong>
                 </div>
                 <button type="button" class="graph">
-                  <span class="time data3" style="height: 0%"
-                    ><span class="blind">data 타입 3</span></span
-                  >
+                  <span class="time data3" style="height: {{negative}}%"
+                    ><span class="blind">
                 </button>
               </li>
             </ul>
@@ -189,7 +193,7 @@
     </div>
     <div class="col-6">
       <div class="form">
-        <h2>리뷰작성</h2>
+        <h6></h6>
         <form action="." method="get">
           <input type="text" id="comment-input" name="comment-input" maxlength="2000" placeholder="리뷰 작성 후 [⏎Enter]"  style="width: 400px; ">
           <br/>
