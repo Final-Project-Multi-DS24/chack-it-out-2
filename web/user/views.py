@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+
 # POST로 받을 DB 모델
 
 # 회원가입오류
@@ -8,13 +9,14 @@ from django.db import IntegrityError
 from book.models import Book
 from .models import User, Favorite, Reading, Wish
 from book.models import Category
-from community.models import Community,Member
+from community.models import Community, Member
 from django.db.models import Q
 import random
 import pickle
 import bookdata
 import recommend4book
 from recommend4book import getRecommend
+
 # 로그인폼
 from .forms import LoginForm
 
@@ -79,7 +81,6 @@ def logout(request):
     return redirect("/")
 
 
-
 def userpage(request, pk):
     user = User.objects.get(id=pk)
     loginuser = User.objects.get(id=int(request.session.get("user")))
@@ -87,48 +88,55 @@ def userpage(request, pk):
     # user_id가 pk와 일치하는 카테고리 객체집합
     favorites = Favorite.objects.all().filter(user_id=pk)
     cate_ls = []
-    cate_name =[]
+    cate_name = []
     for favorite in favorites:
         # category - fk의 값 category_id - fk
         # list에 담아줌
         cate_name.append(favorite.category)
         cate_ls.append(favorite.category_id)
     # 필터링된 책들
-    selectedbooks=Book.objects.all().filter(category_id__in=cate_ls)
+    selectedbooks = Book.objects.all().filter(category_id__in=cate_ls)
     # 랜덤으로 4개 추출
     randomresult = []
     for i in range(4):
         randomresult.append(random.choice(selectedbooks))
     # 추천 위한 피클파일
-    pickle_file_path = 'data/mec_3f_007_matrix.pkl'
-    with open(pickle_file_path, 'rb') as file:
+    pickle_file_path = "data/mec_3f_007_matrix.pkl"
+    with open(pickle_file_path, "rb") as file:
         tfidx_matrix = pickle.load(file)
-    
+
     # "읽은책" 의 책'객체'들 뽑아내기
     endbooks = Reading.objects.all().filter(user_id=pk)
     # 커뮤니티 참여 책 객체
     result = []
-    isbn_list=[]
+    isbn_list = []
     for book in endbooks:
         result.append(book.book)
     for book in result:
         isbn_list.append(book.book_isbn)
     # 책 리스트 df로
     # DataFrame 만들기
-    df=bookdata.df
-    ls=getRecommend(df,tfidx_matrix,isbn_list)
-    recommendbooks=Book.objects.all().filter(book_isbn__in=ls)
-    return render(request, "userpage.html", {"user":user,
-                                             "name": name, 
-                                             "pk": pk, 
-                                             "loginuser": loginuser, 
-                                             'cate_name':cate_name,
-                                             "randomresult": randomresult, 
-                                             'loginuser':loginuser,
-                                            "recommendbooks": recommendbooks,
-                                            "result":result
-                                             })
-    
+    df = bookdata.df
+    ls = getRecommend(df, tfidx_matrix, isbn_list)
+    recommendbooks = Book.objects.all().filter(book_isbn__in=ls)
+    count = len(endbooks)
+    return render(
+        request,
+        "userpage.html",
+        {
+            "user": user,
+            "name": name,
+            "pk": pk,
+            "loginuser": loginuser,
+            "cate_name": cate_name,
+            "randomresult": randomresult,
+            "loginuser": loginuser,
+            "recommendbooks": recommendbooks,
+            "result": result,
+            "count": count,
+        },
+    )
+
 
 def search(request):
     user = User.objects.get(id=int(request.session.get("user")))
@@ -144,10 +152,16 @@ def search(request):
         return render(
             request,
             "usersearch.html",
-            {'user':user,'name':name,"query": query, "users": users, "selectbar": selectbar},
+            {
+                "user": user,
+                "name": name,
+                "query": query,
+                "users": users,
+                "selectbar": selectbar,
+            },
         )
     else:
-        return render(request, "usersearch.html", {"user":user,"name":name})
+        return render(request, "usersearch.html", {"user": user, "name": name})
 
 
 def reading(request, pk):
@@ -155,16 +169,26 @@ def reading(request, pk):
     loginuser = User.objects.get(id=int(request.session.get("user")))
     name = user.user_name
     readings = Reading.objects.all().filter(user_id=pk)
-    readingls=[]
+    readingls = []
     for reading in readings:
         readingls.append(reading.book_id)
-    selectedbooks=Book.objects.all().filter(id__in=readingls)
+    selectedbooks = Book.objects.all().filter(id__in=readingls)
     if "delete" in request.GET:
         id = request.GET.get("delete")
         reading = Reading.objects.all().filter(book_id=id).filter(user_id=user)
         reading.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/reading")
-    return render(request, "reading.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks,"loginuser":loginuser})
+    return render(
+        request,
+        "reading.html",
+        {
+            "user": user,
+            "name": name,
+            "pk": pk,
+            "selectedbooks": selectedbooks,
+            "loginuser": loginuser,
+        },
+    )
 
 
 def wish(request, pk):
@@ -172,16 +196,26 @@ def wish(request, pk):
     loginuser = User.objects.get(id=int(request.session.get("user")))
     name = user.user_name
     Wishes = Wish.objects.all().filter(user_id=pk)
-    wishls=[]
+    wishls = []
     for wish in Wishes:
         wishls.append(wish.book_id)
-    selectedbooks=Book.objects.all().filter(id__in=wishls)
+    selectedbooks = Book.objects.all().filter(id__in=wishls)
     if "delete" in request.GET:
         id = request.GET.get("delete")
         wish = Wish.objects.all().filter(book_id=id).filter(user_id=user)
         wish.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/wish")
-    return render(request, "wish.html", {"user":user,"name": name, "pk": pk, 'selectedbooks':selectedbooks,"loginuser":loginuser})
+    return render(
+        request,
+        "wish.html",
+        {
+            "user": user,
+            "name": name,
+            "pk": pk,
+            "selectedbooks": selectedbooks,
+            "loginuser": loginuser,
+        },
+    )
 
 
 def usercommunity(request, pk):
@@ -190,12 +224,26 @@ def usercommunity(request, pk):
     name = user.user_name
 
     Members = Member.objects.all().filter(user=pk)
-    membercommunityls=[]
+    membercommunityls = []
     for member in Members:
         membercommunityls.append(member.community_id)
     # 모든 종료된 커뮤니티를 가져오고, 그중 id가 list에 있는것을 가져옴
-    endcommunities = Community.objects.all().filter(is_finished=True).filter(id__in=membercommunityls)   
-    return render(request, "usercommunity.html", {"user":user,"name": name, "pk": pk,"endcommunities":endcommunities,"loginuser":loginuser })
+    endcommunities = (
+        Community.objects.all()
+        .filter(is_finished=True)
+        .filter(id__in=membercommunityls)
+    )
+    return render(
+        request,
+        "usercommunity.html",
+        {
+            "user": user,
+            "name": name,
+            "pk": pk,
+            "endcommunities": endcommunities,
+            "loginuser": loginuser,
+        },
+    )
 
 
 # 회원정보 삭제

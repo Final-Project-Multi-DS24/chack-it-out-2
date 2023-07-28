@@ -78,6 +78,8 @@ def result2(request, pk):
     sum=len(aladinreview)
     neg=0
     pos=0
+    negative=0
+    positive=0
     if sum >= 1:
         for booklabel in aladinreview:
             if booklabel.label == 0:
@@ -109,11 +111,10 @@ def result2(request, pk):
         # 리뷰넣기
         if "comment-input" in request.GET:
             contents = request.GET.get("comment-input")
-            urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$\-@\.&+:/?=]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', *contents)
             reviewuser=reviewUser(
                 review=contents,
-                book = Book.objects.get(id=pk)  
+                book = Book.objects.get(id=pk)
             )
             reviewuser.save()
             return redirect(f"/book/search/result2/{pk}")
-        return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview,"neg":neg,"pos":pos,"negative":negative,"positive":positive})
+    return render(request, "result2.html", {"user":user,"pk": pk, "book": book,"allreview":allreview,"neg":neg,"pos":pos,"negative":negative,"positive":positive})

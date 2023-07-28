@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-
-{% block title %}
+{% extends "base.html" %} {% block title %}
 <title>독서모임</title>
 {% endblock %}
 
@@ -16,7 +14,7 @@
   .img_area {
     display: inline-block;
     position: relative;
-    
+
     padding-right: 10px;
     padding-bottom: 10px;
   }
@@ -31,7 +29,6 @@
     display: none;
   }
 
-
   .hover_text {
     position: absolute;
     transition: 10ms;
@@ -44,30 +41,27 @@
     font-size: 25px;
   }
 </style>
-{% endblock %} 
-
+{% endblock %}
 
 <!-- 헤더 -->
 {% block header %}
-<div class="header" style="height: 300px; margin-bottom: 40px;">
-    <div class="container">
-        <div style="overflow: auto; height: 300px">
+<div class="header" style="height: 300px">
+  <div class="container">
+    <div style="overflow: auto; height: 300px">
+      <div class="row">
+        <div class="col-12 text-center"><br /><br /></div>
         <div class="row">
-            <div class="col-12 text-center">
-              <br><br>
-            </div>
-            <div class="row">
-<pre style="font-weight: bold;">
+          <pre style="font-weight: bold">
 
         ❗ 공지사항 ❗     
     
-        안녕하세요, "책읽아웃" 회원 여러분!
+        안녕하세요, "돈독모" 회원 여러분!
         가입을 진심으로 환영합니다. 아래의 공지사항을 꼭 읽어주시기 바랍니다.
 
         💛 모임 참여 💛
  
-        - 독서모임에 많이 참여할수록, 저희 『책읽아웃』이 여러분의 성향에 딱 맞는 책을 추천해 드릴 수 있습니다.
-        웹사이트를 더욱 풍성하게 즐기고 싶다면 "책읽아웃" 하세요!😜
+        - 독서모임에 많이 참여할수록, 여러분의 성향에 딱 맞는 도서를 추천해 드릴 수 있습니다.
+        웹사이트를 더욱 풍성하게 즐기고 싶다면 가입해서 함께 하세요!😜
 
         💛 서로 존중하고 배려하는 분위기를 유지하기 위해 규칙을 지켜주세요. 💛 
         - 욕설이나 비방, 불쾌한 행동은 삼가해주시고, 다른 회원들과 긍정적인 대화와 토론을 이어나가는 데 동참해주세요.
@@ -82,107 +76,124 @@
         좋은 독서 경험과 유익한 커뮤니티 활동이 되길 바랍니다.
         감사합니다!
             
-        - 책읽아웃 운영자 올림
-</pre>             
-            </div>  
+        - 운영자 올림
+</pre
+          >
         </div>
-        </div>
+      </div>
     </div>
-</div>    
+  </div>
+</div>
 {% endblock %}
 
 <!-- 콘텐츠 -->
-{% block contents %}
-{% if request.session.user %}
+{% block contents %} {% if request.session.user %}
 <div class="row">
-    <div class="col-12 text-center">
-      <h6>❗ 모임 생성시 정확한 책 선택을 위해 <span style="font-weight: bold;">🔑ISBN</span>으로만 적도록 되어있습니다. 
-        <a href="/book/search">🔎검색</a>에서 도서의 <span style="font-weight: bold;">🔑ISBN</span>을 확인해주세요.❗ </h6>
+  <div class="col-12 text-center">
+    <h6>
+      ❗ 모임 생성시 정확한 책 선택을 위해
+      <span style="font-weight: bold">🔑ISBN</span>으로만 적도록 되어있습니다.
+      <a href="/book/search">🔎검색</a>에서 도서의
+      <span style="font-weight: bold">🔑ISBN</span>을 확인해주세요.❗
+    </h6>
     <button><a onclick="location.href='new'">모임 새로 만들기</a></button>
-    <br>
-    </div>
-    <div class="col-12 text-center">지금까지 CHACK IT OUT 모임에서 함께한 도서들입니다.</div>
-    <div class="col-12 text-center" text-center style="overflow: auto; width: 1500px; height: 370px ;">
-      
-      {% for book in result %}
-      <a href="/book/search/result/{{book.id}}" class="img_area"><img
-        src="{{book.book_cover}}" style="height: 333px; width: 250px;
-        margin-right: 10px;
-        margin-bottom: 10px;"
-      /><p class="hover_text">"{{book.book_title}}"</p></a>
-      {% endfor %} 
-    </div>
+    <br />
+  </div>
+  <div class="col-12 text-center">
+    지금까지 CHACK IT OUT 모임에서 함께한 도서들입니다.
+  </div>
+  <div
+    class="col-12 text-center"
+    text-center
+    style="overflow: auto; width: 1500px; height: 370px"
+  >
+    {% for book in result %}
+    <a href="/book/search/result/{{book.id}}" class="img_area"
+      ><img
+        src="{{book.book_cover}}"
+        style="
+          height: 333px;
+          width: 250px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        "
+      />
+      <p class="hover_text">"{{book.book_title}}"</p></a
+    >
+    {% endfor %}
+  </div>
 </div>
 
 <div class="container">
-<div>
-  <div style="overflow: auto; width: auto; height: 250px">
-<table class="table caption-top table-dark table-hover">
-    <caption>모집중인 모임</caption>
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">모임일자</th>
-        <th scope="col">모임장소</th>
-        <th scope="col">도서</th>
-        <th scope="col">작성자</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for community in communities %}
-      <tr onclick="location.href='/community/detail/{{community.id}}'">
-        <th scope="row">{{community.id}}</th>
-        <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
-        <td>{{community.meeting_place}}</td>
-        <td>{{community.book}}</td>
-        <td>{{community.creator}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-    </table>
-  </div>
-</div>
-<div>
-  <div style="overflow: auto; width: auto; height: 250px">
-  <table class="table caption-top table-dark table-hover">
-    <caption>종료된 모임</caption>
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">모임일자</th>
-        <th scope="col">모임장소</th>
-        <th scope="col">도서</th>
-        <th scope="col">작성자</th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for community in endcommunities %}
-        <tr onclick="location.href='/community/detail/{{community.id}}'">
-        <th scope="row">{{community.id}}</th>
-        <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
-        <td>{{community.meeting_place}}</td>
-        <td>{{community.book}}</td>
-        <td>{{community.creator}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  </div>
-</div>
-
-{% else %}
-
-    <div class="row">
-        <div class="col-12 text-center">
-        로그인하시면 독서모임에 함께 참여하실 수 있습니다.
-        </div>
+  <div>
+    <div style="overflow: auto; width: auto; height: 250px">
+      <table class="table caption-top table-dark table-hover">
+        <caption>
+          모집중인 모임
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">모임일자</th>
+            <th scope="col">모임장소</th>
+            <th scope="col">도서</th>
+            <th scope="col">작성자</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for community in communities %}
+          <tr onclick="location.href='/community/detail/{{community.id}}'">
+            <th scope="row">{{community.id}}</th>
+            <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
+            <td>{{community.meeting_place}}</td>
+            <td>{{community.book}}</td>
+            <td>{{community.creator}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
-{% endif %}
+  </div>
+  <div>
+    <div style="overflow: auto; width: auto; height: 250px">
+      <table class="table caption-top table-dark table-hover">
+        <caption>
+          종료된 모임
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">모임일자</th>
+            <th scope="col">모임장소</th>
+            <th scope="col">도서</th>
+            <th scope="col">작성자</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for community in endcommunities %}
+          <tr onclick="location.href='/community/detail/{{community.id}}'">
+            <th scope="row">{{community.id}}</th>
+            <td>{{community.meeting_date|date:'Y년 m월 d일 h시 m분'}}</td>
+            <td>{{community.meeting_place}}</td>
+            <td>{{community.book}}</td>
+            <td>{{community.creator}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 
+  {% else %}
+
+  <div class="row">
+    <div class="col-12 text-center">
+      로그인하시면 독서모임에 함께 참여하실 수 있습니다.
+    </div>
+  </div>
+  {% endif %}
 </div>
 {% endblock %}
 
 <!-- js -->
-{% block script %}
-
-{% endblock %}
+{% block script %} {% endblock %}

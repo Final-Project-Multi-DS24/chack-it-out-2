@@ -40,20 +40,9 @@ class Member(models.Model):
 class reviewMember(models.Model):
     community = models.ForeignKey("Community", on_delete=models.CASCADE)
     review = models.CharField(max_length=2000, verbose_name='모임후기')
-    urls= models.CharField(max_length=2000, verbose_name='리뷰URL')
+
     def __str__(self):
         return self.id
 
     class Meta:
         db_table = "tb_reviewmember"
-
-# 모임 도서 후기점수
-class meetingbookscore(models.Model):
-    community = models.ForeignKey("Community", on_delete=models.CASCADE)
-    score = models.IntegerField()
-    
-    def __str__(self):
-        return self.id
-
-    class Meta:
-        db_table = "tb_meetingbookscore"

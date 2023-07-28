@@ -2,8 +2,6 @@
 <title>유저 페이지</title>
 {% endblock %} {% block css %}
 <style>
-
-
   /* 회원페이지 - 회원탈퇴*/
   * {
     padding: 0;
@@ -17,9 +15,9 @@
 
   /* 회원탈퇴 버튼 */
   #popupBtn {
-    width: 150px;
-    height: 50px;
-    padding: 10px 5px;
+    margin-top: 40px;
+    background-color: transparent;
+    border: 0.1px solid rgb(247, 247, 240);
   }
   /* 모달창 전체 */
   #modalWrap {
@@ -52,16 +50,19 @@
     cursor: pointer;
   }
 
-  img:hover {
+  .img {
+    box-shadow: 0px 0px 5px 1px rgb(190, 192, 190);
+    border-radius: 10%;
+  }
+
+  .img:hover {
     filter: brightness(50%);
-    transform: scale(1.1);
     transition: 0.5s;
   }
   /* 이미지영역 */
   .img_area {
     display: inline-block;
     position: relative;
-    
     padding-right: 10px;
     padding-bottom: 10px;
   }
@@ -87,48 +88,51 @@
     font-weight: 600;
     font-size: 25px;
   }
-
+  .link {
+    font-size: 30px;
+  }
 </style>
 {% endblock %}
 
 <!-- 헤더-->
 {% block header %}
-<header class="py-5 bg-light border-bottom mb-5">
+<header class="bg-light border-bottom" style="height: 100px">
   <!-- 추천 탭 -->
-  <div>
-    <div class="container" id="#tab-01">
-      <div class="row">
-        <div class="col-3"></div>
-        <div class="col-2 tab_bar text-center">
-          <a class="nav-link"   href='reading'>📚읽은 책</a>
-        </div>
-        <div class="col-2 tab_bar text-center">
-          <a class="nav-link" href='wish'>📘위시리스트</a>
-        </div>
-        <div class="col-2 tab_bar text-center">
-          <a class="nav-link" href='usercommunity'
-            >📗모임 참여</a
-          >
-        </div>
-        <div class="col-1">
-          <div id="btnWrap">
-            <button type="button" id="popupBtn">회원탈퇴</button>
-          </div>
-          <!-- 모달 -->
-          <div id="modalWrap">
-            <div id="modalBody">
-              <p>정말 탈퇴하시겠습니까?</p>
-              <input
-                class="btn"
-                value="탈퇴하기"
-                onclick="location.href='/user/delete'"
-              />
-              <input class="btn" value="취소" id="cancel" />
-            </div>
-          </div>
-        </div>
-        <div class="col-2"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-2 tab_bar text-center">
+        <span style="font-size: 40px; margin-top: 10px">📚</span>
+        <a class="nav-link" href="reading" style="font-size: 20px">읽은 도서</a>
       </div>
+      <div class="col-2 tab_bar text-center">
+        <span style="font-size: 40px; margin-top: 10px">📘</span>
+        <a class="nav-link" href="wish" style="font-size: 20px">위시리스트</a>
+      </div>
+      <div class="col-2 tab_bar text-center">
+        <span style="font-size: 40px; margin-top: 10px">📗</span>
+        <a class="nav-link" href="usercommunity" style="font-size: 20px"
+          >모임 참여</a
+        >
+      </div>
+      <div class="col-1">
+        <div id="btnWrap">
+          <button type="button" id="popupBtn">회원탈퇴</button>
+        </div>
+        <!-- 모달 -->
+        <div id="modalWrap">
+          <div id="modalBody">
+            <p>정말 탈퇴하시겠습니까?</p>
+            <input
+              class="btn"
+              value="탈퇴하기"
+              onclick="location.href='/user/delete'"
+            />
+            <input class="btn" value="취소" id="cancel" />
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
     </div>
   </div>
 </header>
@@ -137,40 +141,110 @@
 <!-- 콘텐츠 -->
 {% block contents %}
 <div class="container">
+  <h4
+    style="
+      font-weight: bold;
+      color: rgb(113, 70, 70);
+      margin-top: 30px;
+      margin-bottom: 30px;
+    "
+  >
+    {{name}}님의 페이지입니다.
+  </h4>
+</div>
+
+<div class="container">
+  {% if count != 0 %}
+  <div class="col-12 text-center" style="font-size: 20px">
+    <p>{{name}}님이 최근 읽은도서와 유사한 책을 추천합니다.</p>
+  </div>
   <div class="row">
-    <div class="col-12 text-center">{{name}}님의 유저페이지입니다.</div>
+    {% for book in recommendbooks %}
+    <div class="col-3">
+      <a href="/book/search/result/{{book.id}}" class="img_area"
+        ><img
+          class="img"
+          src="{{book.book_cover}}"
+          style="
+            height: 400px;
+            width: 300px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+          "
+        />
+        <p class="hover_text">"{{book.book_title}}"</p></a
+      ><span class="text-center">{{book.book_title}}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div
+    class="row"
+    style="
+      height: 300px;
+      box-shadow: 0px 0px 5px 1px rgb(231, 236, 231);
+      background-color: rgb(241, 241, 240);
+    "
+  >
+    <div class="col-12" style="height: 100px"></div>
+    <div
+      class="col-12 text-center"
+      style="font-size: 30px; border-radius: 10%; font-weight: bold"
+    >
+      현재 읽은 도서가 없습니다.
+    </div>
+    <div
+      class="col-12 text-center"
+      style="height: 100px; font-size: 15px; font-weight: bold; color: #06285c"
+    >
+      도서를 추가하면 관련 도서가 추천됩니다.
+    </div>
+  </div>
+  {% endif %}
+  <div class="row" style="font-size: 20px; margin-top: 30px"></div>
+  <div class="container">
+    <h4
+      style="
+        font-weight: bold;
+        color: rgb(113, 70, 70);
+        margin-top: 10px;
+        margin-bottom: 30px;
+      "
+    >
+      {{name}}님이 관심사로 선택하신
+      <br style="margin-bottom: 10px" />
+      「{% for category in cate_name %}▪{{category}} {% endfor %}」에 해당하는
+      책입니다
+    </h4>
+  </div>
+
+  <div class="row">
+    {% for book in randomresult %}
+    <div class="col-3">
+      <a href="/book/search/result/{{book.id}}" class="img_area"
+        ><img
+          class="img"
+          src="{{book.book_cover}}"
+          style="
+            height: 400px;
+            width: 300px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+          "
+        />
+        <p class="hover_text">
+          "{{book.book_title}}" <br />
+          "
+        </p></a
+      >
+      <div class="text-center">{{book.book_title}}</div>
+      <div class="text-center">({{book.category}})</div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 
-
-<div class="container">
-  <div class="col-12 text-center" style="font-size: 20px;">
-    {{name}}님이 관심사로 선택하신  
-    {% for category in cate_name %}
-    ✅{{category}}
-    {% endfor %}와 관련된 추천도서입니다   
-  </div>  
-    {% for randombook in randomresult %}
-  <a href="/book/search/result/{{randombook.id}}" class="img_area"><img
-    src="{{randombook.book_cover}}" style="height: 400px; width: 300px;
-    margin-right: 10px;
-    margin-bottom: 10px;"
-  /><p class="hover_text">"{{randombook.book_title}}"</p></a>
-    {% endfor %}
-
-  <div class="col-12 text-center" style="font-size: 20px;">
-    {{name}}님이 최근 읽은도서와 유사한 책을 추천합니다.   
-  </div>  
-    {% for book in recommendbooks %}
-  <a href="/book/search/result/{{book.id}}" class="img_area"><img
-    src="{{book.book_cover}}" style="height: 400px; width: 300px;
-    margin-right: 10px;
-    margin-bottom: 10px;"
-  /><p class="hover_text">"{{book.book_title}}"</p></a>
-    {% endfor %}
-</div>
-
-{% endblock %} 
+{% endblock %}
 <!-- 회원탈퇴 -->
 {% block script %}
 <script>

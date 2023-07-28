@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Community, Member, reviewMember,meetingbookscore
+from .models import Community, Member, reviewMember
 from book.models import Book
 from user.models import User
 import re
@@ -101,7 +101,7 @@ def detail2(request, pk):
         contents = request.GET.get("review_input")
         reviewmember=reviewMember(
             review=contents,
-            community = Community.objects.get(id=pk)
+            community = Community.objects.get(id=pk),
         )
         reviewmember.save()
         return redirect(f"/community/detail2/{pk}")

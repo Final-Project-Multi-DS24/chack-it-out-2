@@ -1,9 +1,6 @@
-{% extends "base.html" %}
-{% block title %}
+{% extends "base.html" %} {% block title %}
 <title>커뮤니티 정보</title>
-{% endblock %} 
-
-{% block css%}
+{% endblock %} {% block css%}
 <style>
   ul,
   li {
@@ -101,7 +98,6 @@
             z-index: 2;
           }
           &.data3 {
-
             background: rgb(135, 135, 77);
             z-index: 3;
           }
@@ -134,7 +130,6 @@
   }
 
   .comments {
-    width: 50%;
     padding: 10px;
   }
   .form {
@@ -144,29 +139,24 @@
 </style>
 {% endblock %}
 
-
-
 <!-- 헤더 -->
 {% block header %}
-<div class="header" style="height: 300px; margin-bottom: 40px;">
-    <div class="container">
-        <div style="overflow: auto; height: 300px">
+<div class="header" style="height: 300px; margin-bottom: 40px">
+  <div class="container">
+    <div style="overflow: auto; height: 300px">
+      <div class="row">
+        <div class="col-12 text-center"><br /><br /></div>
         <div class="row">
-            <div class="col-12 text-center">
-              <br><br>
-            </div>
-            <div class="row">
-<pre style="font-weight: bold;">
+          <pre style="font-weight: bold">
 
         ❗ 공지사항 ❗     
     
-        안녕하세요, "책읽아웃" 회원 여러분!
+        안녕하세요, "돈독모" 회원 여러분!
         가입을 진심으로 환영합니다. 아래의 공지사항을 꼭 읽어주시기 바랍니다.
-
+  
         💛 모임 참여 💛
- 
-        - 독서모임에 많이 참여할수록, 저희 『책읽아웃』이 여러분의 성향에 딱 맞는 책을 추천해 드릴 수 있습니다.
-        웹사이트를 더욱 풍성하게 즐기고 싶다면 "책읽아웃" 하세요!😜
+        - 독서모임에 많이 참여할수록, 우리 돈독모에 딱 맞는 도서를 추천해 드릴 수 있습니다.
+        웹사이트를 더욱 풍성하게 즐기고 싶다면 가입해서 함께 하세요!😜
 
         💛 서로 존중하고 배려하는 분위기를 유지하기 위해 규칙을 지켜주세요. 💛 
         - 욕설이나 비방, 불쾌한 행동은 삼가해주시고, 다른 회원들과 긍정적인 대화와 토론을 이어나가는 데 동참해주세요.
@@ -182,38 +172,46 @@
         감사합니다!
             
         - 책읽아웃 운영자 올림
-</pre>             
-            </div>  
+</pre
+          >
         </div>
-        </div>
+      </div>
     </div>
-</div>    
-{% endblock %}
-
-{% block contents %}
+  </div>
+</div>
+{% endblock %} {% block contents %}
 <div class="container">
   <div class="row">
     <div class="col-6">
       <h5>리뷰</h5>
-      <div style="overflow: auto; width: auto; height: 300px;">
+      <div style="overflow: auto; width: auto; height: 300px">
         <div class="comments">
           <ul id="comment-list">
             {% for review in allreview %}
-              <li>{{ user }} - {{ review.review }}</li>
+            <li>{{ user }} - {{ review.review }}</li>
             {% endfor %}
           </ul>
         </div>
       </div>
-    </div>  
+    </div>
     <div class="col-6">
       <div class="form">
         <h5>작성</h5>
         <form action="#" method="get">
-          <input type="text" id="review_input" name="review_input" maxlength="2000" placeholder="리뷰 작성 후 [⏎Enter]" style="width: 400px;">
-          <br/>
+          <input
+            type="text"
+            id="review_input"
+            name="review_input"
+            maxlength="2000"
+            placeholder="리뷰 작성 후 [⏎Enter]"
+            style="width: 400px"
+          />
+          <br />
         </form>
-        <br>
-        <button onclick="location.href='/community/detail/{{ pk }}'">앞으로 가기</button>
+        <br />
+        <button onclick="location.href='/community/detail/{{ pk }}'">
+          앞으로 가기
+        </button>
       </div>
     </div>
   </div>

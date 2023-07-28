@@ -114,7 +114,6 @@
   }
 
   .comments {
-    width: 50%;
     padding: 10px;
   }
   .form {
@@ -152,10 +151,7 @@
         <div class="comments">
           <ul id="comment-list">
             {% for review in allreview %}
-              <li>{{user}} - {{review.review}}</li>
-            {% endfor %}
-            {% for url in urls %}
-              <a href="{{url}}">링크 바로가기</a>
+              <li>❝{{review.review}}❞</li>
             {% endfor %}
           </ul>
         </div>

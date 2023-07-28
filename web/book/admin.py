@@ -4,7 +4,7 @@ from .models import Book, Category, reviewUser, Review
 
 # Register your models here.
 class BookAdmin(admin.ModelAdmin):
-    list_display = ("book_isbn", "book_title", "book_author")
+    list_display = ("book_isbn", "book_title", "book_author", "category")
 
 
 class CategoryAdmin(admin.ModelAdmin):

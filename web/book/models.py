@@ -59,7 +59,6 @@ class reviewUser(models.Model):
         verbose_name="도서",
     )
     review = models.CharField(max_length=2000, verbose_name='리뷰')
-    urls= models.CharField(max_length=2000, verbose_name='URL')
 
     def __str__(self):
         return self.book
