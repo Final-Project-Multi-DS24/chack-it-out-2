@@ -6,103 +6,67 @@
 {% block css %} {% endblock %}
 
 <!-- 헤더 -->
-{% block header %}
-<div class="header" style="height: 300px; margin-bottom: 40px">
-  <div class="container">
-    <div style="overflow: auto; height: 300px">
-      <div class="row">
-        <div class="col-12 text-center"></div>
-        <div class="row">
-          <pre style="font-weight: bold">
-
-        ❗ 공지사항 ❗     
-    
-        안녕하세요, "돈독모" 회원 여러분!
-        가입을 진심으로 환영합니다. 아래의 공지사항을 꼭 읽어주시기 바랍니다.
-  
-        💛 모임 참여 💛
-        - 독서모임에 많이 참여할수록, 우리 돈독모에 딱 맞는 도서를 추천해 드릴 수 있습니다.
-        웹사이트를 더욱 풍성하게 즐기고 싶다면 가입해서 함께 하세요!😜
-
-        💛 서로 존중하고 배려하는 분위기를 유지하기 위해 규칙을 지켜주세요. 💛 
-        - 욕설이나 비방, 불쾌한 행동은 삼가해주시고, 다른 회원들과 긍정적인 대화와 토론을 이어나가는 데 동참해주세요.
-        - 커뮤니티 내에서의 불만이나 문제가 있을 경우, 운영자에게 알려주시면 신속히 조치를 취하도록 하겠습니다.
-
-        💌 운영자 이메일 : bassstg@naver.com
-
-        💛 공지사항 확인 💛 
-        - 커뮤니티의 소식과 중요한 공지사항은 정기적으로 확인해주시기 바랍니다. 
-        - 주기적인 방문을 통해 새로운 소식을 놓치지 않고 참여하실 수 있습니다.
-
-        좋은 독서 경험과 유익한 커뮤니티 활동이 되길 바랍니다.
-        감사합니다!
-            
-        - 책읽아웃 운영자 올림
-</pre
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
 
 <!-- 콘텐츠 -->
 {% block contents %}
 
 <div class="container">
-  <form method="post" action=".">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="meeting_date">
-        1. 모임 날짜 - 📆을 눌러 모임 날짜를 선택
-      </label>
-      <input
-        type="datetime-local"
-        class="form-control"
-        id="meeting_date"
-        name="meeting_date"
-        style="width: 150px"
-      />
+  <div class="row" style="margin-top: 100px;margin-bottom: 100px;">
+    <h4 class="text-center" style="margin-bottom: 50px; font-size: 40px;"> 새 모 임 　만 들 기</h4>
+    <div class="col-2 text-center"></div>
+    <div class="col-4">
+      <form method="post" action=".">
+        {% csrf_token %}
+        <div class="form-group">
+          <span style="display: inline; margin-right: 65px">모임 날짜</span>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="meeting_date"
+            name="meeting_date"
+            style="margin-bottom: 30px; width: 250px; height: 50px; display: inline-block"
+          />
+        </div>
+        <div class="form-group">
+          <span style="display: inline; margin-right: 40px">🔑도서 ISBN</span>
+          <input
+            type="text"
+            class="form-control"
+            id="book"
+            placeholder="📖 도서검색으로 ISBN 확인"
+            name="book"
+            style=" width: 250px; height: 50px; display: inline-block"
+          />
+        </div>
+        <a type="button" href="/book/search/" target="_blank" style="margin-right: 40px;">도서 검색</a>
+        <div class="form-group">
+          <span style="display: inline; margin-right: 65px">모임 장소</span>
+          <input
+            type="text"
+            class="form-control"
+            id="meeting_place"
+            placeholder="모임 장소"
+            maxlength="20"
+            name="meeting_place"
+            style="margin-bottom: 30px; width: 250px; height: 50px; display: inline-block"
+          />
+        </div>
     </div>
-    <div class="form-group">
-      <label for="book"> 2. 🔑도서 ISBN</label>
-      <input
-        type="text"
-        class="form-control"
-        id="book"
-        placeholder="도서검색 후 도서 ISBN을 확인해주세요"
-        name="book"
-        style="width: 400px"
-      />
-      <a type="button" href="/book/search/" target="_blank">도서 검색</a>
+    <div class="col-4">
+        <div class="form-group">
+          <label for="description">모임소개</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            maxlength="999"
+            style="height: 120px; margin-bottom: 20px;"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">만들기</button>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="meeting_place">3. 모임 장소를 적어주세요.</label>
-      <input
-        type="text"
-        class="form-control"
-        id="meeting_place"
-        placeholder="모임 장소를 적어주세요"
-        maxlength="20"
-        name="meeting_place"
-        style="width: 400px"
-      />
-    </div>
-    <div class="form-group">
-      <label for="description">4. 모임에 대한 설명을 적어주세요.</label>
-      <textarea
-        class="form-control"
-        class="form-control"
-        id="description"
-        name="description"
-        placeholder="모임에 대한 소개를 적어주세요."
-        style="width: 1000px"
-        maxlength="999"
-      ></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">만들기</button>
-  </form>
+  </div>
 </div>
 
 {% endblock %}

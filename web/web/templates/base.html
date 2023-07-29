@@ -57,17 +57,17 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="/user/logout"
+                href="/user/userpage/{{user.id}}/"
                 style="font-size: 22px; margin-right: 10px"
-                >🔒로그아웃</a
+                >📚마이페이지</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="/user/userpage/{{user.id}}/"
+                href="/community"
                 style="font-size: 22px; margin-right: 10px"
-                >📚마이페이지</a
+                >📖독서모임</a
               >
             </li>
             <li class="nav-item">
@@ -81,23 +81,23 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="/community"
+                href="/user/logout"
                 style="font-size: 22px; margin-right: 10px"
-                >📖독서모임</a
+                >🔒로그아웃</a
               >
             </li>
             {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="/community" style="font-size: 22px"
+                >📖독서모임</a
+              >
+            </li>
             <li class="nav-item">
               <a
                 class="nav-link"
                 href="/user/login"
                 style="font-size: 22px; margin-right: 10px"
                 >🔒로그인</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/community" style="font-size: 22px"
-                >📖독서모임</a
               >
             </li>
             {% endif %}
@@ -111,7 +111,7 @@
     <!-- 콘텐츠 -->
     {% block contents %} {% endblock%}
     <!-- Footer-->
-    <footer class="py-5 bg" style="background-color: white">
+    <footer class="py-5 border-top" style="background-color: white">
       <div class="container">
         <p>
           <img

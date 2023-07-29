@@ -178,6 +178,7 @@ def reading(request, pk):
         reading = Reading.objects.all().filter(book_id=id).filter(user_id=user)
         reading.delete()
         return redirect(f"/user/userpage/{request.session.get('user')}/reading")
+
     return render(
         request,
         "reading.html",
@@ -228,11 +229,9 @@ def usercommunity(request, pk):
     for member in Members:
         membercommunityls.append(member.community_id)
     # 모든 종료된 커뮤니티를 가져오고, 그중 id가 list에 있는것을 가져옴
-    endcommunities = (
-        Community.objects.all()
-        .filter(is_finished=True)
-        .filter(id__in=membercommunityls)
-    )
+    allcommunities = Community.objects.all().filter(id__in=membercommunityls)
+    endcommunities = allcommunities.filter(is_finished=True)
+    doingcommunities = allcommunities.filter(is_finished=False)
     return render(
         request,
         "usercommunity.html",
@@ -240,7 +239,8 @@ def usercommunity(request, pk):
             "user": user,
             "name": name,
             "pk": pk,
-            "endcommunities": endcommunities,
+            "endcommunities": endcommunities[::-1],
+            "doingcommunities": doingcommunities[::-1],
             "loginuser": loginuser,
         },
     )

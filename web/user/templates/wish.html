@@ -164,38 +164,61 @@
 {% endblock %}
 <!-- 내용 -->
 {% block contents %}
-<div class="col-12 text-center">
+<div class="container">
   <div class="row">
-    <div class="col-12">
-      <h3 style="margin-bottom: 10px">{{name}}님의 위시리스트</h3>
+    <div class="col-12" style="font-size: 20px">
+      <h4
+        style="
+          font-weight: bold;
+          color: rgb(113, 70, 70);
+          margin-top: 40px;
+          margin-bottom: 40px;
+        "
+      >
+        {{name}}님의 위시리스트입니다.
+      </h4>
     </div>
   </div>
-  {% for selectedbook in selectedbooks %}
-  <a href="/book/search/result/{{selectedbook.id}}" class="img_area"
-    ><img
-      src="{{selectedbook.book_cover}}"
-      style="
-        height: 400px;
-        width: 300px;
-        margin-right: 10px;
-        margin-bottom: 10px;
-      "
-    />
-    <p class="hover_text">"{{selectedbook.book_title}}"</p></a
-  >
-  <!-- 본인일때만 -->
-  {% if loginuser == user %}
-  <form action="" method="get" action="." style="display: inline">
-    <button
-      style="margin-right: 50px"
-      type="submit"
-      value="{{selectedbook.id}}"
-      name="delete"
-      id="{{selectedbook.book_id}}"
-    >
-      삭제하기
-    </button>
-  </form>
-  {% endif %} {% endfor %}
+  <div class="row">
+    {% for book in selectedbooks %}
+    <div class="col-3">
+      <div class="col-3">
+        <a href="/book/search/result/{{book.id}}" class="img_area"
+          ><img
+            class="img"
+            src="{{book.book_cover}}"
+            style="
+              height: 380px;
+              width: 280px;
+              margin-right: 10px;
+              margin-bottom: 10px;
+            "
+          />
+          <p class="hover_text">{{book.book_title}}</p></a
+        >
+      </div>
+      <!-- 본인일때만 삭제-->
+      {% if loginuser == user %}
+      <form action="" method="get" action="." style="display: inline">
+        <button
+          class="text-center"
+          type="submit"
+          value="{{book.id}}"
+          name="delete"
+          id="{{book.book_id}}"
+          style="
+            font-size: 20px;
+            margin-left: 100px;
+            background-color: white;
+            border: 0.2px solid transparent;
+          "
+        >
+          삭제하기
+        </button>
+      </form>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

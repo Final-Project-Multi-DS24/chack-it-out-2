@@ -81,7 +81,7 @@
     position: absolute;
     transition: 10ms;
     top: 100px;
-    left: 30px;
+    left: 50px;
     width: 200px;
     color: white;
     -webkit-text-stroke: 1px black;
@@ -102,15 +102,15 @@
     <div class="row">
       <div class="col-3"></div>
       <div class="col-2 tab_bar text-center">
-        <span style="font-size: 40px; margin-top: 10px">📚</span>
+        <a href="reading" style="font-size: 40px; margin-top: 10px">📚</a>
         <a class="nav-link" href="reading" style="font-size: 20px">읽은 도서</a>
       </div>
       <div class="col-2 tab_bar text-center">
-        <span style="font-size: 40px; margin-top: 10px">📘</span>
+        <a href="wish" style="font-size: 40px; margin-top: 10px">📘</a>
         <a class="nav-link" href="wish" style="font-size: 20px">위시리스트</a>
       </div>
       <div class="col-2 tab_bar text-center">
-        <span style="font-size: 40px; margin-top: 10px">📗</span>
+        <a href="usercommunity" style="font-size: 40px; margin-top: 10px">📗</a>
         <a class="nav-link" href="usercommunity" style="font-size: 20px"
           >모임 참여</a
         >
@@ -141,22 +141,18 @@
 <!-- 콘텐츠 -->
 {% block contents %}
 <div class="container">
-  <h4
-    style="
-      font-weight: bold;
-      color: rgb(113, 70, 70);
-      margin-top: 30px;
-      margin-bottom: 30px;
-    "
-  >
-    {{name}}님의 페이지입니다.
-  </h4>
-</div>
-
-<div class="container">
   {% if count != 0 %}
-  <div class="col-12 text-center" style="font-size: 20px">
-    <p>{{name}}님이 최근 읽은도서와 유사한 책을 추천합니다.</p>
+  <div class="col-12" style="font-size: 20px">
+    <h4
+      style="
+        font-weight: bold;
+        color: rgb(113, 70, 70);
+        margin-top: 40px;
+        margin-bottom: 40px;
+      "
+    >
+      {{name}}님이 최근 읽은도서와 유사한 책을 추천합니다.
+    </h4>
   </div>
   <div class="row">
     {% for book in recommendbooks %}
@@ -166,13 +162,13 @@
           class="img"
           src="{{book.book_cover}}"
           style="
-            height: 400px;
-            width: 300px;
+            height: 380px;
+            width: 280px;
             margin-right: 10px;
             margin-bottom: 10px;
           "
         />
-        <p class="hover_text">"{{book.book_title}}"</p></a
+        <p class="hover_text">{{book.book_title}}</p></a
       ><span class="text-center">{{book.book_title}}</span>
     </div>
     {% endfor %}
@@ -203,6 +199,9 @@
   {% endif %}
   <div class="row" style="font-size: 20px; margin-top: 30px"></div>
   <div class="container">
+    <h5 style="font-weight: bold; color: rgb(113, 70, 70); margin-top: 10px">
+      {{name}}님이 관심사로 선택하신
+    </h5>
     <h4
       style="
         font-weight: bold;
@@ -211,8 +210,6 @@
         margin-bottom: 30px;
       "
     >
-      {{name}}님이 관심사로 선택하신
-      <br style="margin-bottom: 10px" />
       「{% for category in cate_name %}▪{{category}} {% endfor %}」에 해당하는
       책입니다
     </h4>
@@ -220,20 +217,20 @@
 
   <div class="row">
     {% for book in randomresult %}
-    <div class="col-3">
+    <div class="col-3" style="margin-bottom: 30px">
       <a href="/book/search/result/{{book.id}}" class="img_area"
         ><img
           class="img"
           src="{{book.book_cover}}"
           style="
-            height: 400px;
-            width: 300px;
+            height: 380px;
+            width: 280px;
             margin-right: 10px;
             margin-bottom: 10px;
           "
         />
         <p class="hover_text">
-          "{{book.book_title}}" <br />
+          {{book.book_title}} <br />
           "
         </p></a
       >
