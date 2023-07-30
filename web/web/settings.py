@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAIN_TEMPLATE_DIR = os.path.join(BASE_DIR, "web/templates")
-sys.path.append(os.path.join(BASE_DIR, 'data'))
+sys.path.append(os.path.join(BASE_DIR, "data"))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     "user",
     "book",
     "community",
-    'bootstrap4'
+    "bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -146,5 +147,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

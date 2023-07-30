@@ -24,8 +24,8 @@ def community(request):
             {
                 "user": user,
                 "name": name,
-                "communities": communities,
-                "endcommunities": endcommunities,
+                "communities": communities[::-1],
+                "endcommunities": endcommunities[::-1],
                 "result": result[::-1],
             },
         )
@@ -99,15 +99,20 @@ def detail2(request, pk):
     community = Community.objects.get(id=pk)
     if "review_input" in request.GET:
         contents = request.GET.get("review_input")
-        reviewmember=reviewMember(
+        reviewmember = reviewMember(
             review=contents,
-            community = Community.objects.get(id=pk),
+            community=Community.objects.get(id=pk),
         )
         reviewmember.save()
         return redirect(f"/community/detail2/{pk}")
         # 모임의의 전체 리뷰조회
     allreview = reviewMember.objects.all().filter(community_id=pk)
-    return render(request, "detail2.html", {"user":user,"pk": pk, "community": community,'allreview':allreview})
+    return render(
+        request,
+        "detail2.html",
+        {"user": user, "pk": pk, "community": community, "allreview": allreview},
+    )
+
 
 # 작성자 권한 : 모임 종료시키기
 def quit(request, pk):
