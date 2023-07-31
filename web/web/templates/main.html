@@ -120,10 +120,10 @@
 <div class="container">
   <div class="row" style="margin-top: 40px;">
     <h4 style="font-weight: bold; color: rgb(113, 70, 70)">
-      최근 모임도서 기반 추천 결과
+      최근 모임도서를 기반으로 추천한 도서입니다.
     </h4>
   </div>
-  <div class="row">
+  <div class="row ">
   {% for book in recommendbooks %}
   <div class="col-3">
   <a href="/book/search/result/{{book.id}}" class="img_area"
@@ -175,7 +175,7 @@
     </div>  
   </div>
 </div>
-<div style="height: 500px; background-color:  rgb(248, 248, 237)">
+<div class="margin-top" style="height: 500px; background-color:  rgb(248, 248, 237)">
   <div class="container" style="height: 400px">
     <div class="row"></div>
     <div class="row" style="font-size: 40px; margin-top: 20px; font-weight: bold;">반가워요❗</div>
