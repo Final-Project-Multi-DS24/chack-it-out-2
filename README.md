@@ -24,6 +24,9 @@
 - 도서 리뷰 데이터 : 알라딘 web
 > 저작권 문제로 해당 데이터는 업로드하지 않음
 
+## 주요기능
+(추후에 이미지 추가)
+
 ## 개발 환경
 - Python
 - Django
@@ -33,10 +36,6 @@
 ### 추천
 web > data > recommend.py
 ```python
-import pandas as pd
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 # 추천 함수
 def getRecommend(df,tfidf_matrix,isbn_list):
 	
