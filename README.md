@@ -12,12 +12,12 @@
 - 독서모임 회원들이 로그인, 도서 추천, 도서 상세 정보 등의 기능을 사용할 수 있도록 웹 서비스 구현
 
 ## 데이터 파이프라인(ETL 구조)
-![데이터 파이프라인](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9ed92e5e-6cae-4636-bb4a-750fb682ddb6/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-08-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_2.44.35.png)
+![데이터 파이프라인](./데이터파이프라인.png)
 
-![데이터 처리 흐름도](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e7a8a17f-b909-421a-9bb0-28f8d9890a5a/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-08-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_2.22.49.png)
+![데이터 처리 흐름도](./데이터처리흐름도.png)
 
 ## ERD 
-![ERD](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/48c1c6b3-1aa3-4101-9a9d-7671f8c0cbe8/Untitled.png)
+![ERD](./ERD.png)
 
 ## 데이터 출처
 - 도서 정보 데이터 : 알라딘 OpenAPI
