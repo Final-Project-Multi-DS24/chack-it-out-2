@@ -14,7 +14,7 @@
 ## 데이터 파이프라인(ETL 구조)
 ![데이터 파이프라인](chack-it-out2/데이터파이프라인.png)
 
-![데이터 처리 흐름도](chack-it-out2/데이터처리흐름도.png)
+![데이터 처리 흐름도]([chack-it-out2/데이터처리흐름도.png](https://github.com/Final-Project-Multi-DS24/chack-it-out-2/blob/develop/%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%92%E1%85%B3%E1%84%85%E1%85%B3%E1%86%B7%E1%84%83%E1%85%A9.png?raw=true)https://github.com/Final-Project-Multi-DS24/chack-it-out-2/blob/develop/%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%A5%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%E1%84%92%E1%85%B3%E1%84%85%E1%85%B3%E1%86%B7%E1%84%83%E1%85%A9.png?raw=true)
 
 ## ERD 
 ![ERD](./ERD.png)
