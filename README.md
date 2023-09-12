@@ -33,6 +33,7 @@
 
 ## 파일 설명
 
+## 주요 코드
 ### 추천
 web > data > recommend.py
 ```python
